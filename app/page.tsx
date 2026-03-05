@@ -1,6 +1,6 @@
 
 export default function Home() {
   return (
-    <>Real Estate Website</>
+    <>Navi Mumbai Property Deals</>
   );
 }

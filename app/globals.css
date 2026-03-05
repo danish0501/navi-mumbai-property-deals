@@ -1,2 +1,90 @@
 @import "tailwindcss";
 
+@theme {
+    --color-primary: #0054A5;
+    --color-primary-dark: #002F5F;
+    --color-neutral-bg: #F4F4F4;
+    --color-neutral-text: #333333;
+    --color-neutral-border: #E0E0E0;
+
+    --font-heading: var(--font-montserrat);
+    --font-sans: var(--font-open-sans);
+}
+
+:root {
+    --primary: #0054A5;
+    --primary-dark: #002F5F;
+    --neutral-bg: #F4F4F4;
+    --neutral-text: #333333;
+    --neutral-border: #E0E0E0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--neutral-bg);
+    color: var(--neutral-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+body,
+p,
+.font-sans {
+    font-family: var(--font-open-sans), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+}
+
+img,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease-in-out;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font: inherit;
+}
+
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
