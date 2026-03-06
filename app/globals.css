@@ -1,90 +1,76 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #0054A5;
-    --color-primary-dark: #002F5F;
-    --color-neutral-bg: #F4F4F4;
-    --color-neutral-text: #333333;
-    --color-neutral-border: #E0E0E0;
+    /* Colors */
+    --color-brand-white: var(--background-white);
+    --color-brand-cream: var(--background-cream);
+    --color-brand-nav: var(--nav-bg);
+    --color-brand-heading: var(--color-heading);
+    --color-brand-paragraph: var(--color-paragraph);
+    --color-brand-primary: var(--color-primary);
+    --color-brand-primary-hover: var(--color-primary-hover);
+    --color-brand-button: var(--color-primary);
+    --color-brand-button-hover: var(--color-primary-hover);
 
-    --font-heading: var(--font-montserrat);
-    --font-sans: var(--font-open-sans);
+    /* Fonts */
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+
+    /* Custom Animations/Effects */
+    --animate-fade-in: fade-in 0.5s ease-out;
+
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 :root {
-    --primary: #0054A5;
-    --primary-dark: #002F5F;
-    --neutral-bg: #F4F4F4;
-    --neutral-text: #333333;
-    --neutral-border: #E0E0E0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
+    --background-white: #ffffff;
+    --background-cream: #faf3e1;
+    --nav-bg: #ffffff;
+    --color-heading: #000000;
+    --color-paragraph: #4b5563;
+    --color-primary: #baa360;
+    --color-primary-hover: #8f7b44;
 }
 
 body {
-    background-color: var(--neutral-bg);
-    color: var(--neutral-text);
-    line-height: 1.6;
+    background-color: var(--background-white);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
 }
 
-body,
-p,
-.font-sans {
-    font-family: var(--font-open-sans), sans-serif;
-}
-
+/* Headings */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-.font-heading {
-    font-family: var(--font-montserrat), sans-serif;
+h6 {
+    color: var(--color-heading);
+    font-family: var(--font-sans);
     font-weight: 700;
+    letter-spacing: 0.01em;
 }
 
-img,
-svg,
-video,
-canvas {
-    display: block;
-    max-width: 100%;
-    height: auto;
+/* Paragraph */
+p {
+    line-height: 1.6;
+    font-weight: 400;
 }
 
+button,
 a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s ease-in-out;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    font: inherit;
-}
-
-input,
-textarea,
-select {
-    font: inherit;
-}
-
-ul,
-ol {
-    list-style: none;
+    transition: all 0.3s ease-in-out;
+    font-family: var(--font-sans);
 }

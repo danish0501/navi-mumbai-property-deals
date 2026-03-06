@@ -1,0 +1,31 @@
+"use client";
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import logoImg from '@/assets/nm-property-logo.png';
+
+const Logo = () => {
+    return (
+        <div className="flex-shrink-0 flex items-center">
+            <Link href="/" className="group relative flex items-center gap-1 py-1">
+                <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center justify-center"
+                >
+                    <Image
+                        src={logoImg}
+                        alt="Navi Mumbai Property Deals"
+                        className="h-10 w-auto object-contain"
+                        priority
+                    />
+                </motion.div>
+                <motion.div
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-button origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                />
+            </Link>
+        </div>
+    );
+};
+
+export default Logo;
