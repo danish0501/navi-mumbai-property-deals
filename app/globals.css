@@ -11,6 +11,8 @@
     --color-brand-primary-hover: var(--color-primary-hover);
     --color-brand-button: var(--color-primary);
     --color-brand-button-hover: var(--color-primary-hover);
+    --color-neutral-bg: var(--color-neutral-bg);
+    --color-neutral-border: var(--color-neutral-border);
 
     /* Fonts */
     --font-sans: var(--font-geist-sans);
@@ -41,6 +43,8 @@
     --color-paragraph: #4b5563;
     --color-primary: #baa360;
     --color-primary-hover: #8f7b44;
+    --color-neutral-bg: #f8fafc;
+    --color-neutral-border: #e2e8f0;
 }
 
 body {

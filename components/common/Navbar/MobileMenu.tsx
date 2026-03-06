@@ -1,7 +1,9 @@
 "use client";
+import { useState } from 'react';
 import Link from 'next/link';
-import { User, Plus } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { User, Plus, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { buyMegaMenuData, Category, rentMegaMenuData, RentCategory } from './navData';
 
 interface PredefinedLink {
     name: string;
@@ -14,36 +16,138 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
+    const [isBuyExpanded, setIsBuyExpanded] = useState(false);
+    const [isRentExpanded, setIsRentExpanded] = useState(false);
+    const [expandedCategory, setExpandedCategory] = useState<Category | null>(null);
+    const [expandedRentCategory, setExpandedRentCategory] = useState<RentCategory | null>(null);
+
+    const categories = Object.keys(buyMegaMenuData) as Category[];
+    const rentCategories = Object.keys(rentMegaMenuData) as RentCategory[];
+
     return (
         <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-zinc-100 overflow-hidden absolute top-full left-0 right-0 shadow-xl"
+            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-zinc-100 overflow-y-auto max-h-[85vh] absolute top-full left-0 right-0 shadow-xl"
         >
-            <div className="px-6 py-8 space-y-4">
-                {navLinks.map((link, idx) => (
-                    <motion.div
-                        key={link.name}
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: idx * 0.05 }}
-                    >
-                        <Link
-                            href={link.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-lg font-semibold text-brand-heading hover:text-brand-button flex items-center justify-between group"
-                        >
-                            {link.name}
+            <div className="px-6 py-8 flex flex-col gap-4">
+                {navLinks.map((link, idx) => {
+                    const isBuyLink = link.name.toLowerCase() === 'buy';
+                    const isRentLink = link.name.toLowerCase() === 'rent';
+
+                    if (isBuyLink || isRentLink) {
+                        const isRent = isRentLink;
+                        const isExpanded = isRent ? isRentExpanded : isBuyExpanded;
+                        const toggleExpanded = () => isRent ? setIsRentExpanded(!isRentExpanded) : setIsBuyExpanded(!isBuyExpanded);
+
+                        const currentCategories = isRent ? rentCategories : categories;
+                        const currentData = isRent ? rentMegaMenuData : buyMegaMenuData;
+
+                        // Type assertions needed since TS doesn't know which state we're updating
+                        const currentExpandedCategory = isRent ? expandedRentCategory : expandedCategory;
+                        const toggleCategory = (cat: string) => {
+                            if (isRent) {
+                                setExpandedRentCategory(expandedRentCategory === cat ? null : cat as RentCategory);
+                            } else {
+                                setExpandedCategory(expandedCategory === cat ? null : cat as Category);
+                            }
+                        };
+
+                        return (
                             <motion.div
-                                whileHover={{ x: 5 }}
-                                className="opacity-0 group-hover:opacity-100 transition-opacity"
+                                key={link.name}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="flex flex-col gap-2"
                             >
-                                →
+                                <button
+                                    onClick={toggleExpanded}
+                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group"
+                                >
+                                    <span>{link.name}</span>
+                                    <ChevronDown
+                                        size={20}
+                                        className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-brand-primary' : 'text-zinc-400 group-hover:text-brand-primary'}`}
+                                    />
+                                </button>
+
+                                <AnimatePresence>
+                                    {isExpanded && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="overflow-hidden flex flex-col ml-4 border-l-2 border-zinc-100 pl-4 gap-3 mt-2"
+                                        >
+                                            {currentCategories.map((category) => (
+                                                <div key={category} className="flex flex-col gap-2">
+                                                    <button
+                                                        onClick={() => toggleCategory(category)}
+                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                    >
+                                                        <span>{category}</span>
+                                                        <ChevronDown
+                                                            size={16}
+                                                            className={`transition-transform duration-300 ${currentExpandedCategory === category ? 'rotate-180 text-brand-primary' : 'text-zinc-400'}`}
+                                                        />
+                                                    </button>
+
+                                                    <AnimatePresence>
+                                                        {currentExpandedCategory === category && (
+                                                            <motion.div
+                                                                initial={{ opacity: 0, height: 0 }}
+                                                                animate={{ opacity: 1, height: 'auto' }}
+                                                                exit={{ opacity: 0, height: 0 }}
+                                                                className="overflow-hidden flex flex-col gap-2 ml-2 pl-2 border-l border-zinc-100"
+                                                            >
+                                                                {/* @ts-ignore - Dynamic key access based on conditional logic */}
+                                                                {currentData[category].map((item: any) => (
+                                                                    <Link
+                                                                        key={item.title}
+                                                                        href={item.href}
+                                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                                        className="text-sm font-normal text-brand-paragraph hover:text-brand-primary py-1"
+                                                                    >
+                                                                        {item.title}
+                                                                    </Link>
+                                                                ))}
+                                                            </motion.div>
+                                                        )}
+                                                    </AnimatePresence>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </motion.div>
-                        </Link>
-                    </motion.div>
-                ))}
+                        );
+                    }
+
+                    return (
+                        <motion.div
+                            key={link.name}
+                            initial={{ x: -20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: idx * 0.05 }}
+                        >
+                            <Link
+                                href={link.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-lg font-semibold text-brand-heading hover:text-brand-button flex items-center justify-between group"
+                            >
+                                {link.name}
+                                <motion.div
+                                    whileHover={{ x: 5 }}
+                                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    →
+                                </motion.div>
+                            </Link>
+                        </motion.div>
+                    );
+                })}
                 <div className="pt-6 border-t border-zinc-100 flex flex-col space-y-3">
                     <Link
                         href="/add-property"
