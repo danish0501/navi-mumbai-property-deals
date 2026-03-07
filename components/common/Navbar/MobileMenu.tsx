@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { User, Plus, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { buyMegaMenuData, Category, rentMegaMenuData, RentCategory } from './navData';
+import { buyMegaMenuData, Category, rentMegaMenuData, RentCategory, sellPropertyCategories } from './navData';
 
 interface PredefinedLink {
     name: string;
@@ -15,39 +15,161 @@ interface MobileMenuProps {
     setIsMobileMenuOpen: (val: boolean) => void;
 }
 
+const sellTypes = ["For Owner", "For Builder"] as const;
+
+const sellBasePathMapping: Record<string, string> = {
+    "For Owner": "/sell/owner",
+    "For Builder": "/sell/builder"
+};
+
 const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
     const [isBuyExpanded, setIsBuyExpanded] = useState(false);
     const [isRentExpanded, setIsRentExpanded] = useState(false);
+    const [isSellExpanded, setIsSellExpanded] = useState(false);
     const [expandedCategory, setExpandedCategory] = useState<Category | null>(null);
     const [expandedRentCategory, setExpandedRentCategory] = useState<RentCategory | null>(null);
+    const [expandedSellType, setExpandedSellType] = useState<string | null>(null);
+    const [expandedSellCategory, setExpandedSellCategory] = useState<string | null>(null);
 
     const categories = Object.keys(buyMegaMenuData) as Category[];
     const rentCategories = Object.keys(rentMegaMenuData) as RentCategory[];
+    const sellCategories = Object.keys(sellPropertyCategories);
 
     return (
         <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/95 backdrop-blur-md border-t border-zinc-100 overflow-y-auto max-h-[85vh] absolute top-full left-0 right-0 shadow-xl"
+            className="lg:hidden max-[769px]:block bg-white/95 backdrop-blur-md border-t border-zinc-100 overflow-y-auto max-h-[85vh] absolute top-full left-0 right-0 shadow-xl"
         >
-            <div className="px-6 py-8 flex flex-col gap-4">
+            <div className="px-6 pt-8 pb-8 max-[426px]:pb-28 flex flex-col gap-4">
                 {navLinks.map((link, idx) => {
                     const isBuyLink = link.name.toLowerCase() === 'buy';
                     const isRentLink = link.name.toLowerCase() === 'rent';
+                    const isSellLink = link.name.toLowerCase() === 'sell';
+
+                    if (isSellLink) {
+                        const toggleExpanded = () => setIsSellExpanded(!isSellExpanded);
+                        const toggleSellType = (type: string) => {
+                            setExpandedSellType(expandedSellType === type ? null : type);
+                        };
+                        const toggleSellCategory = (cat: string) => {
+                            setExpandedSellCategory(expandedSellCategory === cat ? null : cat);
+                        };
+
+                        return (
+                            <motion.div
+                                key={link.name}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="flex flex-col gap-2"
+                            >
+                                <button
+                                    onClick={toggleExpanded}
+                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group"
+                                >
+                                    <span>{link.name}</span>
+                                    <ChevronDown
+                                        size={20}
+                                        strokeWidth={2}
+                                        className={`transition-transform duration-300 font-bold ${isSellExpanded ? 'rotate-180 text-brand-primary-hover' : 'text-brand-heading group-hover:text-brand-primary-hover'}`}
+                                    />
+                                </button>
+
+                                <AnimatePresence>
+                                    {isSellExpanded && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="overflow-hidden flex flex-col ml-4 border-l-2 border-zinc-200 pl-4 gap-3 mt-2"
+                                        >
+                                            {sellTypes.map((sellType) => (
+                                                <div key={sellType} className="flex flex-col gap-2">
+                                                    <button
+                                                        onClick={() => toggleSellType(sellType)}
+                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                    >
+                                                        <span>{sellType}</span>
+                                                        <ChevronDown
+                                                            size={16}
+                                                            strokeWidth={2}
+                                                            className={`transition-transform duration-300 ${expandedSellType === sellType ? 'rotate-180 text-brand-primary-hover' : 'text-brand-heading'}`}
+                                                        />
+                                                    </button>
+
+                                                    <AnimatePresence>
+                                                        {expandedSellType === sellType && (
+                                                            <motion.div
+                                                                initial={{ opacity: 0, height: 0 }}
+                                                                animate={{ opacity: 1, height: 'auto' }}
+                                                                exit={{ opacity: 0, height: 0 }}
+                                                                className="overflow-hidden flex flex-col gap-2 ml-2 pl-2 border-l-2 border-zinc-200 mt-1"
+                                                            >
+                                                                {sellCategories.map((category) => (
+                                                                    <div key={category} className="flex flex-col gap-2 mt-1">
+                                                                        <button
+                                                                            onClick={() => toggleSellCategory(category)}
+                                                                            className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                                        >
+                                                                            <span>{category}</span>
+                                                                            <ChevronDown
+                                                                                size={16}
+                                                                                strokeWidth={2}
+                                                                                className={`transition-transform duration-300 ${expandedSellCategory === category ? 'rotate-180 text-brand-primary-hover' : 'text-brand-heading'}`}
+                                                                            />
+                                                                        </button>
+
+                                                                        <AnimatePresence>
+                                                                            {expandedSellCategory === category && (
+                                                                                <motion.div
+                                                                                    initial={{ opacity: 0, height: 0 }}
+                                                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                                                    exit={{ opacity: 0, height: 0 }}
+                                                                                    className="overflow-hidden flex flex-col gap-2 ml-2 pl-2 border-l-2 border-zinc-200"
+                                                                                >
+                                                                                    {/* @ts-ignore */}
+                                                                                    {sellPropertyCategories[category].map((item: any) => (
+                                                                                        <Link
+                                                                                            key={item.title}
+                                                                                            href={`${sellBasePathMapping[sellType]}${item.href.replace('/sell', '')}`}
+                                                                                            onClick={() => setIsMobileMenuOpen(false)}
+                                                                                            className="text-sm font-normal text-brand-heading hover:text-brand-primary py-1"
+                                                                                        >
+                                                                                            {item.title}
+                                                                                        </Link>
+                                                                                    ))}
+                                                                                </motion.div>
+                                                                            )}
+                                                                        </AnimatePresence>
+                                                                    </div>
+                                                                ))}
+                                                            </motion.div>
+                                                        )}
+                                                    </AnimatePresence>
+                                                </div>
+                                            ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+                        );
+                    }
 
                     if (isBuyLink || isRentLink) {
-                        const isRent = isRentLink;
-                        const isExpanded = isRent ? isRentExpanded : isBuyExpanded;
-                        const toggleExpanded = () => isRent ? setIsRentExpanded(!isRentExpanded) : setIsBuyExpanded(!isBuyExpanded);
+                        const isExpanded = isRentLink ? isRentExpanded : isBuyExpanded;
+                        const toggleExpanded = () => {
+                            if (isRentLink) setIsRentExpanded(!isRentExpanded);
+                            else setIsBuyExpanded(!isBuyExpanded);
+                        };
 
-                        const currentCategories = isRent ? rentCategories : categories;
-                        const currentData = isRent ? rentMegaMenuData : buyMegaMenuData;
+                        const currentCategories = isRentLink ? rentCategories : categories;
+                        const currentData = isRentLink ? rentMegaMenuData : buyMegaMenuData;
 
-                        // Type assertions needed since TS doesn't know which state we're updating
-                        const currentExpandedCategory = isRent ? expandedRentCategory : expandedCategory;
+                        const currentExpandedCategory = isRentLink ? expandedRentCategory : expandedCategory;
                         const toggleCategory = (cat: string) => {
-                            if (isRent) {
+                            if (isRentLink) {
                                 setExpandedRentCategory(expandedRentCategory === cat ? null : cat as RentCategory);
                             } else {
                                 setExpandedCategory(expandedCategory === cat ? null : cat as Category);
@@ -69,7 +191,8 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                     <span>{link.name}</span>
                                     <ChevronDown
                                         size={20}
-                                        className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-brand-primary' : 'text-zinc-400 group-hover:text-brand-primary'}`}
+                                        strokeWidth={2}
+                                        className={`transition-transform duration-300 ${isExpanded ? 'rotate-180 text-brand-primary-hover' : 'text-brand-heading group-hover:text-brand-primary-hover'}`}
                                     />
                                 </button>
 
@@ -79,7 +202,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
                                             exit={{ opacity: 0, height: 0 }}
-                                            className="overflow-hidden flex flex-col ml-4 border-l-2 border-zinc-100 pl-4 gap-3 mt-2"
+                                            className="overflow-hidden flex flex-col ml-4 border-l-2 border-zinc-200 pl-4 gap-3 mt-2"
                                         >
                                             {currentCategories.map((category) => (
                                                 <div key={category} className="flex flex-col gap-2">
@@ -90,7 +213,8 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                         <span>{category}</span>
                                                         <ChevronDown
                                                             size={16}
-                                                            className={`transition-transform duration-300 ${currentExpandedCategory === category ? 'rotate-180 text-brand-primary' : 'text-zinc-400'}`}
+                                                            strokeWidth={2}
+                                                            className={`transition-transform duration-300 ${currentExpandedCategory === category ? 'rotate-180 text-brand-primary-hover' : 'text-brand-heading'}`}
                                                         />
                                                     </button>
 
@@ -100,7 +224,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                                 initial={{ opacity: 0, height: 0 }}
                                                                 animate={{ opacity: 1, height: 'auto' }}
                                                                 exit={{ opacity: 0, height: 0 }}
-                                                                className="overflow-hidden flex flex-col gap-2 ml-2 pl-2 border-l border-zinc-100"
+                                                                className="overflow-hidden flex flex-col gap-2 ml-2 pl-2 border-l-2 border-zinc-200"
                                                             >
                                                                 {/* @ts-ignore - Dynamic key access based on conditional logic */}
                                                                 {currentData[category].map((item: any) => (
@@ -108,7 +232,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                                         key={item.title}
                                                                         href={item.href}
                                                                         onClick={() => setIsMobileMenuOpen(false)}
-                                                                        className="text-sm font-normal text-brand-paragraph hover:text-brand-primary py-1"
+                                                                        className="text-sm font-normal text-brand-heading hover:text-brand-primary py-1"
                                                                     >
                                                                         {item.title}
                                                                     </Link>

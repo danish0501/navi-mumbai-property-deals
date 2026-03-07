@@ -32,7 +32,7 @@ const BottomNavbar = () => {
                                     href={item.href}
                                     className={`flex flex-col items-center justify-center w-full gap-1.5 py-1 transition-all duration-300 group ${isActive
                                         ? 'text-brand-primary-hover'
-                                        : 'text-zinc-400 hover:text-zinc-600'
+                                        : 'text-brand-paragraph hover:text-brand-primary'
                                         }`}
                                 >
                                     <div className="relative flex items-center justify-center">
@@ -53,7 +53,7 @@ const BottomNavbar = () => {
                                             <div className="absolute inset-0 bg-brand-primary/40 blur-2xl rounded-full scale-150 -z-10" />
                                         )}
                                     </div>
-                                    <span className={`text-sm leading-none uppercase tracking-widest transition-all duration-300 ${isActive ? 'text-brand-primary-hover opacity-100 font-bold scale-100' : 'text-zinc-400 opacity-70 font-semibold scale-95 group-hover:text-zinc-600'
+                                    <span className={`text-sm leading-none uppercase tracking-widest transition-all duration-300 ${isActive ? 'text-brand-primary-hover opacity-100 font-bold scale-100' : 'text-brand-paragraph opacity-100 font-semibold scale-95 group-hover:text-brand-primary'
                                         }`}>
                                         {item.name}
                                     </span>
