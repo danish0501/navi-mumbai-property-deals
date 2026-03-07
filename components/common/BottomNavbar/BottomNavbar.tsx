@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -13,9 +14,41 @@ const navItems = [
 
 const BottomNavbar = () => {
     const pathname = usePathname();
+    const [isVisible, setIsVisible] = useState(true);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Hide navbar on any scroll
+            setIsVisible(false);
+
+            // Clear the previous timeout
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+
+            // Set a new timeout to show the navbar after no scrolling
+            timeoutRef.current = setTimeout(() => {
+                setIsVisible(true);
+            }, 1000);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // Cleanup on unmount
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-[100] hidden max-[426px]:block">
+        <div
+            className={`fixed bottom-0 left-0 right-0 z-[100] hidden max-[426px]:block transition-transform duration-500 ease-in-out ${isVisible ? "translate-y-0" : "translate-y-full"
+                }`}
+        >
             {/* Elegant glassmorphism background with safe area padding */}
             <nav className="bg-white/85 backdrop-blur-2xl border-t border-zinc-200/60">
                 <ul className="flex justify-around items-center h-full max-w-md mx-auto relative">
