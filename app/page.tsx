@@ -1,6 +1,7 @@
 import HeroSection from "@/components/Home/HeroSection";
 import AdvancedSearch from "@/components/Home/AdvancedSearch";
 import BuySection from "@/components/Home/BuySection";
+import RentSection from "@/components/Home/RentSection";
 import OurStory from "@/components/Home/OurStory";
 import WhyChooseUs from "@/components/Home/WhyChooseUs";
 import CallToAction from "@/components/Home/CallToAction";
@@ -12,6 +13,7 @@ export default function Home() {
       <AdvancedSearch />
       <OurStory />
       <BuySection />
+      <RentSection />
       <WhyChooseUs />
       <CallToAction />
     </main>
