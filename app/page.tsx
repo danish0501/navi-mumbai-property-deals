@@ -4,8 +4,8 @@ import BuySection from "@/components/Home/BuySection";
 import RentSection from "@/components/Home/RentSection";
 import SaleSection from "@/components/Home/SaleSection";
 import OurStory from "@/components/Home/OurStory";
-import WhyChooseUs from "@/components/Home/WhyChooseUs";
 import CallToAction from "@/components/Home/CallToAction";
+import BlogSection from "@/components/Home/BlogSection";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       <BuySection />
       <SaleSection />
       <RentSection />
-      <WhyChooseUs />
+      <BlogSection />
       <CallToAction />
     </main>
   );
