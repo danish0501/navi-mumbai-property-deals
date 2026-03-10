@@ -5,6 +5,8 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { User, Building2, Plus, ChevronRight, BookOpenText, TrendingUp, MoveRight } from 'lucide-react';
 import { sellPropertyCategories } from './navData';
 
+import Breadcrumb from '../Breadcrumb';
+
 const sellCategories = ["For Owner", "For Builder", "Blogs and Articles"] as const;
 type SellCategory = typeof sellCategories[number];
 
@@ -35,6 +37,12 @@ const itemVariants: Variants = {
 const SellMegaMenu = () => {
     const [activeCategory, setActiveCategory] = useState<SellCategory>("For Owner");
 
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Sell", href: "/sell" },
+        { label: activeCategory, href: "#", active: true }
+    ];
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -46,12 +54,8 @@ const SellMegaMenu = () => {
                 <div className="w-[280px] shrink-0 bg-zinc-50 border-r border-zinc-200 flex flex-col p-5 relative z-10">
                     <div className="mb-4 px-2">
                         <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest">Seller Hub Hierarchy</span>
-                        <div className="flex items-center gap-1 mt-1 text-[11px] text-zinc-500 font-medium">
-                            <span>Home</span>
-                            <ChevronRight size={10} />
-                            <span>Sell</span>
-                            <ChevronRight size={10} />
-                            <span className="text-brand-primary">{activeCategory}</span>
+                        <div className="mt-1">
+                            <Breadcrumb items={breadcrumbItems} variant="minimal" />
                         </div>
                     </div>
 

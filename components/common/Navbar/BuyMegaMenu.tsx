@@ -5,6 +5,8 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { ChevronRight, Home, Map, BriefcaseBusiness, MapPin, BookOpenText, TrendingUp } from 'lucide-react';
 import { buyMegaMenuData, Category } from './navData';
 
+import Breadcrumb from '../Breadcrumb';
+
 const categoryIcons: Record<Category, React.ReactNode> = {
     "Buy a Home": <Home size={18} strokeWidth={2} />,
     "Land/Plot": <Map size={18} strokeWidth={2} />,
@@ -38,6 +40,12 @@ const BuyMegaMenu = () => {
     const [activeCategory, setActiveCategory] = useState<Category>("Buy a Home");
     const categories = Object.keys(buyMegaMenuData) as Category[];
 
+    const breadcrumbItems = [
+        { label: "Home", href: "/" },
+        { label: "Buy", href: "/buy" },
+        { label: activeCategory, href: "#", active: true }
+    ];
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -49,12 +57,8 @@ const BuyMegaMenu = () => {
                 <div className="w-1/3 bg-zinc-50 border-r border-zinc-200 flex flex-col p-5 relative z-10">
                     <div className="mb-4 px-2">
                         <span className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest">Localized Hierarchy</span>
-                        <div className="flex items-center gap-1 mt-1 text-[11px] text-zinc-500 font-medium">
-                            <span>Home</span>
-                            <ChevronRight size={10} />
-                            <span>Buy</span>
-                            <ChevronRight size={10} />
-                            <span className="text-brand-primary">{activeCategory}</span>
+                        <div className="mt-1">
+                            <Breadcrumb items={breadcrumbItems} variant="minimal" />
                         </div>
                     </div>
 

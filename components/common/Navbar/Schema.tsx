@@ -39,40 +39,11 @@ const Schema = () => {
         }
     };
 
-    const breadcrumbSchema = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": `${siteUrl}/`
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Buy",
-                "item": `${siteUrl}/flats-for-sale-in-navi-mumbai`
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Navi Mumbai Real Estate",
-                "item": `${siteUrl}/properties-for-sale-in-vashi-navi-mumbai`
-            }
-        ]
-    };
-
     return (
         <>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
         </>
     );

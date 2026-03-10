@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar/Navbar";
 import BottomNavbar from "@/components/common/BottomNavbar";
 import Footer from "@/components/common/Footer";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden">
         <Navbar />
         <main className="mt-24 overflow-x-hidden">
+          <Breadcrumb />
           {children}
         </main>
         <Footer />
