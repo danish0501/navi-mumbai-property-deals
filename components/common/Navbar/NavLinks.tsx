@@ -36,7 +36,7 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
                 return (
                     <div
                         key={link.name}
-                        className="relative group h-full py-4"
+                        className={`relative group h-full py-4 ${hasMegaMenu ? 'cursor-pointer' : ''}`}
                         onMouseEnter={() => setHoveredLink(link.name)}
                         onMouseLeave={() => setHoveredLink(null)}
                     >
@@ -47,7 +47,7 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
                                 aria-controls={menuId}
                                 role="tab"
                                 aria-selected={isActive}
-                                className={`relative px-4 py-2 text-base font-bold transition-colors duration-200 flex items-center gap-1 outline-none focus-visible:text-brand-primary-hover ${isActive ? 'text-brand-primary-hover' : 'text-zinc-600 hover:text-brand-primary-hover'
+                                className={`relative px-4 py-2 text-base font-bold transition-colors duration-200 flex items-center gap-1 outline-none focus-visible:text-brand-primary-hover cursor-pointer ${isActive ? 'text-brand-primary-hover' : 'text-zinc-600 hover:text-brand-primary-hover'
                                     }`}
                             >
                                 {link.name}

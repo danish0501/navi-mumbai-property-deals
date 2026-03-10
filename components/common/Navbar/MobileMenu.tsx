@@ -68,7 +68,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                             >
                                 <button
                                     onClick={toggleExpanded}
-                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group"
+                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group cursor-pointer"
                                 >
                                     <span>{link.name}</span>
                                     <ChevronDown
@@ -90,7 +90,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                 <div key={sellType} className="flex flex-col gap-2">
                                                     <button
                                                         onClick={() => toggleSellType(sellType)}
-                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left cursor-pointer"
                                                     >
                                                         <span>{sellType}</span>
                                                         <ChevronDown
@@ -112,7 +112,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                                     <div key={category} className="flex flex-col gap-2 mt-1">
                                                                         <button
                                                                             onClick={() => toggleSellCategory(category)}
-                                                                            className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                                            className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left cursor-pointer"
                                                                         >
                                                                             <span>{category}</span>
                                                                             <ChevronDown
@@ -187,7 +187,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                             >
                                 <button
                                     onClick={toggleExpanded}
-                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group"
+                                    className="text-lg font-semibold text-brand-heading hover:text-brand-button w-full flex items-center justify-between group cursor-pointer"
                                 >
                                     <span>{link.name}</span>
                                     <ChevronDown
@@ -209,7 +209,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                                                 <div key={category} className="flex flex-col gap-2">
                                                     <button
                                                         onClick={() => toggleCategory(category)}
-                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left"
+                                                        className="text-base font-medium text-brand-heading flex items-center justify-between group w-full text-left cursor-pointer"
                                                     >
                                                         <span>{category}</span>
                                                         <ChevronDown
