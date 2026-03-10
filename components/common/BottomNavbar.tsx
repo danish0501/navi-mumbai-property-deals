@@ -6,10 +6,34 @@ import { motion } from 'framer-motion';
 import { Home, Key, Tag, BookOpen } from 'lucide-react';
 
 const navItems = [
-    { name: 'Buy', href: '/buy', icon: Home },
-    { name: 'Rent', href: '/rent', icon: Key },
-    { name: 'Sell', href: '/sell', icon: Tag },
-    { name: 'Blogs', href: '/blogs', icon: BookOpen },
+    {
+        name: 'Buy',
+        href: '/buy',
+        icon: Home,
+        title: 'Buy Properties in Navi Mumbai',
+        ariaLabel: 'Search for residential and commercial properties for sale in Navi Mumbai'
+    },
+    {
+        name: 'Rent',
+        href: '/rent',
+        icon: Key,
+        title: 'Rent Properties in Navi Mumbai',
+        ariaLabel: 'Find rental apartments, flats and shops in Navi Mumbai'
+    },
+    {
+        name: 'Sell',
+        href: '/sell',
+        icon: Tag,
+        title: 'Sell Property in Navi Mumbai',
+        ariaLabel: 'List your property in Navi Mumbai for sale or rent to reach potential buyers'
+    },
+    {
+        name: 'Blogs',
+        href: '/blogs',
+        icon: BookOpen,
+        title: 'Real Estate Blogs for Navi Mumbai',
+        ariaLabel: 'Read the latest real estate news and market trends for Navi Mumbai'
+    },
 ];
 
 const BottomNavbar = () => {
