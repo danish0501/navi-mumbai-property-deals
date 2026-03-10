@@ -14,9 +14,11 @@ const Logo = () => {
                 >
                     <Image
                         src="/images/nm-property-logo.png"
-                        alt="Navi Mumbai Property Deals"
+                        alt="Navi Mumbai Property Deals - Trusted Real Estate Portal"
                         width={180}
                         height={60}
+                        priority
+                        fetchPriority="high"
                         className="h-auto w-auto max-w-[120px]"
                     />
                 </motion.div>

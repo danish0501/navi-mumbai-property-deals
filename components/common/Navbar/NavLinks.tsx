@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import MegaMenu from './BuyMegaMenu';
+import BuyMegaMenu from './BuyMegaMenu';
 import RentMegaMenu from './RentMegaMenu';
 import SellMegaMenu from './SellMegaMenu';
 
@@ -18,67 +18,91 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
     return (
-        <motion.div
-            key="nav-links"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
+        <nav
             className="flex items-center gap-1"
+            role="tablist"
+            aria-label="High-competition Real Estate Navigation"
         >
             {navLinks.map((link) => {
                 const isActive = pathname === link.href;
-                const isBuyLink = link.name.toLowerCase() === 'buy';
-                const isRentLink = link.name.toLowerCase() === 'rent';
-                const isSellLink = link.name.toLowerCase() === 'sell';
+                const normalizedName = link.name.toLowerCase().trim();
+                const isBuyLink = normalizedName === 'buy' || normalizedName.includes('buy');
+                const isRentLink = normalizedName === 'rent' || normalizedName.includes('rent');
+                const isSellLink = normalizedName === 'sell' || normalizedName.includes('sell');
+                const hasMegaMenu = isBuyLink || isRentLink || isSellLink;
+                const isCurrentlyHovered = hoveredLink === link.name;
+                const menuId = `mega-menu-${normalizedName.replace(/\s+/g, '-')}`;
 
                 return (
                     <div
                         key={link.name}
-                        className="relative group"
+                        className="relative group h-full py-4"
                         onMouseEnter={() => setHoveredLink(link.name)}
                         onMouseLeave={() => setHoveredLink(null)}
                     >
-                        <Link
-                            href={link.href}
-                            className={`relative px-4 py-2 text-base font-medium transition-colors duration-200 block ${isActive ? 'text-brand-primary-hover' : 'text-brand-paragraph hover:text-brand-primary-hover'
-                                }`}
-                        >
-                            <span className="flex items-center gap-1">
+                        {hasMegaMenu ? (
+                            <button
+                                aria-expanded={isCurrentlyHovered}
+                                aria-haspopup="true"
+                                aria-controls={menuId}
+                                role="tab"
+                                aria-selected={isActive}
+                                className={`relative px-4 py-2 text-base font-bold transition-colors duration-200 flex items-center gap-1 outline-none focus-visible:text-brand-primary-hover ${isActive ? 'text-brand-primary-hover' : 'text-zinc-600 hover:text-brand-primary-hover'
+                                    }`}
+                            >
                                 {link.name}
-                                {(isBuyLink || isRentLink || isSellLink) && (
-                                    <ChevronDown
-                                        size={16}
-                                        className="transition-transform duration-300 group-hover:rotate-180"
+                                <ChevronDown
+                                    size={16}
+                                    className={`transition-transform duration-300 ${isCurrentlyHovered ? 'rotate-180' : ''}`}
+                                />
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="active-underline"
+                                        className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-button"
+                                        initial={false}
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                     />
                                 )}
-                            </span>
-                            {isActive && (
-                                <motion.div
-                                    layoutId="active-underline"
-                                    className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-button"
-                                    initial={false}
-                                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                />
-                            )}
-                        </Link>
+                            </button>
+                        ) : (
+                            <Link
+                                href={link.href}
+                                role="tab"
+                                aria-selected={isActive}
+                                aria-current={isActive ? "page" : undefined}
+                                className={`relative px-4 py-2 text-base font-bold transition-colors duration-200 block outline-none focus-visible:text-brand-primary-hover ${isActive ? 'text-brand-primary-hover' : 'text-zinc-600 hover:text-brand-primary-hover'
+                                    }`}
+                            >
+                                {link.name}
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="active-underline"
+                                        className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-button"
+                                        initial={false}
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                            </Link>
+                        )}
 
                         {/* Mega Menus */}
-                        <AnimatePresence>
-                            {isBuyLink && hoveredLink === link.name && (
-                                <MegaMenu />
-                            )}
-                            {isRentLink && hoveredLink === link.name && (
-                                <RentMegaMenu />
-                            )}
-                            {isSellLink && hoveredLink === link.name && (
-                                <SellMegaMenu />
-                            )}
-                        </AnimatePresence>
+                        {hasMegaMenu && (
+                            <div
+                                id={menuId}
+                                className={`absolute top-full left-1/2 -translate-x-1/2 -pt-10 transition-all duration-300 ${isCurrentlyHovered
+                                    ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+                                    : 'opacity-0 translate-y-1 invisible pointer-events-none'
+                                    }`}
+                            >
+                                {isBuyLink && <BuyMegaMenu />}
+                                {isRentLink && <RentMegaMenu />}
+                                {isSellLink && <SellMegaMenu />}
+                            </div>
+                        )}
                     </div>
                 );
             })}
-        </motion.div>
+        </nav>
     );
 };
 

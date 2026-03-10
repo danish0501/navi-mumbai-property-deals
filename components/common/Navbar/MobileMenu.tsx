@@ -44,9 +44,10 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
         >
             <div className="px-6 pt-8 pb-8 max-[426px]:pb-28 flex flex-col gap-4">
                 {navLinks.map((link, idx) => {
-                    const isBuyLink = link.name.toLowerCase() === 'buy';
-                    const isRentLink = link.name.toLowerCase() === 'rent';
-                    const isSellLink = link.name.toLowerCase() === 'sell';
+                    const normalizedName = link.name.toLowerCase().trim();
+                    const isBuyLink = normalizedName === 'buy' || normalizedName.includes('buy');
+                    const isRentLink = normalizedName === 'rent' || normalizedName.includes('rent');
+                    const isSellLink = normalizedName === 'sell' || normalizedName.includes('sell');
 
                     if (isSellLink) {
                         const toggleExpanded = () => setIsSellExpanded(!isSellExpanded);

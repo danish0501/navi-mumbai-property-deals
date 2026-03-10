@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from './Logo';
 import NavLinks from './NavLinks';
-import MobileSearchBar from './MobileSearchBar';
 import NavbarActions from './NavbarActions';
 import MobileMenu from './MobileMenu';
+import Schema from './Schema';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -16,12 +16,12 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Home', href: '/' },
-        { name: 'About', href: '/about' },
-        { name: 'Blogs', href: '/blogs' },
-        { name: 'Buy', href: '/buy' },
-        { name: 'Rent', href: '/rent' },
-        { name: 'Sell', href: '/sell' },
-        { name: 'Contact', href: '/contact' },
+        { name: 'About', href: '/about-us-navi-mumbai-real-estate' },
+        { name: 'Blogs', href: '/real-estate-blogs-navi-mumbai' },
+        { name: 'Buy', href: '/flats-for-sale-in-navi-mumbai' },
+        { name: 'Rent', href: '/flats-for-rent-in-navi-mumbai' },
+        { name: 'Sell', href: '/sell-property-navi-mumbai' },
+        { name: 'Contact', href: '/contact-us' },
     ];
 
     useEffect(() => {
@@ -44,6 +44,7 @@ const Navbar = () => {
         <header
             className="fixed top-0 left-0 right-0 z-[100]"
         >
+            <Schema />
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -77,13 +78,6 @@ const Navbar = () => {
 
                 </div>
             </motion.nav>
-
-            {/* TABLET/MOBILE SEARCH BAR (Visible for < 1024px, specifically for 427px to 769px) */}
-            <AnimatePresence>
-                {isSearchOpen && (
-                    <MobileSearchBar setIsSearchOpen={setIsSearchOpen} />
-                )}
-            </AnimatePresence>
 
             {/* MOBILE MENU */}
             <AnimatePresence>
