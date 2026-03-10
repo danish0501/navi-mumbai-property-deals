@@ -39,7 +39,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-brand-dark text-white pt-16 pb-12 max-[426px]:pb-28 relative overflow-hidden">
+        <footer className="bg-brand-dark text-white pt-16 max-[426px]:pt-8 pb-12 max-[426px]:pb-28 relative overflow-hidden">
             {/* Interactive Grid Background */}
             <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:34px_34px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
@@ -140,8 +140,8 @@ export default function Footer() {
                             <li className="flex items-start gap-3 text-brand-muted group">
                                 <MapPin className="text-brand-primary shrink-0 mt-1" size={18} />
                                 <span className="group-hover:text-white transition-colors duration-300">
-                                    Navi Mumbai Property Deals,<br />
-                                    Sector 17, Vashi,<br />
+                                    Navi Mumbai Property Deals,<br className="max-[426px]:hidden" />
+                                    Sector 17, Vashi,<br className="max-[426px]:hidden" />
                                     Navi Mumbai - 400703
                                 </span>
                             </li>
