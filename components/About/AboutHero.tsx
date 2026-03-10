@@ -139,12 +139,12 @@ export default function AboutHero() {
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-brand-white bg-brand-button hover:bg-brand-button-hover rounded-xl shadow-lg hover:shadow-brand-primary/30 overflow-hidden transition-all duration-300 cursor-pointer border-none max-[426px]:w-full"
+                                    className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-brand-white bg-brand-button hover:bg-brand-button-hover rounded-xl overflow-hidden transition-all duration-300 cursor-pointer border-none max-[426px]:w-full"
                                 >
                                     <span className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out skew-x-12" />
                                     <span className="relative flex items-center gap-3">
                                         Explore Our Blogs
-                                        <ArrowRight className="w-4 h-4 text-brand-white font-bold transition-transform duration-300 group-hover:translate-x-1" />
+                                        <ArrowRight className="w-5 h-5 text-brand-white font-bold transition-transform duration-300 group-hover:translate-x-1" />
                                     </span>
                                 </motion.button>
                             </Link>

@@ -149,7 +149,10 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
     }
 
     return (
-        <div className="w-full bg-white/60 backdrop-blur-md border-b border-zinc-100 py-3 relative z-40">
+        <div className="w-full bg-brand-dark bg-[radial-gradient(circle_at_30%_50%,rgba(186,163,96,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_50%,rgba(186,163,96,0.05)_0%,transparent_50%)] backdrop-blur-md border-b border-white/5 py-3 relative z-40 group/breadcrumb overflow-hidden">
+            {/* Interactive Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover/breadcrumb:translate-x-full transition-transform duration-[2500ms] ease-in-out pointer-events-none" />
+
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -170,23 +173,23 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
                                 className="flex items-center"
                             >
                                 {index > 0 && (
-                                    <ChevronRight className="w-4 h-4 text-brand-dark shrink-0" strokeWidth={2.5} />
+                                    <ChevronRight className="w-4 h-4 text-brand-white shrink-0" strokeWidth={3} />
                                 )}
 
                                 <div className="flex items-center">
                                     {item.href === '/' ? (
                                         <Link
                                             href="/"
-                                            className="flex items-center gap-1.5 text-zinc-500 hover:text-brand-primary transition-all duration-200"
+                                            className="flex items-center gap-1.5 text-zinc-500 hover:text-brand-primary-hover transition-all duration-200 group"
                                         >
-                                            <Home className="w-3.5 h-3.5 text-brand-dark group-hover:text-brand-primary" />
-                                            <span className="font-bold hidden text-brand-dark sm:inline uppercase tracking-wider text-[11px] group-hover:text-brand-primary">Home</span>
+                                            <Home className="w-3.5 h-3.5 text-brand-white group-hover:text-brand-primary transition-colors duration-200" />
+                                            <span className="font-bold hidden text-brand-white sm:inline uppercase tracking-wider text-[12px] group-hover:text-brand-primary transition-colors duration-200">Home</span>
                                         </Link>
                                     ) : (
                                         <Link
                                             href={item.href}
                                             className={`
-                                                text-[11px] font-bold uppercase tracking-wider transition-all duration-300 ml-2
+                                                text-[12px] font-extrabold uppercase tracking-wider transition-all duration-300 ml-2
                                                 ${item.active
                                                     ? 'text-brand-primary-hover cursor-default pointer-events-none'
                                                     : 'text-zinc-500 hover:text-brand-primary'
@@ -204,10 +207,10 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
                 </nav>
 
                 {/* EEAT Signal */}
-                <div className="hidden lg:flex items-center gap-3 pr-2 border-l border-zinc-200 pl-6 ml-6">
+                <div className="hidden lg:flex items-center gap-3 pr-2 border-l-2 border-brand-white pl-6 ml-6">
                     <div className="flex flex-col items-end">
                         <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-black text-zinc-900 leading-none">EXPERT VERIFIED</span>
+                            <span className="text-[10px] font-black text-white leading-none">EXPERT VERIFIED</span>
                             <ShieldCheck size={12} className="text-brand-primary" fill="currentColor" fillOpacity={0.1} />
                         </div>
                         <span className="text-[8px] text-zinc-400 font-bold tracking-[0.2em] leading-none mt-1 uppercase">Navi Mumbai Real Estate</span>
