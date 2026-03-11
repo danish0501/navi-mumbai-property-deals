@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowUpRight, User } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { BlogPost } from "./Blogdata";
 
 interface BlogCardProps {
@@ -10,87 +10,91 @@ interface BlogCardProps {
     index: number;
 }
 
+const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.21, 1.11, 0.81, 0.99] as const
+        }
+    }
+};
+
 const BlogCard = ({ post, index }: BlogCardProps) => {
     return (
         <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative bg-white rounded-[2rem] overflow-hidden border border-neutral-100/80 hover:border-brand-primary/20 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(var(--brand-primary-rgb),0.1)]"
+            variants={cardVariants}
+            whileHover={{ y: -10 }}
+            className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-neutral-100/80 hover:border-brand-primary/30 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(186,163,96,0.15)]"
         >
-            {/* Image Container */}
-            <div className="relative aspect-[16/11] overflow-hidden group">
+            {/* Image Section */}
+            <div className="relative aspect-[16/12] overflow-hidden">
                 <Image
                     src={post.image}
                     alt={post.title}
                     fill
-                    className="object-cover transform group-hover:scale-110 transition-transform duration-1000"
+                    className="object-cover transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-heading/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Category Badge */}
-                <div className="absolute top-6 left-6">
-                    <span className="px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-sm text-brand-primary text-[10px] font-black uppercase tracking-widest shadow-sm border border-neutral-100">
-                        {post.category}
-                    </span>
-                </div>
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-heading/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                {/* Floating Arrow on Image Hover */}
-                <div className="absolute center inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="w-16 h-16 rounded-full bg-brand-primary text-white flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500">
-                        <ArrowUpRight className="w-8 h-8" />
+                {/* Glass Badge */}
+                <div className="absolute top-4 left-4 z-20">
+                    <div className="px-4 py-2 rounded-2xl bg-white/80 backdrop-blur-md border border-white/40 shadow-xl shadow-black/5">
+                        <span className="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em]">
+                            {post.category}
+                        </span>
                     </div>
                 </div>
             </div>
 
-            {/* Content */}
-            <div className="p-8">
-                <div className="flex items-center gap-4 mb-5 text-[11px] font-black text-brand-paragraph/40 uppercase tracking-wider">
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-neutral-50 rounded-full">
-                        <Calendar className="w-3.5 h-3.5 text-brand-primary" />
-                        {post.date}
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-neutral-50 rounded-full">
-                        <Clock className="w-3.5 h-3.5 text-brand-primary" />
-                        {post.readTime}
-                    </div>
-                </div>
-
-                <Link href={`/blogs/${post.id}`} className="block">
-                    <h2 className="text-2xl font-black text-brand-heading mb-4 leading-snug group-hover:text-brand-primary transition-colors line-clamp-2">
+            {/* Content Section */}
+            <div className="p-4 md:p-6 relative">
+                <Link href={`/blogs/${post.id}`} className="block group/title">
+                    <h2 className="text-2xl font-black text-brand-heading mb-4 leading-[1.3] group-hover/title:text-brand-primary transition-colors duration-500 line-clamp-2">
                         {post.title}
                     </h2>
                 </Link>
 
-                <p className="text-brand-paragraph text-sm mb-8 line-clamp-3 font-medium leading-relaxed opacity-70">
+                <p className="text-brand-paragraph/70 text-[15px] mb-6 line-clamp-4 font-medium leading-relaxed">
                     {post.excerpt}
                 </p>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-6 border-t border-neutral-50">
-                    <div className="flex items-center gap-3">
-                        <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-brand-primary/10">
-                            <div className="w-full h-full bg-brand-primary/5 flex items-center justify-center text-brand-primary">
-                                <User className="w-5 h-5" />
+                {/* Bottom Section */}
+                <div className="pt-6 border-t border-neutral-50/80 space-y-6">
+                    {/* Meta info */}
+                    <div className="flex items-center gap-6">
+                        <div className="flex items-center group/meta">
+                            <div className="w-8 h-8 rounded-xl bg-brand-primary/5 flex items-center justify-center text-brand-primary group-hover/meta:bg-brand-primary group-hover/meta:text-white transition-colors duration-500 mr-3">
+                                <Calendar className="w-4 h-4" />
                             </div>
+                            <span className="text-[12px] font-bold text-brand-paragraph uppercase tracking-wider">{post.date}</span>
                         </div>
-                        <div>
-                            <p className="text-sm font-black text-brand-heading leading-none mb-1">{post.author}</p>
-                            <p className="text-[10px] font-bold text-brand-paragraph/50 uppercase tracking-tighter">{post.authorRole}</p>
+                        <div className="flex items-center group/meta">
+                            <div className="w-8 h-8 rounded-xl bg-brand-primary/5 flex items-center justify-center text-brand-primary group-hover/meta:bg-brand-primary group-hover/meta:text-white transition-colors duration-500 mr-3">
+                                <Clock className="w-4 h-4" />
+                            </div>
+                            <span className="text-[12px] font-bold text-brand-paragraph uppercase tracking-wider">{post.readTime}</span>
                         </div>
                     </div>
 
+                    {/* Full Width Button */}
                     <Link
                         href={`/blogs/${post.id}`}
-                        className="w-10 h-10 rounded-xl bg-neutral-50 flex items-center justify-center text-brand-heading hover:bg-brand-primary hover:text-white transition-all duration-300 group/btn"
+                        className="group/btn relative w-full flex items-center justify-center gap-3 bg-brand-primary hover:bg-brand-primary-hover text-brand-white py-4 px-6 rounded-2xl font-black transition-all duration-500 overflow-hidden"
                     >
-                        <ArrowUpRight className="w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                        <span className="relative z-10 text-sm uppercase tracking-widest">Read Article</span>
+                        <ArrowRight className="relative z-10 w-5 h-5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-x-0.5 transition-transform" />
+                        <div className="absolute inset-0 bg-brand-primary/10 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-700" />
                     </Link>
                 </div>
             </div>
         </motion.article>
     );
 };
+
 
 export default BlogCard;
