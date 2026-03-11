@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function CallToAction() {
     return (
@@ -30,9 +31,9 @@ export default function CallToAction() {
 
                     <div className="px-6 py-8 md:py-12 md:px-20 max-[376px]:p-4 flex flex-col items-center text-center relative z-10">
 
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl max-[321px]:text-2xl font-black text-white mb-6 leading-tight">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl max-[321px]:text-2xl font-black !text-neutral-border mb-6 leading-tight">
                             Ready to Find Your <br className="hidden md:block" />
-                            Dream Property?
+                            <span className="!text-brand-white italic">Dream Property?</span>
                         </h2>
 
                         <p className="text-white/90 text-lg md:text-xl max-[321px]:text-lg max-w-3xl mx-auto mb-10 font-medium">
@@ -40,12 +41,23 @@ export default function CallToAction() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                            <button className="w-full sm:w-auto px-8 py-4 bg-white text-brand-primary font-bold text-lg max-[321px]:text-base rounded-full hover:bg-brand-neutral-bg transition-all flex items-center justify-center group cursor-pointer">
-                                Browse Properties
-                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            <Link href="/about">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-brand-white bg-brand-button hover:bg-brand-button-hover rounded-full shadow-lg hover:shadow-brand-primary/30 overflow-hidden transition-all duration-300 cursor-pointer border-none max-[426px]:w-full"
+                                >
+                                    <span className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out skew-x-12" />
+                                    <span className="relative flex items-center gap-3">
+                                        Browse Properties
+                                        <div className="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                                            <ArrowRight className="w-4 h-4 text-brand-white" />
+                                        </div>
+                                    </span>
+                                </motion.button>
+                            </Link>
 
-                            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-white/50 text-white font-bold text-lg max-[321px]:text-base rounded-full hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm cursor-pointer">
+                            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border-1 border-white/10 text-white font-bold text-lg max-[321px]:text-base rounded-full hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm cursor-pointer">
                                 Contact an Expert
                             </button>
                         </div>

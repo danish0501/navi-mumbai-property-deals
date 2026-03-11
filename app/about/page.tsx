@@ -2,6 +2,7 @@ import AboutHero from "@/components/About/AboutHero";
 import AboutInfo from "@/components/About/AboutInfo";
 import CoreValues from "@/components/About/CoreValues";
 import CompanyImpact from "@/components/About/CompanyImpact";
+import CallToAction from "@/components/common/CallToAction";
 
 export default function AboutPage() {
     return (
@@ -10,6 +11,7 @@ export default function AboutPage() {
             <AboutInfo />
             <CompanyImpact />
             <CoreValues />
+            <CallToAction />
         </div>
     );
 }
