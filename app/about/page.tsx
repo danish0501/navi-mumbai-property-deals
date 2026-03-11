@@ -1,5 +1,6 @@
 import AboutHero from "@/components/About/AboutHero";
 import AboutInfo from "@/components/About/AboutInfo";
+import InfrastructureGrowth from "@/components/About/InfrastructureGrowth";
 import CoreValues from "@/components/About/CoreValues";
 import CompanyImpact from "@/components/About/CompanyImpact";
 import CallToAction from "@/components/common/CallToAction";
@@ -11,8 +12,9 @@ export default function AboutPage() {
         <div className="min-h-screen">
             <AboutHero />
             <AboutInfo />
-            <CompanyImpact />
+            <InfrastructureGrowth />
             <CoreValues />
+            <CompanyImpact />
             <Testimonials />
             <CallToAction />
         </div>
