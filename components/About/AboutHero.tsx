@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Award, Shield, Users, ArrowRight, Plus } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
+import Script from "next/script";
 
 export default function AboutHero() {
     const containerRef = useRef(null);
@@ -13,20 +14,44 @@ export default function AboutHero() {
     });
 
     const yVal = useTransform(scrollYProgress, [0, 1], [0, 200]);
-    const opacityVal = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const scaleVal = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
     const stats = [
-        { icon: <Users className="w-5 h-5" />, label: "Happy Clients", value: "5000+" },
-        { icon: <Award className="w-5 h-5" />, label: "Awards Won", value: "25+" },
-        { icon: <Shield className="w-5 h-5" />, label: "Trusted Partners", value: "150+" },
+        { icon: <Users className="w-5 h-5" aria-hidden="true" />, label: "Happy Clients", value: "5000+" },
+        { icon: <Award className="w-5 h-5" aria-hidden="true" />, label: "Awards Won", value: "25+" },
+        { icon: <Shield className="w-5 h-5" aria-hidden="true" />, label: "Trusted Partners", value: "150+" },
     ];
+
+    const aboutPageSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "description": "Learn about Navi Mumbai Property Deals, the leading real estate consultancy helping you find the perfect home in Kharghar, Panvel, Ulwe, and across Navi Mumbai.",
+        "mainEntity": {
+            "@type": "RealEstateAgent",
+            "name": "Navi Mumbai Property Deals",
+            "image": "https://navimumbaipropertydeals.com/modern_about_hero.png",
+            "priceRange": "$$",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Navi Mumbai",
+                "addressRegion": "Maharashtra",
+                "addressCountry": "India"
+            },
+            "url": "https://navimumbaipropertydeals.com/about"
+        }
+    };
 
     return (
         <section
             ref={containerRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950 pt-10 pb-30"
         >
+            <Script
+                id="about-page-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+            />
+
             {/* Background Image with Parallax Scale */}
             <motion.div
                 style={{ scale: scaleVal }}
@@ -34,10 +59,12 @@ export default function AboutHero() {
             >
                 <Image
                     src="/modern_about_hero.png"
-                    alt="Luxury Real Estate Navi Mumbai"
+                    alt="Premium Luxury Residential Apartments in Navi Mumbai Skyline"
                     fill
                     className="object-cover opacity-100"
                     priority
+                    // @ts-ignore
+                    fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/40 to-zinc-950" />
                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950/20" />
@@ -52,6 +79,7 @@ export default function AboutHero() {
                     }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute top-[20%] right-[10%] w-64 h-64 bg-brand-primary/10 rounded-full blur-[100px]"
+                    aria-hidden="true"
                 />
                 <motion.div
                     animate={{
@@ -60,6 +88,7 @@ export default function AboutHero() {
                     }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute bottom-[20%] left-[5%] w-80 h-80 bg-brand-primary/5 rounded-full blur-[120px]"
+                    aria-hidden="true"
                 />
             </div>
 
@@ -74,8 +103,8 @@ export default function AboutHero() {
                         className="flex flex-col space-y-8"
                     >
                         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md w-fit">
-                            <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse" />
-                            <span className="text-xs font-bold text-brand-primary tracking-[0.3em] uppercase">Redefining Excellence</span>
+                            <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse" aria-hidden="true" />
+                            <span className="text-xs font-bold text-brand-primary tracking-[0.3em] uppercase">Redefining Excellence in Navi Mumbai Real Estate</span>
                         </div>
 
                         <h1 className="font-black !text-white leading-[1.1] tracking-tighter">
@@ -112,6 +141,7 @@ export default function AboutHero() {
                                     initial={{ width: 0, opacity: 0 }}
                                     animate={{ width: "100%", opacity: 1 }}
                                     transition={{ duration: 1.5, delay: 1, ease: "circOut" }}
+                                    aria-hidden="true"
                                 />
 
                                 {/* Subtle Light Sweep Effect */}
@@ -126,16 +156,21 @@ export default function AboutHero() {
                                         ease: "easeInOut"
                                     }}
                                     className="absolute inset-0 z-10 w-32 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[35deg] pointer-events-none"
+                                    aria-hidden="true"
                                 />
                             </motion.div>
                         </h1>
 
                         <p className="text-xl text-zinc-400 max-w-xl leading-relaxed font-light">
-                            Navi Mumbai Property Deals is not just a portal. We are architects of dreams, connecting you to the most prestigious addresses in the heart of Maharashtra.
+                            Navi Mumbai Property Deals is not just a portal. We are expert real estate architects of dreams, connecting you to the most prestigious residential and commercial addresses in Kharghar, Panvel, and the heart of Maharashtra.
                         </p>
 
                         <div className="flex flex-wrap gap-6 pt-4">
-                            <Link href="/blogs">
+                            <Link
+                                href="/blogs"
+                                title="Read expert Navi Mumbai real estate market insights"
+                                aria-label="Explore our real estate blogs and Navi Mumbai market intelligence"
+                            >
                                 <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -144,7 +179,7 @@ export default function AboutHero() {
                                     <span className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out skew-x-12" />
                                     <span className="relative flex items-center gap-3">
                                         Explore Our Blogs
-                                        <ArrowRight className="w-5 h-5 text-brand-white font-bold transition-transform duration-300 group-hover:translate-x-1" />
+                                        <ArrowRight className="w-5 h-5 text-brand-white font-bold transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                                     </span>
                                 </motion.button>
                             </Link>
@@ -153,9 +188,11 @@ export default function AboutHero() {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+                                title="List your Navi Mumbai property with our experts"
+                                aria-label="Add your property for sale or rent in Navi Mumbai"
                             >
                                 <span className="flex items-center gap-3">
-                                    <Plus />
+                                    <Plus aria-hidden="true" />
                                     Add Property
                                 </span>
                             </motion.button>
@@ -177,11 +214,11 @@ export default function AboutHero() {
                             >
                                 <Image
                                     src="/modern_about_hero.png"
-                                    alt="About Us Feature"
+                                    alt="Expert Navi Mumbai real estate consultants guiding property deals"
                                     fill
                                     className="object-cover"
                                 />
-                                <div className="absolute" />
+                                <div className="absolute" aria-hidden="true" />
                             </motion.div>
 
                             {/* Floating Stat Cards */}
@@ -208,7 +245,7 @@ export default function AboutHero() {
                             ))}
 
                             {/* Decorative Grid Lines */}
-                            <div className="absolute -inset-10 border border-brand-primary/10 rounded-full animate-spin-slow pointer-events-none" />
+                            <div className="absolute -inset-10 border border-brand-primary/10 rounded-full animate-spin-slow pointer-events-none" aria-hidden="true" />
                         </div>
                     </motion.div>
                 </div>

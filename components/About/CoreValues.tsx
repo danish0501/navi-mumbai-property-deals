@@ -5,7 +5,7 @@ import { ShieldCheck, Eye, Handshake, Headset, CheckCircle2, TrendingUp, Search,
 
 const valueCards = [
     {
-        icon: <ShieldCheck className="w-10 h-10" />,
+        icon: <ShieldCheck className="w-10 h-10" aria-hidden="true" />,
         title: "100% RERA Compliance",
         subtitle: "Verified Assets Only",
         description: "We don't just list properties; we audit them. Our in-house legal team verifies RERA numbers, land titles, and OC status before any property goes live.",
@@ -13,7 +13,7 @@ const valueCards = [
         color: "blue"
     },
     {
-        icon: <Eye className="w-10 h-10" />,
+        icon: <Eye className="w-10 h-10" aria-hidden="true" />,
         title: "Zero Hidden Charges",
         subtitle: "A Radical Transparency Policy",
         description: "Hidden costs are the enemy of trust. From stamp duty to society charges, we provide a full breakdown of the Total Cost of Ownership (TCO) upfront.",
@@ -21,7 +21,7 @@ const valueCards = [
         color: "gold"
     },
     {
-        icon: <Handshake className="w-10 h-10" />,
+        icon: <Handshake className="w-10 h-10" aria-hidden="true" />,
         title: "Client-First Advocacy",
         subtitle: "Consultants, Not Salesmen",
         description: "Our advisors are structured to prioritize your long-term wealth. We often advise clients NOT to buy if a project doesn't meet our ROI benchmarks.",
@@ -29,7 +29,7 @@ const valueCards = [
         color: "emerald"
     },
     {
-        icon: <Headset className="w-10 h-10" />,
+        icon: <Headset className="w-10 h-10" aria-hidden="true" />,
         title: "Post-Sale Ecosystem",
         subtitle: "Lifetime Support Lifecycle",
         description: "Registration is just the beginning. We provide a full suite of property management, rental assistance, and resale services to ensure asset performance.",
@@ -42,8 +42,8 @@ export default function CoreValues() {
     return (
         <section className="py-16 bg-white relative overflow-hidden">
             {/* Soft Background Accents */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] -mr-64 -mt-32 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-secondary/5 rounded-full blur-[100px] -ml-40 -mb-20 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] -mr-64 -mt-32 pointer-events-none" aria-hidden="true" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-secondary/5 rounded-full blur-[100px] -ml-40 -mb-20 pointer-events-none" aria-hidden="true" />
 
             <div className="container mx-auto px-6 relative">
                 <div className="max-w-4xl mx-auto text-center mb-20">
@@ -53,7 +53,7 @@ export default function CoreValues() {
                         viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-black uppercase tracking-widest mb-6"
                     >
-                        <UserCheck size={14} /> Our Ethics & standards
+                        <UserCheck size={14} aria-hidden="true" /> Our Ethics & standards
                     </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
@@ -76,7 +76,7 @@ export default function CoreValues() {
 
                 <div className="grid lg:grid-cols-2 gap-8">
                     {valueCards.map((card, index) => (
-                        <motion.div
+                        <motion.article
                             key={index}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export default function CoreValues() {
                                         {card.features.map((feature, fIdx) => (
                                             <div key={fIdx} className="flex items-center gap-3 text-sm font-bold text-zinc-700">
                                                 <div className="w-5 h-5 rounded-full bg-green-50 flex items-center justify-center text-green-500">
-                                                    <CheckCircle2 size={14} />
+                                                    <CheckCircle2 size={14} aria-hidden="true" />
                                                 </div>
                                                 {feature}
                                             </div>
@@ -113,11 +113,11 @@ export default function CoreValues() {
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
+                        </motion.article>
                     ))}
                 </div>
 
-                {/* Interactive Trust Footer */}
+                {/* Trust Footer */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +126,7 @@ export default function CoreValues() {
                 >
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-xl bg-brand-primary text-white flex items-center justify-center shadow-lg shadow-brand-primary/20">
-                            <TrendingUp size={24} />
+                            <TrendingUp size={24} aria-hidden="true" />
                         </div>
                         <div>
                             <h4 className="font-black text-zinc-900 text-lg">Predicting Value, Ensuring Performance.</h4>
@@ -135,9 +135,11 @@ export default function CoreValues() {
                     </div>
                     <Link
                         href="/blogs"
+                        title="Explore our data-backed real estate approach in Navi Mumbai"
+                        aria-label="Learn about our data-backed approach to real estate investments"
                         className="px-8 py-3 bg-zinc-950 text-white font-bold rounded-xl hover:bg-brand-primary-hover transition-all duration-300 hover:shadow-xl hover:shadow-brand-primary/20 flex items-center gap-2 group whitespace-nowrap cursor-pointer"
                     >
-                        <Search size={18} className="group-hover:scale-125 transition-transform" />
+                        <Search size={18} className="group-hover:scale-125 transition-transform" aria-hidden="true" />
                         Explore Our Approach
                     </Link>
                 </motion.div>

@@ -20,9 +20,9 @@ export default function CompanyImpact() {
     const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
     return (
-        <section ref={containerRef} className="py-16 bg-brand-primary-hover relative overflow-hidden">
+        <section ref={containerRef} className="py-16 bg-brand-primary-hover relative overflow-hidden" aria-labelledby="impact-heading">
             {/* Abstract Background Shapes */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-[-20deg] translate-x-1/2 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-[-20deg] translate-x-1/2 pointer-events-none" aria-hidden="true" />
 
             <motion.div
                 style={{ scale, opacity }}
@@ -38,7 +38,7 @@ export default function CompanyImpact() {
                         >
                             Our Real-World Impact
                         </motion.span>
-                        <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">
+                        <h2 id="impact-heading" className="text-4xl md:text-6xl font-black mb-8 leading-tight">
                             Quantifying the <span className="text-brand-white italic">Difference</span> we make Every Day.
                         </h2>
                         <p className="text-brand-white text-xl leading-relaxed">
@@ -48,7 +48,7 @@ export default function CompanyImpact() {
 
                     <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {stats.map((stat, index) => (
-                            <motion.div
+                            <motion.article
                                 key={index}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
@@ -59,13 +59,13 @@ export default function CompanyImpact() {
                                 <span className="text-4xl md:text-5xl font-black text-brand-primary mb-2">
                                     {stat.value}
                                 </span>
-                                <span className="text-lg font-bold text-zinc-900 mb-1">
+                                <h3 className="text-lg font-bold text-zinc-900 mb-1">
                                     {stat.label}
-                                </span>
+                                </h3>
                                 <span className="text-sm text-brand-muted font-medium">
                                     {stat.subtext}
                                 </span>
-                            </motion.div>
+                            </motion.article>
                         ))}
                     </div>
                 </div>

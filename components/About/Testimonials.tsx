@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Quote, ChevronLeft, ChevronRight, Star, MapPin, UserCheck } from "lucide-react";
 import Image from "next/image";
+import Script from "next/script";
 
 const testimonials = [
     {
@@ -62,6 +63,15 @@ export default function Testimonials() {
         return () => clearInterval(timer);
     }, [nextTestimonial]);
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") prevTestimonial();
+            if (e.key === "ArrowRight") nextTestimonial();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [nextTestimonial, prevTestimonial]);
+
     const slideVariants = {
         enter: (direction: number) => ({
             x: direction > 0 ? 1000 : -1000,
@@ -82,12 +92,44 @@ export default function Testimonials() {
         })
     };
 
+    const reviewSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": testimonials.map((t, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "item": {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": t.name
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": t.rating.toString(),
+                    "bestRating": "5"
+                },
+                "reviewBody": t.content,
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Navi Mumbai Property Deals"
+                }
+            }
+        }))
+    };
+
     return (
-        <section className="py-16 bg-zinc-50 relative overflow-hidden">
+        <section className="py-16 bg-zinc-50 relative overflow-hidden" aria-labelledby="testimonials-heading">
+            <Script
+                id="testimonial-review-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+            />
+
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-                <div className="absolute top-20 left-10 w-64 h-64 bg-brand-primary/10 rounded-full blur-[80px]" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-primary/5 rounded-full blur-[100px]" />
+                <div className="absolute top-20 left-10 w-64 h-64 bg-brand-primary/10 rounded-full blur-[80px]" aria-hidden="true" />
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-primary/5 rounded-full blur-[100px]" aria-hidden="true" />
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
@@ -98,16 +140,11 @@ export default function Testimonials() {
                         viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-black uppercase tracking-widest mb-6"
                     >
-                        <UserCheck size={14} /> Client Testimonials
+                        <UserCheck size={14} aria-hidden="true" /> Client Testimonials
                     </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-6xl font-black text-zinc-950 leading-[1.1] mb-6"
-                    >
+                    <h2 id="testimonials-heading" className="text-4xl md:text-6xl font-black text-zinc-950 leading-[1.1] mb-6">
                         Trust Built on <span className="text-brand-primary italic">Proven</span> Results.
-                    </motion.h2>
+                    </h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -135,26 +172,26 @@ export default function Testimonials() {
                             }}
                             className="absolute w-full px-4 md:px-0"
                         >
-                            <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-zinc-200 border border-zinc-100 flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+                            <article className="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-zinc-200 border border-zinc-100 flex flex-col md:flex-row gap-10 md:gap-16 items-center">
                                 <div className="relative group flex-shrink-0">
-                                    <div className="absolute -inset-4 bg-gradient-to-tr from-brand-primary to-transparent opacity-20 rounded-full blur-2xl group-hover:opacity-40 transition-opacity duration-500" />
+                                    <div className="absolute -inset-4 bg-gradient-to-tr from-brand-primary to-transparent opacity-20 rounded-full blur-2xl group-hover:opacity-40 transition-opacity duration-500" aria-hidden="true" />
                                     <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
                                         <Image
                                             src={testimonials[currentIndex].image}
-                                            alt={testimonials[currentIndex].name}
+                                            alt={`Client testimonial from ${testimonials[currentIndex].name} in ${testimonials[currentIndex].location}`}
                                             fill
                                             className="object-cover"
                                         />
                                     </div>
                                     <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-brand-primary rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-primary/30 z-20">
-                                        <Quote size={32} />
+                                        <Quote size={32} aria-hidden="true" />
                                     </div>
                                 </div>
 
                                 <div className="flex-grow">
                                     <div className="flex items-center gap-1 mb-6">
                                         {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                                            <Star key={i} size={20} className="fill-brand-primary text-brand-primary" />
+                                            <Star key={i} size={20} className="fill-brand-primary text-brand-primary" aria-hidden="true" />
                                         ))}
                                     </div>
 
@@ -170,12 +207,12 @@ export default function Testimonials() {
                                             <p className="text-brand-primary font-bold">{testimonials[currentIndex].role}</p>
                                         </div>
                                         <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-50 border border-zinc-100 text-zinc-500 text-sm font-semibold self-start sm:self-center">
-                                            <MapPin size={16} className="text-brand-primary" />
+                                            <MapPin size={16} className="text-brand-primary" aria-hidden="true" />
                                             {testimonials[currentIndex].location}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </motion.div>
                     </AnimatePresence>
 
@@ -185,8 +222,9 @@ export default function Testimonials() {
                             onClick={prevTestimonial}
                             className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
                             aria-label="Previous testimonial"
+                            title="View previous client testimonial (Arrow Left)"
                         >
-                            <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
+                            <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
                         </button>
                     </div>
                     <div className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-8 z-30">
@@ -194,8 +232,9 @@ export default function Testimonials() {
                             onClick={nextTestimonial}
                             className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
                             aria-label="Next testimonial"
+                            title="View next client testimonial (Arrow Right)"
                         >
-                            <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                            <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                         </button>
                     </div>
                 </div>
@@ -214,6 +253,7 @@ export default function Testimonials() {
                                 : "w-3 bg-zinc-200 hover:bg-zinc-300"
                                 }`}
                             aria-label={`Go to testimonial ${index + 1}`}
+                            title={`Navigate to testimonial from ${testimonials[index].name}`}
                         />
                     ))}
                 </div>
