@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { TrendingUp, ArrowRight, Zap } from "lucide-react";
+import { TrendingUp, Zap } from "lucide-react";
 import { useRef } from "react";
 
 const BlogHero = () => {
@@ -35,7 +35,7 @@ const BlogHero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-transparent to-zinc-950/30" aria-hidden="true" />
             </motion.div>
 
-            {/* Floating Decorative Elements (Abstract Shapes) */}
+            {/* Floating Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <motion.div
                     animate={{
@@ -165,7 +165,7 @@ const BlogHero = () => {
                                         </div>
 
                                         <div className="space-y-3">
-                                            <h3 className="text-3xl font-black text-white leading-[1.1] tracking-tight">
+                                            <h3 className="text-3xl font-black !text-white leading-[1.1] tracking-tight">
                                                 Navi Mumbai's <br />
                                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-[#fff4d6] to-brand-primary">Growth Decoded</span>
                                             </h3>
