@@ -4,6 +4,8 @@ import Image from "next/image";
 import { TrendingUp, Zap } from "lucide-react";
 import { useRef } from "react";
 
+import SearchBar from "./SearchBar";
+
 const BlogHero = () => {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -129,6 +131,8 @@ const BlogHero = () => {
                         <p className="text-xl text-zinc-400 max-w-xl leading-relaxed font-light">
                             Navigate the future of real estate with expert analysis, local intelligence, and the latest infrastructure breakthroughs in India&apos;s most planned metropolis.
                         </p>
+
+                        <SearchBar />
                     </motion.div>
 
                     {/* Right Side: Featured Spotlight / Magazine Card */}
@@ -144,7 +148,7 @@ const BlogHero = () => {
 
                             {/* Main Magazine Card */}
                             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-zinc-900/40 backdrop-blur-xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:border-brand-primary/30 group-hover:shadow-brand-primary/10">
-                                <div className="relative aspect-[5/5]">
+                                <div className="relative aspect-[4/5]">
                                     <Image
                                         src="/kharghar_spotlight_1773210561744.png"
                                         alt="Featured Navi Mumbai Real Estate Article"
