@@ -26,9 +26,7 @@ export default function Contact() {
 
                 <ContactMap />
 
-                <div className="bg-brand-cream/10">
-                    <ContactFAQ />
-                </div>
+                <ContactFAQ />
             </div>
         </main>
     );
