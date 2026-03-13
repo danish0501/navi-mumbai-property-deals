@@ -44,7 +44,7 @@ export default function AboutHero() {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950 pt-10 pb-30"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950 pt-10 pb-30 max-[769px]:pb-16"
         >
             <Script
                 id="about-page-schema"
@@ -103,8 +103,8 @@ export default function AboutHero() {
                         className="flex flex-col space-y-8"
                     >
                         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md w-fit">
-                            <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse" aria-hidden="true" />
-                            <span className="text-xs font-bold text-brand-primary tracking-[0.3em] uppercase">Redefining Excellence in Navi Mumbai Real Estate</span>
+                            <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse max-[426px]:hidden" aria-hidden="true" />
+                            <span className="text-xs font-bold text-brand-primary tracking-[0.3em] max-[426px]:tracking-[0.1em] uppercase max-[426px]:text-center">Redefining Excellence in Navi Mumbai Real Estate</span>
                         </div>
 
                         <h1 className="font-black !text-white leading-[1.1] tracking-tighter">
@@ -112,7 +112,7 @@ export default function AboutHero() {
                                 initial={{ opacity: 0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                className="block text-5xl md:text-8xl"
+                                className="block text-5xl md:text-8xl max-[426px]:text-6xl max-[376px]:text-5xl max-[321px]:text-4xl"
                             >
                                 Elevating the
                             </motion.span>
@@ -131,7 +131,7 @@ export default function AboutHero() {
                                 }}
                                 className="relative inline-block mt-2 group cursor-default"
                             >
-                                <span className="text-5xl md:text-8xl italic text-transparent text-italic bg-clip-text bg-gradient-to-r from-brand-primary via-[#fff4d6] to-brand-primary bg-[length:200%_auto] block pb-2 transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(186,163,96,0.3)]">
+                                <span className="text-8xl max-[769px]:text-[82px] max-[426px]:text-[42px] max-[376px]:text-[38px] max-[321px]:text-[32px] italic text-transparent text-italic bg-clip-text bg-gradient-to-r from-brand-primary via-[#fff4d6] to-brand-primary bg-[length:200%_auto] block pb-2 transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(186,163,96,0.3)]">
                                     Standard of Living
                                 </span>
 
@@ -161,13 +161,14 @@ export default function AboutHero() {
                             </motion.div>
                         </h1>
 
-                        <p className="text-xl text-zinc-400 max-w-xl leading-relaxed font-light">
+                        <p className="text-xl max-[426px]:text-lg text-zinc-400 max-w-xl max-[769px]:max-w-3xl leading-relaxed font-light">
                             Navi Mumbai Property Deals is not just a portal. We are expert real estate architects of dreams, connecting you to the most prestigious residential and commercial addresses in Kharghar, Panvel, and the heart of Maharashtra.
                         </p>
 
                         <div className="flex flex-wrap gap-6 pt-4">
                             <Link
                                 href="/blogs"
+                                className="max-[426px]:w-full"
                                 title="Read expert Navi Mumbai real estate market insights"
                                 aria-label="Explore our real estate blogs and Navi Mumbai market intelligence"
                             >
@@ -187,12 +188,12 @@ export default function AboutHero() {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer"
+                                className="px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-colors cursor-pointer inline-flex items-center justify-center max-[426px]:w-full"
                                 title="List your Navi Mumbai property with our experts"
                                 aria-label="Add your property for sale or rent in Navi Mumbai"
                             >
                                 <span className="flex items-center gap-3">
-                                    <Plus aria-hidden="true" />
+                                    <Plus className="w-5 h-5" aria-hidden="true" />
                                     Add Property
                                 </span>
                             </motion.button>

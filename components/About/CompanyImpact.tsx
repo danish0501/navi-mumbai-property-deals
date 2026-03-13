@@ -20,7 +20,7 @@ export default function CompanyImpact() {
     const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
     return (
-        <section ref={containerRef} className="py-16 bg-brand-primary-hover relative overflow-hidden" aria-labelledby="impact-heading">
+        <section ref={containerRef} className="py-16 max-[426px]:py-8 bg-brand-primary-hover relative overflow-hidden" aria-labelledby="impact-heading">
             {/* Abstract Background Shapes */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-[-20deg] translate-x-1/2 pointer-events-none" aria-hidden="true" />
 
@@ -29,7 +29,7 @@ export default function CompanyImpact() {
                 className="container mx-auto px-6 relative"
             >
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-                    <div className="lg:w-1/2 text-white">
+                    <div className="w-full lg:w-1/2 text-white">
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -38,15 +38,15 @@ export default function CompanyImpact() {
                         >
                             Our Real-World Impact
                         </motion.span>
-                        <h2 id="impact-heading" className="text-4xl md:text-6xl font-black mb-8 leading-tight">
+                        <h2 id="impact-heading" className="text-4xl md:text-6xl max-[426px]:text-5xl max-[376px]:text-[40px] max-[321px]:text-[34px] font-black mb-8 max-[376px]:mb-4 leading-tight">
                             Quantifying the <span className="text-brand-white italic">Difference</span> we make Every Day.
                         </h2>
-                        <p className="text-brand-white text-xl leading-relaxed">
+                        <p className="text-brand-white text-xl max-[376px]:text-lg leading-relaxed">
                             Data doesn't lie. Our growth is a direct reflection of the success our clients experience in the Navi Mumbai real estate market.
                         </p>
                     </div>
 
-                    <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="w-full lg:w-1/2 grid grid-cols-2 max-[426px]:grid-cols-1 gap-4">
                         {stats.map((stat, index) => (
                             <motion.article
                                 key={index}

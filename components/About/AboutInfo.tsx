@@ -32,7 +32,7 @@ const features = [
 
 export default function AboutInfo() {
     return (
-        <section className="py-16 bg-white relative overflow-hidden" aria-labelledby="about-heading">
+        <section className="py-16 bg-white relative overflow-hidden max-[769px]:px-6 max-[376px]:px-4" aria-labelledby="about-heading">
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230054A5' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
@@ -56,7 +56,7 @@ export default function AboutInfo() {
                                 alt="Modern luxury residential interior in Kharghar Navi Mumbai highlighting real estate excellence"
                                 width={800}
                                 height={800}
-                                className="object-cover aspect-[5/5] hover:scale-105 transition-transform duration-1000"
+                                className="object-cover aspect-[5/5] max-[769px]:aspect-[7/5] max-[426px]:aspect-[4/5] hover:scale-105 transition-transform duration-1000"
                                 priority
                             />
 
@@ -83,8 +83,8 @@ export default function AboutInfo() {
                         </motion.div>
 
                         {/* Experience Counter Badge */}
-                        <div className="absolute -bottom-6 -left-6 p-8 bg-brand-primary rounded-[2rem] text-white shadow-xl flex items-center gap-5">
-                            <div className="text-4xl font-black">12+</div>
+                        <div className="absolute -bottom-6 -left-6 p-8 max-[426px]:p-4 bg-brand-primary rounded-[2rem] text-white shadow-xl flex items-center gap-5 max-[426px]:gap-2">
+                            <div className="text-4xl max-[426px]:text-2xl font-black">12+</div>
                             <div className="text-xs uppercase tracking-widest font-bold leading-tight opacity-80">
                                 Years of Local<br />Market Mastery
                             </div>
@@ -97,21 +97,21 @@ export default function AboutInfo() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="mb-10"
+                            className="mb-10 max-[769px]:mt-12"
                         >
                             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/5 text-brand-primary text-xs font-black uppercase tracking-widest mb-6 border border-brand-primary/10">
                                 <Users size={14} aria-hidden="true" /> Expertise & Trust
                             </span>
-                            <h2 id="about-heading" className="text-4xl md:text-6xl font-black text-zinc-950 leading-[1.1] mb-6 tracking-tight">
+                            <h2 id="about-heading" className="text-6xl max-[769px]:text-6xl max-[426px]:text-[42px] max-[376px]:text-[38px] max-[321px]:text-[34px] font-black text-zinc-950 leading-[1.1] mb-6 tracking-tight">
                                 Your Gateway to <span className="text-brand-primary italic">Navi Mumbai's</span> Premier Assets.
                             </h2>
-                            <p className="text-zinc-600 text-lg leading-relaxed mb-4">
+                            <p className="text-zinc-600 text-lg max-[376px]:text-base leading-relaxed mb-4">
                                 Navigating the Navi Mumbai real estate landscape requires more than just listings; it requires <strong className="text-brand-paragraph">deep-node market intelligence</strong>. Since 2014, we have helped thousands find value in Mumbai's most planned satellite city.
                             </p>
                             <p className="text-zinc-500 text-base leading-relaxed mb-4">
                                 From the luxury high-rises on <strong className="text-brand-paragraph">Palm Beach Road</strong> to high-growth commercial plots in <strong className="text-brand-paragraph">South Navi Mumbai</strong>, our data-backed approach ensures every investment is verified, compliant, and positioned for growth.
                             </p>
-                            <p className="text-zinc-500 text-lg leading-relaxed">
+                            <p className="text-zinc-500 text-lg max-[376px]:text-base leading-relaxed">
                                 As we move further into 2026, the operationalization of the <strong className="text-brand-paragraph">Atal Setu (MTHL)</strong> and the final phase of the <strong className="text-brand-paragraph">Navi Mumbai International Airport</strong> have transformed the region from a satellite city into India’s premier growth engine.
                             </p>
                         </motion.div>
@@ -119,7 +119,7 @@ export default function AboutInfo() {
                 </div>
 
                 {/* Feature Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 max-[426px]:mt-6">
                     {features.map((feature, index) => (
                         <motion.article
                             key={index}
@@ -127,7 +127,7 @@ export default function AboutInfo() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="p-6 rounded-3xl bg-zinc-50 border border-zinc-100 hover:bg-white hover:border-brand-primary/20 hover:shadow-xl transition-all duration-500 group"
+                            className="p-6 max-[376px]:p-4 rounded-3xl bg-zinc-50 border border-zinc-100 hover:bg-white hover:border-brand-primary/20 hover:shadow-xl transition-all duration-500 group"
                         >
                             <div className="flex justify-between items-start mb-4">
                                 <div className="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center shadow-lg shadow-brand-primary/20 group-hover:rotate-6 transition-transform">

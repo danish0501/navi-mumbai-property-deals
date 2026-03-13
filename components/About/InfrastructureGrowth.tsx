@@ -82,7 +82,7 @@ export default function InfrastructureGrowth() {
                     <div ref={titleRef} className="mb-8">
                         <motion.h2
                             id="infra-heading"
-                            className="text-5xl md:text-7xl font-black !text-brand-white leading-[1.05] tracking-tighter"
+                            className="text-7xl max-[769px]:text-5xl max-[426px]:text-4xl max-[376px]:text-3xl max-[321px]:text-2xl font-black !text-brand-white leading-[1.05] tracking-tighter"
                         >
                             {["Future", "Infrastructure", "Hub"].map((word, i) => (
                                 <motion.span
@@ -112,13 +112,13 @@ export default function InfrastructureGrowth() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.8 }}
-                        className="text-zinc-400 text-lg md:text-xl leading-relaxed mx-auto max-w-4xl"
+                        className="text-zinc-400 text-lg md:text-xl max-[426px]:text-lg leading-relaxed mx-auto max-w-4xl"
                     >
                         Navi Mumbai nodes like Kharghar and Panvel are evolving into global economic powerhouses under the vision of CIDCO and MMRDA.
                     </motion.p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
+                <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 max-[769px]:gap-4 items-center">
                     {/* Left Content Side */}
                     <div className="order-2 lg:order-1">
                         <div className="relative space-y-4">
@@ -130,7 +130,7 @@ export default function InfrastructureGrowth() {
                                     viewport={{ once: true, margin: "-50px" }}
                                     transition={{ delay: index * 0.15 }}
                                     whileHover={{ x: 10 }}
-                                    className="flex gap-6 p-4 rounded-3xl group hover:bg-white/[0.03] transition-colors border border-transparent hover:border-white/10 relative"
+                                    className="flex gap-6 max-[426px]:gap-4 max-[321px]:gap-2 p-4 max-[426px]:p-2 max-[321px]:p-0 rounded-3xl group hover:bg-white/[0.03] transition-colors border border-transparent hover:border-white/10 relative"
                                 >
                                     <div className={`flex-shrink-0 w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:bg-gradient-to-br ${driver.color} transition-all duration-500 overflow-hidden relative shadow-lg group-hover:shadow-[0_0_20px_rgba(0,0,0,0.3)]`}>
                                         <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
@@ -140,7 +140,7 @@ export default function InfrastructureGrowth() {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex flex-wrap items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-bold !text-brand-white group-hover:text-white transition-colors">
+                                            <h3 className="text-xl max-[376px]:text-lg font-bold !text-brand-white group-hover:text-white transition-colors">
                                                 {driver.title}
                                             </h3>
                                             <span className={`text-[10px] font-black bg-white/5 text-zinc-400 group-hover:bg-gradient-to-r ${driver.color} group-hover:text-white px-2.5 py-1 rounded-full uppercase tracking-tighter transition-all`}>
@@ -157,7 +157,7 @@ export default function InfrastructureGrowth() {
                     </div>
 
                     {/* Right Visual Side */}
-                    <div className="order-1 lg:order-2 relative h-[500px] md:h-[700px]">
+                    <div className="order-1 lg:order-2 relative h-[500px] md:h-[700px] max-[426px]:h-[400px]">
                         <motion.div
                             style={{ y: y1 }}
                             className="relative h-full w-full"
@@ -195,7 +195,7 @@ export default function InfrastructureGrowth() {
                                     initial={{ y: 40, opacity: 0 }}
                                     whileInView={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.5 }}
-                                    className="absolute bottom-6 left-6 right-6 p-8 bg-zinc-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-3xl overflow-hidden group/card"
+                                    className="absolute bottom-6 left-6 right-6 p-8 max-[426px]:p-4 bg-zinc-900/60 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-3xl overflow-hidden group/card"
                                 >
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover/card:bg-brand-primary/20 transition-colors" aria-hidden="true" />
 
@@ -204,8 +204,8 @@ export default function InfrastructureGrowth() {
                                             <CheckCircle2 size={24} aria-hidden="true" />
                                         </div>
                                         <div>
-                                            <p className="text-xs font-black uppercase text-brand-primary tracking-[0.2em] mb-1">Expert Verdict</p>
-                                            <p className="text-2xl font-black !text-brand-white">Prime Growth</p>
+                                            <p className="text-xs font-black uppercase text-brand-primary tracking-[0.2em] max-[321px]:tracking-[0em] mb-1 max-[426px]:mb-0">Expert Verdict</p>
+                                            <p className="text-2xl max-[321px]:text-lg font-black !text-brand-white">Prime Growth</p>
                                         </div>
                                     </div>
                                     <p className="text-zinc-300 text-sm leading-relaxed relative z-10">

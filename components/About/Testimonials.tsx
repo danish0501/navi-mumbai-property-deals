@@ -142,7 +142,7 @@ export default function Testimonials() {
                     >
                         <UserCheck size={14} aria-hidden="true" /> Client Testimonials
                     </motion.div>
-                    <h2 id="testimonials-heading" className="text-4xl md:text-6xl font-black text-zinc-950 leading-[1.1] mb-6">
+                    <h2 id="testimonials-heading" className="text-4xl lg:text-6xl font-black text-zinc-950 leading-[1.1] mb-6">
                         Trust Built on <span className="text-brand-primary italic">Proven</span> Results.
                     </h2>
                     <motion.p
@@ -150,13 +150,13 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-zinc-500 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
+                        className="text-zinc-500 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto"
                     >
                         Don't just take our word for it. Hear what our clients have to say about their journey with Navi Mumbai's most trusted real estate partner.
                     </motion.p>
                 </div>
 
-                <div className="relative max-w-5xl mx-auto min-h-[500px] flex items-center justify-center">
+                <div className="relative max-w-5xl mx-auto min-h-[500px] max-[376px]:min-h-[600px] max-[426px]:mt-32 flex items-center justify-center">
                     <AnimatePresence initial={false} custom={direction}>
                         <motion.div
                             key={currentIndex}
@@ -170,12 +170,12 @@ export default function Testimonials() {
                                 opacity: { duration: 0.4 },
                                 scale: { duration: 0.4 }
                             }}
-                            className="absolute w-full px-4 md:px-0"
+                            className="absolute w-full px-4 lg:px-0"
                         >
-                            <article className="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl shadow-zinc-200 border border-zinc-100 flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+                            <article className="bg-white rounded-[3rem] p-8 lg:p-16 max-[376px]:p-4 shadow-2xl shadow-zinc-200 border border-zinc-100 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
                                 <div className="relative group flex-shrink-0">
                                     <div className="absolute -inset-4 bg-gradient-to-tr from-brand-primary to-transparent opacity-20 rounded-full blur-2xl group-hover:opacity-40 transition-opacity duration-500" aria-hidden="true" />
-                                    <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                                    <div className="relative w-40 h-40 lg:w-56 lg:h-56 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
                                         <Image
                                             src={testimonials[currentIndex].image}
                                             alt={`Client testimonial from ${testimonials[currentIndex].name} in ${testimonials[currentIndex].location}`}
@@ -195,18 +195,18 @@ export default function Testimonials() {
                                         ))}
                                     </div>
 
-                                    <blockquote className="text-xl md:text-3xl font-medium text-zinc-800 leading-snug md:leading-relaxed mb-8 italic">
+                                    <blockquote className="text-xl lg:text-3xl max-[376px]:text-lg font-medium text-zinc-800 leading-snug lg:leading-relaxed mb-8 italic">
                                         "{testimonials[currentIndex].content}"
                                     </blockquote>
 
                                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                                         <div>
-                                            <h4 className="text-2xl font-black text-zinc-950 uppercase tracking-tight">
+                                            <h4 className="text-2xl max-[376px]:text-xl font-black text-zinc-950 uppercase tracking-tight">
                                                 {testimonials[currentIndex].name}
                                             </h4>
                                             <p className="text-brand-primary font-bold">{testimonials[currentIndex].role}</p>
                                         </div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-50 border border-zinc-100 text-zinc-500 text-sm font-semibold self-start sm:self-center">
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-50 border border-zinc-100 text-zinc-500 text-sm max-[321px]:text-xs font-semibold self-start sm:self-center">
                                             <MapPin size={16} className="text-brand-primary" aria-hidden="true" />
                                             {testimonials[currentIndex].location}
                                         </div>
@@ -217,20 +217,20 @@ export default function Testimonials() {
                     </AnimatePresence>
 
                     {/* Navigation Buttons */}
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-8 z-30">
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-4 lg:-left-8 z-30">
                         <button
                             onClick={prevTestimonial}
-                            className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
+                            className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
                             aria-label="Previous testimonial"
                             title="View previous client testimonial (Arrow Left)"
                         >
                             <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
                         </button>
                     </div>
-                    <div className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-8 z-30">
+                    <div className="absolute top-1/2 -translate-y-1/2 -right-4 lg:-right-8 z-30">
                         <button
                             onClick={nextTestimonial}
-                            className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
+                            className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-white border border-zinc-100 shadow-xl flex items-center justify-center text-zinc-400 hover:text-brand-primary hover:border-brand-primary transition-all duration-300 group cursor-pointer"
                             aria-label="Next testimonial"
                             title="View next client testimonial (Arrow Right)"
                         >
