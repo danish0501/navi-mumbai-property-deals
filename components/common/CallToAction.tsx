@@ -29,14 +29,14 @@ export default function CallToAction() {
                     <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-[100px]" aria-hidden="true" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-[80px]" aria-hidden="true" />
 
-                    <div className="px-6 py-8 md:py-12 md:px-20 max-[376px]:p-4 flex flex-col items-center text-center relative z-10">
+                    <div className="px-6 py-8 md:py-12 md:px-20 max-[376px]:p-4 max-[376px]:py-8 flex flex-col items-center text-center relative z-10">
 
-                        <h2 id="cta-heading" className="text-4xl md:text-5xl lg:text-6xl max-[321px]:text-2xl font-black !text-neutral-border mb-6 leading-tight">
+                        <h2 id="cta-heading" className="text-4xl md:text-5xl lg:text-6xl max-[376px]:text-3xl max-[321px]:text-2xl font-black !text-neutral-border mb-6 leading-tight">
                             Ready to Find Your <br className="hidden md:block" />
                             <span className="!text-brand-white italic">Dream Property?</span>
                         </h2>
 
-                        <p className="text-white/90 text-lg md:text-xl max-[321px]:text-lg max-w-3xl mx-auto mb-10 font-medium">
+                        <p className="text-white/90 text-lg md:text-xl max-[321px]:text-base max-w-3xl mx-auto mb-10 font-medium">
                             Join thousands of satisfied homeowners. Our expert team is ready to guide you through a seamless real estate journey in Navi Mumbai.
                         </p>
 
