@@ -30,7 +30,7 @@ const NavbarActions = ({
             </Link>
 
             <Link
-                href="/register"
+                href="/login"
                 className="bg-brand-primary group hidden sm:flex items-center space-x-2 bg-brand-button text-white pl-1 pr-4 py-1 text-base font-medium hover:bg-brand-button-hover transition-all rounded-full border border-brand-button cursor-pointer"
             >
                 <div className="w-10 h-10 text-brand-white rounded-full bg-brand-white/20 flex items-center justify-center backdrop-blur-sm group-hover:bg-white group-hover:text-brand-primary transition-colors">
@@ -49,7 +49,7 @@ const NavbarActions = ({
             </Link>
 
             <Link
-                href="/register"
+                href="/login"
                 className="hidden max-[426px]:flex text-brand-paragraph hover:text-brand-heading p-2 rounded-full hover:bg-zinc-100 transition-colors"
                 title="Sign In"
             >

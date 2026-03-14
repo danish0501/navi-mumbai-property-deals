@@ -1,13 +1,25 @@
 "use client";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Login from "./Login";
 import Signup from "./Signup";
 
-const RegisterWrapper = () => {
-    const [isLogin, setIsLogin] = useState(true);
-    const toggleAuth = () => setIsLogin(!isLogin);
+interface RegisterWrapperProps {
+    initialMode?: "login" | "signup";
+}
+
+const RegisterWrapper = ({ initialMode = "login" }: RegisterWrapperProps) => {
+    const router = useRouter();
+    const isLogin = initialMode === "login";
+
+    const toggleAuth = () => {
+        if (isLogin) {
+            router.push("/signup");
+        } else {
+            router.push("/login");
+        }
+    };
 
     return (
         <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden">

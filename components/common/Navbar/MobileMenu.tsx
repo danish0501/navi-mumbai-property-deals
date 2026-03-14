@@ -283,7 +283,7 @@ const MobileMenu = ({ navLinks, setIsMobileMenuOpen }: MobileMenuProps) => {
                         <span>Add Property</span>
                     </Link>
                     <Link
-                        href="/register"
+                        href="/login"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="w-full bg-brand-button text-white py-4 rounded-xl font-bold flex items-center justify-center space-x-2 shadow-lg shadow-brand-button/20 active:scale-[0.98] transition-transform"
                     >

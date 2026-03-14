@@ -1,12 +1,65 @@
 "use client";
-import React from "react";
-import { Mail, Lock, User, Phone, ArrowRight, ShieldCheck } from "lucide-react";
+import React, { useState } from "react";
+import { Mail, Lock, User, Phone, ShieldCheck, Eye, EyeOff } from "lucide-react";
 
 interface SignupProps {
     onSwitch: () => void;
 }
 
 const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    // Form State
+    const [formData, setFormData] = useState({
+        fullName: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const [errors, setErrors] = useState({
+        fullName: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    // Regex Patterns
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const PHONE_REGEX = /^[6-9]\d{9}$/;
+    const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
+    const validateField = (name: string, value: string) => {
+        let error = "";
+        switch (name) {
+            case "fullName":
+                if (value.length < 2) error = "Name must be at least 2 characters";
+                break;
+            case "phone":
+                if (!PHONE_REGEX.test(value)) error = "Enter a valid 10-digit mobile number";
+                break;
+            case "email":
+                if (!EMAIL_REGEX.test(value)) error = "Enter a valid email address";
+                break;
+            case "password":
+                if (!PASSWORD_REGEX.test(value)) error = "Min. 8 chars, 1 Uppercase, 1 Number & 1 Special Char";
+                break;
+            case "confirmPassword":
+                if (value !== formData.password) error = "Passwords do not match";
+                break;
+        }
+        setErrors((prev) => ({ ...prev, [name]: error }));
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        validateField(name, value);
+    };
+
     return (
         <div className="w-full">
             <div className="text-center mb-8">
@@ -18,61 +71,100 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                 <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-brand-heading ml-1">Full Name</label>
                     <div className="relative group">
-                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-brand-primary transition-colors" />
+                        <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.fullName ? "text-red-400" : "text-neutral-400 group-focus-within:text-brand-primary"}`} />
                         <input
                             type="text"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
                             placeholder="e.g. Alex Johnson"
-                            className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary transition-all text-brand-heading placeholder:text-neutral-400 font-medium"
+                            className={`w-full pl-12 pr-4 py-3 bg-neutral-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-neutral-400 font-medium ${errors.fullName ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-neutral-200 focus:ring-brand-primary/5 focus:border-brand-primary"
+                                }`}
                         />
                     </div>
+                    {errors.fullName && <p className="text-[11px] text-red-500 font-bold ml-1 uppercase tracking-wide">{errors.fullName}</p>}
                 </div>
 
                 <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-brand-heading ml-1">Phone Number</label>
                     <div className="relative group">
-                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-brand-primary transition-colors" />
+                        <Phone className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.phone ? "text-red-400" : "text-neutral-400 group-focus-within:text-brand-primary"}`} />
                         <input
                             type="tel"
-                            placeholder="+91 98765 43210"
-                            className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary transition-all text-brand-heading placeholder:text-neutral-400 font-medium"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="98765 43210"
+                            className={`w-full pl-12 pr-4 py-3 bg-neutral-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-neutral-400 font-medium ${errors.phone ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-neutral-200 focus:ring-brand-primary/5 focus:border-brand-primary"
+                                }`}
                         />
                     </div>
+                    {errors.phone && <p className="text-[11px] text-red-500 font-bold ml-1 uppercase tracking-wide">{errors.phone}</p>}
                 </div>
 
                 <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-brand-heading ml-1">Email Address</label>
                     <div className="relative group">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-brand-primary transition-colors" />
+                        <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.email ? "text-red-400" : "text-neutral-400 group-focus-within:text-brand-primary"}`} />
                         <input
                             type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder="alex@example.com"
-                            className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary transition-all text-brand-heading placeholder:text-neutral-400 font-medium"
+                            className={`w-full pl-12 pr-4 py-3 bg-neutral-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-neutral-400 font-medium ${errors.email ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-neutral-200 focus:ring-brand-primary/5 focus:border-brand-primary"
+                                }`}
                         />
                     </div>
+                    {errors.email && <p className="text-[11px] text-red-500 font-bold ml-1 uppercase tracking-wide">{errors.email}</p>}
                 </div>
 
                 <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-brand-heading ml-1">Password</label>
                     <div className="relative group">
-                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-brand-primary transition-colors" />
+                        <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.password ? "text-red-400" : "text-neutral-400 group-focus-within:text-brand-primary"}`} />
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
                             placeholder="Min. 8 characters"
-                            className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary transition-all text-brand-heading placeholder:text-neutral-400 font-medium"
+                            className={`w-full pl-12 pr-12 py-3 bg-neutral-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-neutral-400 font-medium tracking-widest ${errors.password ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-neutral-200 focus:ring-brand-primary/5 focus:border-brand-primary"
+                                }`}
                         />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-brand-primary transition-colors cursor-pointer"
+                        >
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
                     </div>
+                    {errors.password && <p className="text-[11px] text-red-500 font-bold ml-1 uppercase tracking-wide">{errors.password}</p>}
                 </div>
 
                 <div className="space-y-1.5">
                     <label className="text-sm font-semibold text-brand-heading ml-1">Confirm Password</label>
                     <div className="relative group">
-                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-brand-primary transition-colors" />
+                        <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.confirmPassword ? "text-red-400" : "text-neutral-400 group-focus-within:text-brand-primary"}`} />
                         <input
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
                             placeholder="Confirm password"
-                            className="w-full pl-12 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary transition-all text-brand-heading placeholder:text-neutral-400 font-medium"
+                            className={`w-full pl-12 pr-12 py-3 bg-neutral-50 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-neutral-400 font-medium tracking-widest ${errors.confirmPassword ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-neutral-200 focus:ring-brand-primary/5 focus:border-brand-primary"
+                                }`}
                         />
+                        <button
+                            type="button"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-brand-primary transition-colors cursor-pointer"
+                        >
+                            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
                     </div>
+                    {errors.confirmPassword && <p className="text-[11px] text-red-500 font-bold ml-1 uppercase tracking-wide">{errors.confirmPassword}</p>}
                 </div>
 
                 <div className="flex items-start gap-3 py-2 cursor-pointer group">
@@ -91,10 +183,10 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                 <div className="space-y-3 pt-2">
                     <button
                         type="submit"
-                        className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                        disabled={Object.values(errors).some((err) => err !== "") || Object.values(formData).some((val) => val === "")}
+                        className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                         Create Free Account
-                        <ArrowRight className="w-5 h-5" />
                     </button>
 
                     <button
