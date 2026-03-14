@@ -42,7 +42,7 @@ const RegisterWrapper = ({ initialMode = "login" }: RegisterWrapperProps) => {
     };
 
     return (
-        <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden">
+        <div className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-6 md:p-12 max-[426px]:p-4 max-[426px]:py-10 relative overflow-hidden">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -70,7 +70,7 @@ const RegisterWrapper = ({ initialMode = "login" }: RegisterWrapperProps) => {
                             alt="Navi Mumbai Property Deals Secure Login"
                             width={200}
                             height={70}
-                            className="h-auto object-contain"
+                            className="h-auto w-[200px] max-[426px]:w-[180px] object-contain"
                             priority
                             fetchPriority="high"
                         />
@@ -80,7 +80,7 @@ const RegisterWrapper = ({ initialMode = "login" }: RegisterWrapperProps) => {
 
                 {/* Clean Professional Card */}
                 <div className="bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-neutral-200/60 overflow-hidden">
-                    <div className="p-8 md:p-10">
+                    <div className="p-8 md:p-10 max-[426px]:p-4 max-[426px]:py-8">
                         <AnimatePresence mode="wait" initial={false}>
                             {isLogin ? (
                                 <motion.div

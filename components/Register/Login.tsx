@@ -65,7 +65,7 @@ const Login: React.FC<LoginProps> = ({ onSwitch }) => {
                             autoComplete="email"
                             aria-describedby={errors.email ? "email-error" : undefined}
                             aria-invalid={!!errors.email}
-                            className={`w-full pl-12 pr-4 py-3.5 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.email ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-4 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.email ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                     </div>
@@ -91,7 +91,7 @@ const Login: React.FC<LoginProps> = ({ onSwitch }) => {
                             autoComplete="current-password"
                             aria-describedby={errors.password ? "password-error" : undefined}
                             aria-invalid={!!errors.password}
-                            className={`w-full pl-12 pr-12 py-3.5 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-widest ${errors.password ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-12 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-widest ${errors.password ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                         <button
@@ -112,7 +112,7 @@ const Login: React.FC<LoginProps> = ({ onSwitch }) => {
                         whileHover={{ scale: 1.01, y: -2 }}
                         whileTap={{ scale: 0.98 }}
                         disabled={Object.values(errors).some((err) => err !== "") || formData.email === "" || formData.password === ""}
-                        className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:y-0"
+                        className="w-full bg-brand-primary text-white py-4 max-[426px]:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:y-0"
                     >
                         Log In
                     </motion.button>
@@ -132,7 +132,7 @@ const Login: React.FC<LoginProps> = ({ onSwitch }) => {
             <button
                 type="button"
                 aria-label="Log in with Google"
-                className="w-full bg-white text-brand-heading py-4 rounded-xl font-bold flex items-center justify-center gap-3 border border-brand-muted/20 hover:bg-brand-muted/10 transition-all shadow-sm hover:border-brand-muted/20 cursor-pointer"
+                className="w-full bg-white text-brand-heading py-4 max-[426px]:py-3.5 rounded-xl font-bold flex items-center justify-center gap-3 border border-brand-muted/20 hover:bg-brand-muted/10 transition-all shadow-sm hover:border-brand-muted/20 cursor-pointer"
             >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path

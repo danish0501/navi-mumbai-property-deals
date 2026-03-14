@@ -89,7 +89,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                 <button
                     type="button"
                     aria-label="Sign up with Google"
-                    className="w-full bg-white text-brand-heading py-4 rounded-xl font-bold flex items-center justify-center gap-3 border border-brand-muted/20 hover:bg-brand-muted/10 transition-all shadow-sm hover:border-brand-muted/20 cursor-pointer"
+                    className="w-full bg-white text-brand-heading py-4 max-[426px]:py-3.5 rounded-xl font-bold flex items-center justify-center gap-3 border border-brand-muted/20 hover:bg-brand-muted/10 transition-all shadow-sm hover:border-brand-muted/20 cursor-pointer"
                 >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                         <path
@@ -131,7 +131,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             autoComplete="name"
                             aria-describedby={errors.fullName ? "name-error" : undefined}
                             aria-invalid={!!errors.fullName}
-                            className={`w-full pl-12 pr-4 py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.fullName ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-4 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.fullName ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                     </div>
@@ -152,7 +152,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             autoComplete="tel"
                             aria-describedby={errors.phone ? "phone-error" : undefined}
                             aria-invalid={!!errors.phone}
-                            className={`w-full pl-12 pr-4 py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.phone ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-4 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.phone ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                     </div>
@@ -173,7 +173,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             autoComplete="email"
                             aria-describedby={errors.email ? "email-error-signup" : undefined}
                             aria-invalid={!!errors.email}
-                            className={`w-full pl-12 pr-4 py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.email ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-4 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted ${errors.email ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                     </div>
@@ -194,7 +194,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             autoComplete="new-password"
                             aria-describedby={errors.password ? "password-error-signup" : undefined}
                             aria-invalid={!!errors.password}
-                            className={`w-full pl-12 pr-12 py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-wide ${errors.password ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-12 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-wide ${errors.password ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                         <button
@@ -245,7 +245,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             autoComplete="new-password"
                             aria-describedby={errors.confirmPassword ? "confirm-error" : undefined}
                             aria-invalid={!!errors.confirmPassword}
-                            className={`w-full pl-12 pr-12 py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-wide ${errors.confirmPassword ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
+                            className={`w-full pl-12 pr-12 py-3.5 max-[426px]:py-3 bg-brand-muted/5 border rounded-xl focus:bg-white focus:outline-none focus:ring-4 transition-all text-brand-heading placeholder:text-brand-muted tracking-wide ${errors.confirmPassword ? "border-red-500 focus:ring-red-500/5 focus:border-red-500" : "border-brand-muted/30 focus:ring-brand-primary/5 focus:border-brand-primary"
                                 }`}
                         />
                         <button
@@ -283,7 +283,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                             <button
                                 type="submit"
                                 disabled={Object.values(errors).some((err) => err !== "") || Object.values(formData).some((val) => val === "") || !agreed}
-                                className="w-full bg-brand-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                                className="w-full bg-brand-primary text-white py-4 max-[426px]:py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary-hover shadow-lg shadow-brand-primary/10 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
                                 Create Free Account
                             </button>
@@ -298,7 +298,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitch }) => {
                 </div>
             </form>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-emerald-600 font-bold bg-emerald-50 px-4 py-2.5 rounded-lg border border-emerald-100 uppercase tracking-widest">
+            <div className="mt-6 flex items-center justify-center gap-2 text-[11px] max-[321px]:text-[10px] text-emerald-600 font-bold bg-emerald-50 px-4 max-[321px]:px-2 py-2.5 rounded-lg border border-emerald-100 uppercase tracking-widest max-[321px]:tracking-wide">
                 <ShieldCheck className="w-4 h-4 fill-emerald-100" />
                 Your data is encrypted and secure
             </div>
