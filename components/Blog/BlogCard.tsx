@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Share2, Check, ChevronRight } from "lucide-react";
-import { BlogPost } from "./Blogdata";
+import { BlogPost } from "../BlogDetail/Blogdata";
 
 interface BlogCardProps {
     post: BlogPost;

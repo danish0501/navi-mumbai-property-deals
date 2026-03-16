@@ -1,5 +1,5 @@
-import { blogPosts } from "@/components/Blog/Blogdata";
-import BlogDetail from "@/components/Blog/BlogDetail";
+import { blogPosts } from "@/components/BlogDetail/Blogdata";
+import BlogDetail from "@/components/BlogDetail/BlogDetail";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 

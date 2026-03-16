@@ -1,6 +1,6 @@
 "use client";
 import BlogCard from "./BlogCard";
-import { blogPosts } from "./Blogdata";
+import { blogPosts } from "../BlogDetail/Blogdata";
 import { SearchX, ArrowRight, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 

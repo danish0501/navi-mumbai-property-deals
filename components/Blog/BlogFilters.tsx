@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TrendingUp, BookOpen, MapPin, BarChart3, Wallet, Filter, Hash, ArrowRight } from "lucide-react";
-import { blogPosts } from "./Blogdata";
+import { blogPosts } from "../BlogDetail/Blogdata";
 
 interface BlogFiltersProps {
     activeCategory: string;
