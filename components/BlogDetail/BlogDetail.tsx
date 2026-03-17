@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2, Bookmark, Calendar, Clock, ShieldCheck, Plus } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, Calendar, Clock, ShieldCheck } from "lucide-react";
 import { BlogPost, blogPosts } from "./Blogdata";
 import BlogSidebar from "./BlogSidebar";
 import BlogMainContent from "./BlogMainContent";

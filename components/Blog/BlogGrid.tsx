@@ -79,7 +79,7 @@ const BlogGrid = ({ searchQuery, setSearchQuery, activeCategory, setActiveCatego
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ duration: 0.4 }}
-                            className="flex flex-col items-center justify-center py-20 text-center"
+                            className="flex flex-col items-center justify-center py-16 text-center"
                         >
                             <div className="relative mb-10">
                                 <div className="absolute inset-0 bg-brand-primary/10 rounded-full blur-2xl animate-pulse" />
@@ -129,13 +129,13 @@ const BlogGrid = ({ searchQuery, setSearchQuery, activeCategory, setActiveCatego
                         viewport={{ once: true }}
                         className="flex flex-col items-center"
                     >
-                        <div className="w-px h-20 bg-gradient-to-b from-brand-primary/0 via-brand-primary/20 to-brand-primary/0 mb-10" />
+                        <div className="w-px h-20 bg-gradient-to-b from-brand-primary/0 via-brand-primary/20 to-brand-primary/0" />
 
                         <button className="group relative cursor-pointer">
                             <div className="absolute inset-0 bg-brand-primary/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative px-16 py-4 bg-white border-2 border-neutral-100 text-brand-heading font-black rounded-[2rem] group-hover:border-brand-primary group-hover:text-brand-primary transition-all duration-500 shadow-sm overflow-hidden flex items-center gap-4">
+                            <div className="relative px-16 py-4 bg-white border-2 border-neutral-100 text-brand-heading font-bold rounded-[2rem] group-hover:border-brand-primary group-hover:text-brand-primary transition-all duration-500 shadow-sm overflow-hidden flex items-center gap-4">
                                 <span className="relative z-10 text-[15px] uppercase tracking-widest">
-                                    Load More Blogs
+                                    More Blogs
                                 </span>
                                 <div className="relative w-7 h-7 rounded-full bg-brand-primary/10 flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500">
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

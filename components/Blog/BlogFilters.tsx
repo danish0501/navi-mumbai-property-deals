@@ -42,7 +42,7 @@ export default function BlogFilters({ activeCategory, setActiveCategory }: BlogF
     };
 
     return (
-        <section className="relative py-16 overflow-hidden" aria-label="Blog Filters">
+        <section className="relative py-16 max-[426px]:py-8 overflow-hidden" aria-label="Blog Filters">
             {/* Ambient Background Glows */}
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
@@ -55,36 +55,79 @@ export default function BlogFilters({ activeCategory, setActiveCategory }: BlogF
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 mb-12 rounded-full bg-zinc-900 text-white border border-white/10 shadow-2xl"
+                            className="inline-flex items-center gap-2 px-4 py-1.5 mb-12 max-[426px]:mb-6 rounded-full bg-zinc-900 text-white border border-white/10 shadow-2xl"
                         >
                             <Hash size={14} className="text-brand-primary animate-pulse" />
                             <span className="text-[10px] font-black uppercase tracking-[0.2em]">Navi Mumbai Intelligence</span>
                         </motion.div>
-                        <h2 className="text-4xl md:text-6xl font-black text-brand-heading tracking-tight mb-6">
-                            Explore by <span className="text-brand-primary italic">Expertise</span>
+                        <h2 className="text-4xl md:text-6xl max-[426px]:text-4xl max-[376px]:text-[32px] max-[321px]:text-[28px] font-black text-brand-heading tracking-tight mb-6 max-[426px]:mb-0">
+                            Explore by {" "}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                                }}
+                                transition={{
+                                    opacity: { duration: 1, delay: 0.4 },
+                                    scale: { duration: 1, delay: 0.4 },
+                                    backgroundPosition: { duration: 5, repeat: Infinity, ease: "linear" }
+                                }}
+                                className="relative inline-block group cursor-default"
+                            >
+                                <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-primary bg-[length:200%_auto] block pb-4 transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(186,163,96,0.3)]">
+                                    Expertise
+                                </span>
+
+                                {/* Animated Underline */}
+                                <motion.div
+                                    className="absolute bottom-2 left-0 h-[3px] bg-gradient-to-r from-brand-primary rounded-full"
+                                    initial={{ width: 0, opacity: 0 }}
+                                    animate={{ width: "100%", opacity: 1 }}
+                                    transition={{ duration: 1.5, delay: 1, ease: "circOut" }}
+                                    aria-hidden="true"
+                                />
+
+                                {/* Light Sweep Effect */}
+                                <motion.div
+                                    animate={{
+                                        left: ["-100%", "200%"],
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        repeatDelay: 1,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="absolute inset-0 z-10 w-32 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[35deg] pointer-events-none"
+                                    aria-hidden="true"
+                                />
+                            </motion.div>
                         </h2>
                     </div>
 
-                    {/* Desktop Filter Rail */}
-                    <div className="relative p-2 bg-zinc-100/50 backdrop-blur-md rounded-[3rem] border border-zinc-200/50 flex flex-wrap justify-center gap-2">
+                    {/* Category Button */}
+                    <div className="relative p-4 max-[426px]:p-2.5 bg-zinc-100/40 backdrop-blur-xl rounded-[2.5rem] max-[426px]:rounded-2xl border border-zinc-200/50 grid grid-cols-3 max-[991px]:grid-cols-2 max-[426px]:grid-cols-1 justify-center gap-4 w-full max-w-6xl">
                         {categories.map((cat) => {
                             const isActive = activeCategory === cat.name;
                             const count = getCount(cat.name);
 
                             return (
-                                <button
+                                <motion.button
                                     key={cat.name}
+                                    whileTap={{ scale: 0.98 }}
                                     onClick={() => handleCategoryChange(cat.name)}
                                     onMouseEnter={() => setHoveredTab(cat.name)}
                                     onMouseLeave={() => setHoveredTab(null)}
-                                    className={`relative px-8 py-4 rounded-full transition-all duration-500 group flex items-center gap-3 outline-none cursor-pointer ${isActive ? "text-white" : "text-brand-paragraph hover:text-zinc-900"
+                                    className={`relative px-6 max-[376px]:px-4 max-[321px]:px-2 py-5 max-[426px]:py-4 max-[376px]:py-3 rounded-2xl transition-all duration-500 group flex items-center outline-none cursor-pointer w-full ${isActive ? "text-white shadow-xl shadow-brand-primary/20" : "text-brand-paragraph bg-white/30 hover:bg-white hover:text-zinc-900 border border-zinc-200/50"
                                         }`}
                                 >
-                                    {/* Active Liquid Pill */}
+                                    {/* Active State Background */}
                                     {isActive && (
                                         <motion.div
                                             layoutId="activePill"
-                                            className="absolute inset-0 bg-brand-primary rounded-full shadow-[0_10px_20_rgba(var(--brand-primary-rgb),0.3)] z-0"
+                                            className="absolute inset-0 bg-brand-primary rounded-2xl z-0"
                                             transition={{ type: "spring", bounce: 0.25, duration: 0.6 }}
                                         />
                                     )}
@@ -93,39 +136,49 @@ export default function BlogFilters({ activeCategory, setActiveCategory }: BlogF
                                     {hoveredTab === cat.name && !isActive && (
                                         <motion.div
                                             layoutId="hoverPill"
-                                            className="absolute inset-0 bg-white shadow-sm rounded-full z-0"
+                                            className="absolute inset-0 bg-white shadow-sm rounded-2xl z-0"
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                         />
                                     )}
 
-                                    <span className="relative z-10 flex items-center gap-3">
-                                        <div className={`p-1.5 rounded-lg transition-transform group-hover:rotate-12 ${isActive ? "bg-white/20" : "bg-zinc-200/50"}`}>
-                                            {cat.icon}
+                                    <span className="relative z-10 flex items-center justify-between w-full">
+                                        <div className="flex items-center gap-4">
+                                            <div className={`p-2.5 rounded-xl transition-all duration-300 group-hover:rotate-6 group-hover:scale-110 ${isActive ? "bg-white/20" : "bg-zinc-200"}`}>
+                                                {cat.icon}
+                                            </div>
+                                            <div className="flex flex-col items-start text-left">
+                                                <span className="text-sm md:text-base max-[321px]:text-sm font-black max-[321px]:font-semibold uppercase tracking-wide max-[321px]:tracking-none leading-none">{cat.name}</span>
+                                                <span className={`text-[10px] font-black mt-1.5 uppercase opacity-100 ${isActive ? "text-white/70" : "text-brand-primary"}`}>
+                                                    {count} Articles
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="flex flex-col items-start">
-                                            <span className="text-sm font-bold uppercase tracking-wide leading-none">{cat.name}</span>
-                                            <span className={`text-[9px] font-black mt-1 uppercase opacity-100 ${isActive ? "text-white" : "text-brand-primary-hover"}`}>
-                                                {count} Blogs
-                                            </span>
-                                        </div>
+
+                                        <ArrowRight
+                                            size={18}
+                                            className={`transition-all duration-300 ${isActive ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"} group-hover:opacity-100 group-hover:translate-x-0 max-[426px]:opacity-100`}
+                                        />
                                     </span>
-                                </button>
+                                </motion.button>
                             );
                         })}
                     </div>
 
-                    {/* Interactive Result Count / Reset Button */}
+                    {/* Result Count / Reset Button */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeCategory}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            className="flex items-center gap-8"
+                            className="flex flex-col md:flex-row items-center gap-6 md:gap-8"
                         >
-                            <div className="flex items-center gap-3 text-brand-paragraph font-bold text-xs uppercase tracking-widest">
-                                <Filter size={16} className="text-brand-primary" />
-                                Showing {getCount(activeCategory)} articles for {activeCategory}
+                            <div className="flex items-center gap-3 text-brand-paragraph font-bold text-[12px] max-[321px]:text-[10px] uppercase tracking-widest bg-zinc-100 px-5 py-2.5 rounded-full border border-zinc-200/50">
+                                <Filter size={14} className="text-brand-primary" />
+                                <span className="opacity-80">Filtered:</span>
+                                <span>{getCount(activeCategory)} articles</span>
+                                <span className="opacity-80">|</span>
+                                <span className="text-brand-primary">{activeCategory}</span>
                             </div>
 
                             {activeCategory !== "All" && (
@@ -135,7 +188,7 @@ export default function BlogFilters({ activeCategory, setActiveCategory }: BlogF
                                     onClick={() => handleCategoryChange("All")}
                                     className="flex items-center gap-2 text-[12px] font-black uppercase text-brand-primary border-b-2 border-brand-primary pb-1 cursor-pointer group"
                                 >
-                                    Clear Selection
+                                    Clear Category
                                     <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                                 </motion.button>
                             )}

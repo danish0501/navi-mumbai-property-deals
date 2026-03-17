@@ -90,22 +90,22 @@ const SearchBar = ({ onFocusChange }: SearchBarProps) => {
                 />
 
                 {/* Main Search Container */}
-                <div className={`relative flex items-center bg-brand-dark border rounded-full transition-all duration-500 overflow-hidden ${isFocused
-                    ? 'border-brand-primary'
+                <div className={`relative flex items-center bg-brand-dark/80 backdrop-blur-xl border rounded-full transition-all duration-500 overflow-hidden ${isFocused
+                    ? 'border-brand-primary ring-2 ring-brand-primary/20'
                     : 'border-white/10 group-hover:border-white/20'
-                    }`}>
+                    } max-[426px]:mx-1`}>
 
                     {/* Search Icon with Animation */}
-                    <div className="pl-6 flex items-center justify-center">
+                    <div className="pl-6 max-[426px]:pl-5 flex items-center justify-center">
                         <motion.div
                             animate={isSearching ? { rotate: 360 } : { rotate: 0 }}
                             transition={isSearching ? { duration: 1, repeat: Infinity, ease: "linear" } : {}}
                             className={`${isFocused ? 'text-brand-primary' : 'text-zinc-500'} transition-colors duration-300`}
                         >
                             {isSearching ? (
-                                <Loader2 className="w-6 h-6" />
+                                <Loader2 className="w-6 max-[426px]:w-5 h-6 max-[426px]:h-5" />
                             ) : (
-                                <Search className="w-6 h-6" />
+                                <Search className="w-6 max-[426px]:w-5 h-6 max-[426px]:h-5" />
                             )}
                         </motion.div>
                     </div>
@@ -117,12 +117,12 @@ const SearchBar = ({ onFocusChange }: SearchBarProps) => {
                         onChange={(e) => setQuery(e.target.value)}
                         onFocus={handleFocus}
                         onBlur={handleBlur}
-                        placeholder="Search Navi Mumbai Real Estate Blogs..."
-                        className="w-full bg-transparent border-none outline-none px-5 py-5 text-white text-lg placeholder:font-light font-medium selection:bg-brand-primary selection:text-zinc-950"
+                        placeholder="Search Blogs..."
+                        className="w-full bg-transparent border-none outline-none px-5 max-[426px]:px-3 py-5 max-[426px]:py-4 text-white text-lg max-[426px]:text-base placeholder:font-light max-[426px]:placeholder:text-zinc-500 font-medium selection:bg-brand-primary selection:text-zinc-950"
                     />
 
                     {/* Interactive Elements on Right */}
-                    <div className="flex items-center pr-3 gap-3">
+                    <div className="flex items-center pr-3 max-[426px]:pr-2 gap-3 max-[426px]:gap-2">
                         <AnimatePresence>
                             {query && (
                                 <motion.button
@@ -131,29 +131,31 @@ const SearchBar = ({ onFocusChange }: SearchBarProps) => {
                                     exit={{ opacity: 0, scale: 0.8 }}
                                     type="button"
                                     onClick={handleClear}
-                                    className="p-2 text-zinc-500 hover:text-white transition-colors rounded-full hover:bg-white/5 cursor-pointer"
+                                    className="p-2 text-zinc-500 hover:text-white transition-colors rounded-full hover:bg-white/5 cursor-pointer max-[426px]:p-1"
                                     title="Clear search"
                                 >
-                                    <X className="w-5 h-5" />
+                                    <X className="w-5 h-5 max-[426px]:w-4 max-[426px]:h-4" />
                                 </motion.button>
                             )}
                         </AnimatePresence>
 
                         {/* Search Button */}
                         <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
+                            whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(186, 163, 96, 0.4)" }}
+                            whileTap={{ scale: 0.95 }}
                             type="submit"
-                            className="bg-brand-primary hover:bg-brand-primary-hover text-brand-white px-8 py-4 rounded-full font-black text-sm uppercase tracking-widest transition-all duration-300 cursor-pointer"
+                            className="relative overflow-hidden bg-brand-primary hover:bg-brand-primary-hover text-brand-white px-8 max-[426px]:px-5 py-4 max-[426px]:py-3 rounded-full font-black max-[426px]:font-extrabold text-sm max-[426px]:text-xs uppercase tracking-widest max-[426px]:tracking-wider transition-all duration-300 cursor-pointer group/btn"
                         >
-                            <span className="flex items-center gap-2">
+                            <span className="relative z-10 flex items-center gap-2">
                                 Search
                             </span>
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]"
+                                aria-hidden="true"
+                            />
                         </motion.button>
                     </div>
                 </div>
-
-
             </form>
 
             {/* Trending / Quick Tags */}
@@ -164,16 +166,17 @@ const SearchBar = ({ onFocusChange }: SearchBarProps) => {
                         animate={{ opacity: 1, height: "auto", marginTop: 48 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className="flex flex-wrap items-center gap-6 px-4 overflow-hidden"
+                        className="flex flex-wrap items-center gap-6 max-[426px]:gap-3 px-4 max-[426px]:px-2 overflow-hidden max-[426px]:mt-10"
                     >
-                        <span className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.2em]">Popular:</span>
-                        <div className="flex flex-wrap gap-4">
+                        <span className="text-[11px] font-black text-zinc-500 uppercase tracking-[0.2em] max-[426px]:tracking-widest">Popular:</span>
+                        <div className="flex flex-wrap gap-4 max-[426px]:gap-2">
                             {['Market ROI 2026', 'Atal Setu Impact', 'Ulwe Properties', 'NMIA Timeline'].map((tag, idx) => (
                                 <motion.button
                                     key={tag}
                                     whileHover={{ y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
                                     type="button"
-                                    className="group relative flex items-center text-[12px] text-zinc-400 font-bold transition-all whitespace-nowrap"
+                                    className="group relative flex items-center text-[12px] max-[426px]:text-[13px] text-zinc-400 font-bold max-[426px]:font-semibold transition-all whitespace-nowrap"
                                     onClick={() => setQuery(tag)}
                                 >
                                     <span className="text-brand-primary/60 mr-1 group-hover:text-brand-primary transition-colors">#</span>

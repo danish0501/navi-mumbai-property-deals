@@ -48,8 +48,6 @@ const BlogSidebar = ({ content, isPinned, isAtBottom }: BlogSidebarProps) => {
                         entriesRef.current.set(entry.target.id, entry);
                     });
 
-                    // Finding the active heading: the last one that has passed the threshold
-                    // Threshold is 80px from top (matches top-20 navbar)
                     const threshold = 81;
 
                     const active = [...tocItems].reverse().find(item => {
@@ -120,11 +118,6 @@ const BlogSidebar = ({ content, isPinned, isAtBottom }: BlogSidebarProps) => {
         return items.filter(item => {
             // 1. H2 is always visible
             if (item.level === 2) return true;
-
-            // 2. Sub-items are visible if:
-            // - Their parent is active (showing children of active category)
-            // - One of their siblings is active (showing the whole sub-menu we are currently in)
-            // - Their parent is an ancestor of the active item
             if (activeId === item.parentId) return true;
             if (activeItem?.parentId === item.parentId) return true;
             if (activeAncestors.includes(item.parentId || "")) return true;

@@ -11,8 +11,6 @@ const BlogMainContent = ({ content, tags }: BlogMainContentProps) => {
     const contentWithIds = useMemo(() => {
         let processedContent = content;
 
-        // 1. Wrap first paragraph in AI summary / Key Takeaways box
-        // This helps Generative Engines (SGE) summarize the article
         let paragraphCount = 0;
         processedContent = processedContent.replace(/<p\b[^>]*>(.*?)<\/p>/i, (match, text) => {
             paragraphCount++;

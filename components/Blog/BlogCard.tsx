@@ -41,7 +41,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
             whileHover={{ y: -10 }}
             itemScope
             itemType="http://schema.org/BlogPosting"
-            className="group relative bg-white rounded-[2.5rem] overflow-hidden border border-neutral-100/80 hover:border-brand-primary/30 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(186,163,96,0.15)]"
+            className="group/card relative bg-white rounded-[2.5rem] overflow-hidden border border-neutral-100/80 hover:border-brand-primary/30 transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(186,163,96,0.15)]"
         >
             {/* Publisher Schema (Hidden for SEO) */}
             <div itemProp="publisher" itemScope itemType="https://schema.org/Organization" className="hidden">
@@ -54,11 +54,11 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
                     src={post.image}
                     alt={post.title}
                     fill
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+                    className="object-cover transform group-hover/card:scale-105 transition-transform duration-[1.5s] ease-out"
                 />
 
                 {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-heading/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-heading/40 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
 
                 {/* Glass Badge */}
                 <div className="absolute top-4 left-4 z-20">
@@ -103,18 +103,18 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
             {/* Content Section */}
             <div className="p-4 md:p-6 relative">
                 {/* Breadcrumb Micro-component */}
-                <div className="flex items-center gap-1.5 mb-3 text-[10px] font-bold text-brand-paragraph/40 uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 mb-3 text-[10px] font-bold text-brand-paragraph uppercase tracking-widest">
                     <span>Blog</span>
-                    <ChevronRight size={10} />
-                    <span className="text-brand-primary/60">{post.category}</span>
+                    <ChevronRight size={12} />
+                    <span className="text-brand-primary">{post.category}</span>
                 </div>
 
                 <Link
                     href={`/blogs/${post.slug}`}
-                    className="block group/title"
+                    className="block"
                     title={`Read more about ${post.title} | Navi Mumbai Property Market Insights`}
                 >
-                    <h2 itemProp="headline" className="text-2xl font-black text-brand-heading mb-4 leading-[1.3] group-hover/title:text-brand-primary transition-colors duration-500 line-clamp-2">
+                    <h2 itemProp="headline" className="text-2xl font-black text-brand-heading mb-4 leading-[1.3] group-hover/card:!text-brand-primary-hover transition-colors duration-300 line-clamp-2">
                         {post.title}
                     </h2>
                 </Link>
@@ -148,7 +148,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
                         </div>
                     </div>
 
-                    {/* Full Width Button */}
+                    {/* Read Article Button */}
                     <Link
                         href={`/blogs/${post.slug}`}
                         title={`Read Article: ${post.title} - Expert Navi Mumbai Property Market Analysis`}

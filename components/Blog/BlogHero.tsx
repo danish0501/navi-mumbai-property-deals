@@ -79,7 +79,7 @@ const BlogHero = ({ isSearching = false, onSearchFocusChange }: BlogHeroProps) =
                 <div className={`grid ${isSearching ? "lg:grid-cols-1" : "lg:grid-cols-2"} gap-10 items-center`}>
 
                     {/* Left Side: Content */}
-                    <div className={`flex flex-col ${isSearching ? "items-center text-center space-y-6" : "space-y-8"}`}>
+                    <div className={`flex flex-col -my-10 ${isSearching ? "items-center text-center space-y-6" : "space-y-8"}`}>
                         <AnimatePresence mode="wait">
                             {!isSearching && (
                                 <motion.div
@@ -92,7 +92,7 @@ const BlogHero = ({ isSearching = false, onSearchFocusChange }: BlogHeroProps) =
                                 >
                                     <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md w-fit">
                                         <span className="flex h-2 w-2 rounded-full bg-brand-primary animate-pulse" aria-hidden="true" />
-                                        <span className="text-xs font-black text-brand-primary tracking-[0.3em] uppercase">Intelligence & Insights Hub</span>
+                                        <span className="text-xs font-black text-brand-primary tracking-[0.3em] max-[321px]:tracking-[0.1em] uppercase">Intelligence & Insights Hub</span>
                                     </div>
 
                                     <h1 className="font-black !text-white leading-[1.05] tracking-tighter">
@@ -100,7 +100,7 @@ const BlogHero = ({ isSearching = false, onSearchFocusChange }: BlogHeroProps) =
                                             initial={{ opacity: 0, y: 40 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                            className="block text-5xl md:text-[90px]"
+                                            className="block text-5xl md:text-[90px] max-[426px]:text-[56px] max-[376px]:text-[52px] max-[321px]:text-[44px]"
                                         >
                                             Navi Mumbai
                                         </motion.span>
@@ -119,7 +119,7 @@ const BlogHero = ({ isSearching = false, onSearchFocusChange }: BlogHeroProps) =
                                             }}
                                             className="relative inline-block mt-2 group cursor-default"
                                         >
-                                            <span className="text-5xl md:text-[80px] italic text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-[#fff4d6] to-brand-primary bg-[length:200%_auto] block pb-4 transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(186,163,96,0.3)]">
+                                            <span className="text-5xl md:text-[80px] max-[376px]:text-[46px] max-[321px]:text-[38px] italic text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-[#fff4d6] to-brand-primary bg-[length:200%_auto] block pb-4 transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(186,163,96,0.3)]">
                                                 Knowledge Hub
                                             </span>
 
@@ -149,7 +149,7 @@ const BlogHero = ({ isSearching = false, onSearchFocusChange }: BlogHeroProps) =
                                         </motion.div>
                                     </h1>
 
-                                    <p className="text-xl text-zinc-400 max-w-xl leading-relaxed font-light">
+                                    <p className="text-xl max-[321px]:text-lg text-zinc-400 max-w-xl leading-relaxed font-light">
                                         Navigate the future of real estate with expert analysis, local intelligence, and the latest infrastructure breakthroughs in India&apos;s most planned metropolis.
                                     </p>
                                 </motion.div>
