@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2, Bookmark } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, Calendar, Clock, ShieldCheck, Plus } from "lucide-react";
 import { BlogPost, blogPosts } from "./Blogdata";
 import BlogSidebar from "./BlogSidebar";
 import BlogMainContent from "./BlogMainContent";
@@ -16,7 +16,6 @@ interface BlogDetailProps {
 
 const BlogDetail = ({ post }: BlogDetailProps) => {
 
-
     const [isPinned, setIsPinned] = useState(false);
     const [isAtBottom, setIsAtBottom] = useState(false);
     const mainContentRef = useRef<HTMLDivElement>(null);
@@ -25,8 +24,8 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
         const handleScroll = () => {
             if (mainContentRef.current) {
                 const rect = mainContentRef.current.getBoundingClientRect();
-                const navbarHeight = 80; // Approximate top-20
-                const headerHeight = 60; // Approximate blog header height
+                const navbarHeight = 80;
+                const headerHeight = 60;
                 const threshold = navbarHeight + headerHeight;
 
                 // Check if we started the content area
@@ -36,9 +35,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
                     setIsPinned(false);
                 }
 
-                // Check if we hit the bottom of content area
-                // We trigger 'isAtBottom' when the bottom of the section is about to leave the "fixed" view area
-                const sidebarVisibleHeight = 600; // Estimated height of sidebars
+                const sidebarVisibleHeight = 700; // Estimated height of sidebars
                 if (rect.bottom <= threshold + sidebarVisibleHeight) {
                     setIsAtBottom(true);
                 } else {
@@ -58,7 +55,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
     }, []);
 
     // Related posts
-    const relatedPosts = blogPosts
+    const relatedBlogs = blogPosts
         .filter(p => p.slug !== post.slug && p.category === post.category)
         .slice(0, 3);
 
@@ -66,9 +63,8 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
         <article className="relative min-h-screen bg-white">
             <BlogSchema post={post} />
 
-
-            {/* Sticky Navigation / Header */}
-            <header className="sticky top-20 z-40 bg-white/80 backdrop-blur-md border-b border-neutral-100 px-4 py-4">
+            {/* Header */}
+            <header className="z-40 bg-white/80 backdrop-blur-md border-b border-neutral-100 px-4 py-4">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <Link
                         href="/blogs"
@@ -98,7 +94,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
             </header>
 
             {/* Hero Section */}
-            <section className="relative w-full bg-neutral-50/30 py-16 border-b border-neutral-100">
+            <section className="relative w-full bg-neutral-50/30 py-16 max-[769px]:py-8 border-b border-neutral-100">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
                         <div className="lg:w-1/2">
@@ -122,13 +118,18 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
                             </motion.h1>
 
                             <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
-                                className="flex flex-wrap items-center gap-6 py-4"
+                                className="flex flex-wrap items-center gap-6 py-4 max-[426px]:gap-4"
                             >
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center text-sm font-black shadow-lg shadow-brand-primary/20">
+                                {/* Author Block */}
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="flex items-center gap-3 max-[426px]:w-full max-[426px]:bg-white max-[426px]:p-5 max-[426px]:rounded-[2rem] max-[426px]:border max-[426px]:border-neutral-100 max-[426px]:shadow-[0_15px_35px_rgba(0,0,0,0.03)] group"
+                                >
+                                    <div className="w-10 h-10 rounded-full bg-brand-primary text-white flex items-center justify-center text-sm font-black shadow-lg shadow-brand-primary/20 shrink-0 group-hover:rotate-12 transition-transform duration-300">
                                         {post.author.charAt(0)}
                                     </div>
                                     <div className="flex flex-col">
@@ -139,16 +140,45 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
                                         >
                                             {post.author}
                                         </Link>
-                                        <span className="text-[10px] font-bold text-brand-paragraph/60 uppercase tracking-widest">{post.authorRole || 'Author'}</span>
+                                        <span className="text-[11px] font-bold text-brand-paragraph uppercase tracking-widest">{post.authorRole || 'Author'}</span>
                                     </div>
-                                </div>
+                                    <div className="ml-auto hidden max-[426px]:block">
+                                        <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+                                            <ShieldCheck size={14} className="text-green-600" />
+                                        </div>
+                                    </div>
+                                </motion.div>
+
                                 <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
-                                <div className="flex flex-col">
-                                    <span className="text-xs font-bold text-brand-paragraph/60 uppercase tracking-widest">{post.date}</span>
-                                    <span className="text-[9px] font-black text-brand-primary uppercase tracking-[0.1em] mt-0.5">Fact-Checked by Expert</span>
+
+                                {/* Metadata Grid */}
+                                <div className="flex flex-wrap items-center gap-6 max-[426px]:grid max-[426px]:grid-cols-2 max-[426px]:w-full max-[426px]:gap-4">
+                                    <motion.div
+                                        whileHover={{ y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex flex-col max-[426px]:bg-white max-[426px]:p-5 max-[426px]:rounded-[2rem] max-[426px]:border max-[426px]:border-neutral-100 max-[426px]:shadow-[0_15px_35px_rgba(0,0,0,0.03)]"
+                                    >
+                                        <div className="flex items-center gap-2 mb-1.5 hidden max-[426px]:flex">
+                                            <Calendar size={12} className="text-brand-primary" />
+                                            <span className="text-[9px] font-black text-brand-paragraph uppercase tracking-widest">Published</span>
+                                        </div>
+                                        <span className="text-xs font-bold text-brand-heading uppercase tracking-widest max-[426px]:text-brand-heading max-[426px]:text-[11px]">{post.date}</span>
+                                    </motion.div>
+
+                                    <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
+
+                                    <motion.div
+                                        whileHover={{ y: -2 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex flex-col max-[426px]:bg-white max-[426px]:p-5 max-[426px]:rounded-[2rem] max-[426px]:border max-[426px]:border-neutral-100 max-[426px]:shadow-[0_15px_35px_rgba(0,0,0,0.03)]"
+                                    >
+                                        <div className="flex items-center gap-2 mb-1.5 hidden max-[426px]:flex">
+                                            <Clock size={12} className="text-brand-primary" />
+                                            <span className="text-[9px] font-black text-brand-paragraph uppercase tracking-widest">Read Time</span>
+                                        </div>
+                                        <span className="text-xs font-bold text-brand-heading uppercase tracking-widest max-[426px]:text-brand-heading max-[426px]:text-[11px]">{post.readTime}</span>
+                                    </motion.div>
                                 </div>
-                                <div className="h-4 w-px bg-neutral-200 hidden sm:block" />
-                                <span className="text-xs font-bold text-brand-paragraph/60 uppercase tracking-widest">{post.readTime}</span>
                             </motion.div>
                         </div>
 
@@ -173,7 +203,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
             </section>
 
             {/* Main Content Layout */}
-            <main className="w-full mx-auto px-12 py-16">
+            <main className="w-full mx-auto p-12 max-[426px]:p-6 max-[321px]:p-4">
                 <div ref={mainContentRef} className="flex flex-col lg:flex-row gap-8 items-start">
                     {/* Left: Table of Contents */}
                     <div className="hidden lg:block w-60 shrink-0 self-stretch">
@@ -193,21 +223,47 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
             </main>
 
             {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-                <section className="py-16 bg-neutral-50/50 border-t border-neutral-100 px-6">
+            {relatedBlogs.length > 0 && (
+                <section className="py-16 max-[426px]:py-10 bg-neutral-50/50 border-t border-neutral-100 px-6">
                     <div className="max-w-7xl mx-auto">
-                        <div className="flex items-center justify-between mb-16">
-                            <div>
-                                <h2 className="text-3xl font-black text-brand-heading mb-2 uppercase tracking-tight">Related Blogs</h2>
-                                <p className="text-brand-muted font-bold uppercase text-[12px] tracking-[0.2em]">Curated articles from {post.category}</p>
-                            </div>
-                            <Link href="/blogs" className="text-xs font-black text-brand-primary uppercase tracking-widest hover:underline px-6 py-3 rounded-full bg-brand-primary/5">
-                                View All Articles
-                            </Link>
+                        <div className="flex items-center justify-between mb-16 max-[426px]:flex-col max-[426px]:items-start max-[426px]:gap-8 max-[426px]:mb-12">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="max-[426px]:w-full"
+                            >
+                                <div className="flex items-center gap-3 mb-4 hidden max-[426px]:flex">
+                                    <div className="w-8 h-1 bg-brand-primary rounded-full" />
+                                    <span className="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Next Reads</span>
+                                </div>
+                                <h2 className="text-5xl max-[769px]:text-4xl max-[376px]:text-3xl font-black text-brand-heading mb-2 uppercase tracking-tight max-[426px]:leading-[1.1]">
+                                    Related <span className="text-brand-primary">Blogs</span>
+                                </h2>
+                                <p className="text-brand-muted font-bold uppercase text-lg max-[769px]:text-base max-[321px]:text-xs tracking-[0.1em] max-[376px]:tracking-[0]">
+                                    Curated content for <span className="text-brand-heading underline decoration-brand-primary/30 decoration-2 underline-offset-4">{post.category}</span>
+                                </p>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2 }}
+                                className="max-[426px]:hidden"
+                            >
+                                <Link
+                                    href="/blogs"
+                                    className="flex items-center justify-center px-8 py-3 bg-white text-brand-heading text-lg font-medium transition-all rounded-full border-2 border-brand-primary/20 hover:border-brand-primary cursor-pointer shadow-sm hover:shadow-md relative overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/0 via-brand-primary/5 to-brand-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                                    <span className="text-brand-heading group-hover:text-brand-primary transition-colors z-10">View All Articles</span>
+                                </Link>
+                            </motion.div>
                         </div>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                            {relatedPosts.map((relatedPost, idx) => (
+                            {relatedBlogs.map((relatedPost, idx) => (
                                 <motion.div
                                     key={relatedPost.id}
                                     initial={{ opacity: 0, y: 20 }}
@@ -229,20 +285,36 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="p-8">
-                                        <h3 className="text-xl font-black text-brand-heading mb-6 line-clamp-2 leading-[1.3] group-hover:text-brand-primary transition-colors uppercase tracking-tight">
+                                    <div className="p-8 max-[376px]:p-4">
+                                        <h3 className="text-xl max-[426px]:text-lg font-black text-brand-heading mb-6 line-clamp-2 leading-[1.3] group-hover:text-brand-primary transition-colors uppercase tracking-tight">
                                             <Link href={`/blogs/${relatedPost.slug}`}>{relatedPost.title}</Link>
                                         </h3>
                                         <div className="flex items-center justify-between pt-6 border-t border-neutral-50">
-                                            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-[0.2em]">{relatedPost.date}</span>
-                                            <Link href={`/blogs/${relatedPost.slug}`} className="w-10 h-10 rounded-full bg-neutral-50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
-                                                <ArrowLeft className="rotate-180 w-4 h-4" />
+                                            <span className="text-[10px] font-bold text-brand-paragraph uppercase tracking-[0.2em]">{relatedPost.date}</span>
+                                            <Link href={`/blogs/${relatedPost.slug}`} className="w-12 h-12 rounded-full bg-neutral-50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
+                                                <ArrowLeft className="rotate-180 w-5 h-5" />
                                             </Link>
                                         </div>
                                     </div>
                                 </motion.div>
                             ))}
                         </div>
+
+                        {/* Mobile View All Button */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mt-12 hidden max-[426px]:block"
+                        >
+                              <Link
+                                href="/blogs"
+                                className="flex items-center justify-center px-8 py-3 bg-white text-brand-heading text-lg font-medium transition-all rounded-full border-2 border-brand-primary/20 hover:border-brand-primary cursor-pointer shadow-sm hover:shadow-md relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/0 via-brand-primary/5 to-brand-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                                <span className="text-brand-heading group-hover:text-brand-primary transition-colors z-10">View All Articles</span>
+                            </Link>
+                        </motion.div>
                     </div>
                 </section>
             )}

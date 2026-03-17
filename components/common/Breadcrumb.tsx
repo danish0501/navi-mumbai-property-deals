@@ -158,7 +158,7 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 max-[426px]:px-2 max-[426px]:py-1 flex items-center justify-between">
                 <nav aria-label="Breadcrumb" className="flex items-center text-sm">
                     <motion.ol
                         variants={container}
@@ -173,7 +173,7 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
                                 className="flex items-center"
                             >
                                 {index > 0 && (
-                                    <ChevronRight className="w-4 h-4 text-brand-white shrink-0" strokeWidth={3} />
+                                    <ChevronRight className="w-4 max-[426px]:w-3.5 h-4 max-[426px]:h-3.5 text-brand-white shrink-0" strokeWidth={3} />
                                 )}
 
                                 <div className="flex items-center">
@@ -189,7 +189,7 @@ const Breadcrumb = ({ items: customItems, variant = 'default' }: BreadcrumbProps
                                         <Link
                                             href={item.href}
                                             className={`
-                                                text-[12px] font-extrabold uppercase tracking-wider transition-all duration-300 ml-2
+                                                text-[12px] max-[426px]:text-[11px] max-[376px]:text-[10px] font-extrabold uppercase tracking-wider transition-all duration-300 ml-2 max-[426px]:ml-1
                                                 ${item.active
                                                     ? 'text-brand-primary cursor-default pointer-events-none'
                                                     : 'text-brand-white hover:text-brand-primary'
