@@ -120,17 +120,19 @@ const RentMegaMenu = () => {
                                 {activeCategory}
                             </motion.h3>
 
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-5 mt-2">
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-4 mt-2">
                                 {rentMegaMenuData[activeCategory].map((item) => (
                                     <motion.div variants={itemVariants} key={item.title}>
                                         <Link
                                             href={item.href}
                                             title={item.seoTitle}
-                                            className="group flex flex-col gap-1 text-sm font-semibold text-zinc-900 hover:text-brand-primary transition-colors py-1 outline-none"
+                                            className="group flex items-center gap-3 p-2 -ml-2 rounded-xl hover:bg-zinc-50 transition-all duration-300 outline-none"
                                         >
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 group-hover:bg-brand-primary group-hover:scale-150 transition-all duration-300"></div>
-                                                <span className="relative inline-block transition-transform duration-300 group-hover:translate-x-1 origin-left">
+                                            <div className="flex-shrink-0 rounded-lg flex items-center justify-center group-hover:bg-brand-primary/10 transition-colors duration-300">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 group-hover:bg-brand-primary transition-all duration-300"></div>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-sm font-bold text-zinc-900 group-hover:text-brand-primary transition-colors duration-300">
                                                     {item.title}
                                                 </span>
                                             </div>
