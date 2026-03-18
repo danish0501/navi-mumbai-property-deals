@@ -1,36 +1,34 @@
 import { notFound } from 'next/navigation';
 import { sellPropertyCategories } from '@/components/common/Navbar/navData';
-import SaleSection from '@/components/Home/SaleSection';
+import UniversalListingHub from '@/components/Listing/UniversalListingHub';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
-export default function SellPropertyPage({ params }: PageProps) {
-    const { slug } = params;
+export default async function SellPropertyPage({ params }: PageProps) {
+    const { slug } = await params;
     const allLinks = Object.values(sellPropertyCategories).flat();
-    const linkData = allLinks.find(link => link.href === `/sell/${slug}`);
+
+    // Sell data hrefs may or may not have /sell/ prefix — handle both
+    const linkData = allLinks.find(
+        link =>
+            link.href === `/sell/${slug}` ||
+            link.href === slug
+    );
 
     if (!linkData) {
         notFound();
     }
 
     return (
-        <div className="min-h-screen pt-24">
-            <div className="container mx-auto px-4 py-8">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-extrabold text-brand-heading mb-3">
-                        {linkData.title}
-                    </h1>
-                    <p className="text-zinc-600 max-w-3xl text-lg">
-                        {linkData.seoTitle}
-                    </p>
-                </div>
-
-                <SaleSection />
-            </div>
-        </div>
+        <UniversalListingHub
+            mode="sell"
+            pageTitle={linkData.title}
+            pageSubtitle={linkData.seoTitle}
+            filterKeyword={slug}
+        />
     );
 }
