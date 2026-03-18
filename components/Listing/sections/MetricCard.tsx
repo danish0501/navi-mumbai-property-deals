@@ -25,9 +25,8 @@ export default function MetricCard({
             transition={{ type: "spring", stiffness: 340, damping: 22 }}
             className={`
                 relative flex items-center gap-4 flex-1 min-w-[220px]
-                ${BRAND.cardBg} rounded-2xl px-5 py-5
+                ${BRAND.cardBg} rounded-2xl p-5
                 border ${BRAND.borderCls}
-                shadow-[0_2px_16px_rgba(0,0,0,0.06)]
                 ${BRAND.hoverGlow}
                 transition-all duration-300 cursor-default overflow-hidden
                 ${highlight ? BRAND.iconRing : ""}

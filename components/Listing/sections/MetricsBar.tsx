@@ -1,8 +1,8 @@
 "use client";
-import { BarChart3, TrendingUp, Zap, BadgeCheck } from "lucide-react";
 import MetricCard from "./MetricCard";
 import type { ListingMode } from "./types";
 import type { LocalityMetrics } from "../listingData";
+import { BarChart3, TrendingUp, Zap, BadgeCheck } from "lucide-react";
 
 interface MetricsBarProps {
     mode: ListingMode;
@@ -13,7 +13,7 @@ export default function MetricsBar({ mode, metrics }: MetricsBarProps) {
     return (
         <section
             aria-label="Market metrics for this locality"
-            className="relative overflow-hidden py-4"
+            className="relative overflow-hidden py-5"
             style={{
                 background:
                     "linear-gradient(135deg,#fffdf5 0%,#fafaf9 50%,#fdf6e3 100%)",
@@ -38,15 +38,14 @@ export default function MetricsBar({ mode, metrics }: MetricsBarProps) {
                 {/* Section label */}
                 <div className="flex items-center gap-2 mb-8">
                     <span
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full
-                                   text-[10px] font-black uppercase tracking-widest"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest"
                         style={{
                             background: "rgba(186,163,96,0.12)",
                             color: "#8f7b44",
                             border: "1px solid rgba(186,163,96,0.35)",
                         }}
                     >
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-primary-hover animate-pulse" />
                         Live Market Intelligence · Navi Mumbai
                     </span>
                 </div>
