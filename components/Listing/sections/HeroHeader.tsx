@@ -30,7 +30,7 @@ export default function HeroHeader({
                     "linear-gradient(135deg, #fefcf5 0%, #fffdf8 35%, #fdf8ec 65%, #faf4e0 100%)",
             }}
         >
-            {/* ── Animated ambient orbs ── */}
+            {/* Animated ambient orbs */}
             <div
                 className="pointer-events-none absolute inset-0 overflow-hidden"
                 aria-hidden="true"
@@ -66,8 +66,7 @@ export default function HeroHeader({
                     }}
                     className="absolute top-1/2 left-1/2 w-[500px] h-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]"
                     style={{
-                        background:
-                            "radial-gradient(ellipse, #baa360 0%, transparent 65%)",
+                        background: "radial-gradient(ellipse, #baa360 0%, transparent 65%)",
                     }}
                 />
                 {/* Subtle grid overlay */}
@@ -75,8 +74,7 @@ export default function HeroHeader({
                     className="absolute inset-0 opacity-[0.03]"
                     style={{
                         backgroundImage:
-                            "linear-gradient(#baa360 1px, transparent 1px), linear-gradient(90deg, #baa360 1px, transparent 1px)",
-                        backgroundSize: "40px 40px",
+                            "linear-gradient(#baa360 1px, transparent 1px), linear-gradient(90deg, #baa360 1px, transparent 1px)", backgroundSize: "40px 40px",
                     }}
                 />
             </div>
@@ -84,7 +82,7 @@ export default function HeroHeader({
             <div className="relative container mx-auto px-4 sm:px-6 py-10 sm:py-14">
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
 
-                    {/* ── LEFT: Main headline block ── */}
+                    {/* LEFT: Main headline block */}
                     <div className="flex-1 max-w-3xl">
                         {/* Mode badge */}
                         <motion.div
@@ -115,12 +113,12 @@ export default function HeroHeader({
                             </span>
                         </motion.div>
 
-                        {/* H1 with gradient accent on first 2 words */}
+                        {/* H1 */}
                         <motion.h1
                             initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.55, delay: 0.08 }}
-                            className="text-[32px] sm:text-[42px] lg:text-[52px] font-black leading-[1.08] tracking-tight mb-4 text-zinc-900"
+                            className="text-[32px] sm:text-[42px] lg:text-[52px] font-black leading-[1.08] tracking-tight mb-4 text-brand-paragraph"
                         >
                             {(() => {
                                 const words = pageTitle.split(" ");
@@ -150,7 +148,7 @@ export default function HeroHeader({
                             initial={{ opacity: 0, y: 12 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.16 }}
-                            className="text-zinc-600 text-[16px] sm:text-[18px] font-medium leading-relaxed max-w-2xl mb-6"
+                            className="text-brand-paragraph text-[16px] sm:text-[18px] font-medium leading-relaxed max-w-2xl mb-6"
                         >
                             {pageSubtitle}
                         </motion.p>
@@ -164,11 +162,10 @@ export default function HeroHeader({
                         >
                             {/* Animated live count chip */}
                             <div
-                                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl"
+                                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full"
                                 style={{
                                     background:
-                                        "linear-gradient(135deg, #baa360 0%, #8f7b44 100%)",
-                                    boxShadow: "0 4px 20px rgba(186,163,96,0.4)",
+                                        "linear-gradient(135deg, #baa360 0%, #8f7b44 100%)", boxShadow: "0 4px 20px rgba(186,163,96,0.4)",
                                 }}
                             >
                                 <span className="text-brand-white font-bold text-[16px]">
@@ -195,7 +192,7 @@ export default function HeroHeader({
                         </motion.div>
                     </div>
 
-                    {/* ── RIGHT: Trust / Stats panel ── */}
+                    {/* RIGHT: Trust / Stats panel */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -261,7 +258,7 @@ export default function HeroHeader({
                     </motion.div>
                 </div>
 
-                {/* ── Bottom divider line with badge ── */}
+                {/* Bottom divider line with badge */}
                 <motion.div
                     initial={{ opacity: 0, scaleX: 0 }}
                     animate={{ opacity: 1, scaleX: 1 }}
@@ -270,7 +267,7 @@ export default function HeroHeader({
                 >
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#baa360]/30 to-transparent" />
                     <span
-                        className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.18em] px-3 py-1 rounded-full"
+                        className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.18em] px-3 py-1 rounded-full"
                         style={{
                             color: "#a89060",
                             background: "rgba(186,163,96,0.08)",
