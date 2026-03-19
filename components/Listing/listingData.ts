@@ -1,6 +1,5 @@
-// ─────────────────────────────────────────────
+
 //  Listing Hub — Shared Data Types & Mock Data
-// ─────────────────────────────────────────────
 
 export type ListingMode = "buy" | "rent" | "sell";
 
@@ -45,7 +44,7 @@ export interface LocalityInsight {
     infrastructure: string;
 }
 
-// ─── Mock Property Listings ───────────────────
+// Mock Property Listings
 
 export const listingProperties: ListingProperty[] = [
     {
@@ -277,7 +276,7 @@ export const listingProperties: ListingProperty[] = [
     },
 ];
 
-// ─── Locality Metrics by Mode ─────────────────
+// Locality Metrics by Mode
 
 export const localityMetrics: Record<ListingMode, LocalityMetrics> = {
     buy: {
@@ -300,14 +299,45 @@ export const localityMetrics: Record<ListingMode, LocalityMetrics> = {
     },
 };
 
-// ─── Locality Insights ────────────────────────
+export interface LocalityInsight {
+    location: string;
+    whyInvest: string;
+    connectivity: string;
+    infrastructure: string;
+    highlights?: string[];
+    connectivityHighlights?: string[];
+    infraHighlights?: string[];
+}
+
+// Locality Insights
 
 export const localityInsight: LocalityInsight = {
     location: "Navi Mumbai",
     whyInvest:
         "Navi Mumbai has emerged as one of India's most lucrative real estate markets. Planned by CIDCO across 163 nodes, it offers superior infrastructure, lower pollution levels, and better quality of life at 25–40% lower costs compared to Mumbai. With growing IT parks in Airoli, Belapur, and Vashi, and a rapidly expanding metro network, demand continues to outstrip supply.",
     connectivity:
-        "The Navi Mumbai Metro (Lines 1 & 8) now connects Belapur–Kharghar–Pendhar corridors, while the Sion–Panvel Highway and Mumbai Trans-Harbour Link (MTHL — inaugurated 2024) have slashed commute times to South Mumbai to under 25 minutes. The upcoming Navi Mumbai International Airport at Ulwe is set to go live in 2025, making localities like Panvel, Dronagiri, and Ulwe the next micro-market hotspots.",
+        "Navi Mumbai's connectivity is anchored by the Mumbai Trans-Harbour Link (MTHL), which has reduced travel time to South Mumbai to just 20 minutes. This is complemented by a robust Suburban Rail network (Harbour & Trans-Harbour lines) and the newly operational Navi Mumbai Metro. The 10-lane Sion-Panvel Highway and the upcoming Pune-Mumbai Expressway extension further strengthen its position as a primary transit-oriented development hub, connecting seamlessly to JNPT and the industrial belts of Taloja.",
     infrastructure:
-        "Key upcoming infrastructure includes: NMIA (Navi Mumbai International Airport) by 2025, Navi Mumbai Metro Line 2 & 3 by 2026, the Sewri–Nhava Sheva Trans Harbour Link operational, and proposed MTHL Phase 2 extension to Alibaug, unlocking coastal corridor value.",
+        "The region is witnessing a 'Infrastructure Renaissance' led by the Navi Mumbai International Airport (NMIA), set to be the secondary hub for MMR. Beyond transit, the International Corporate Park in Kharghar (BKC 2) and the sprawling 80-hectare Central Park define its urban landscape. Upcoming projects like the Navi Mumbai Marina, specialized Data Center parks in Airoli, and the NAINA smart city initiative ensure a futuristic urban ecosystem with world-class amenities and 40% planned open spaces.",
+    highlights: [
+        "MTHL (Atal Setu): 20 min drive to South Mumbai",
+        "Upcoming International Airport (NMIA) - 2025 Opening",
+        "Superior CIDCO Planning: Wide Roads & 40% Green Cover",
+        "Highest Appreciation Potential in MMR (12-15% annually)",
+        "India's Top Data Center Hub (Digital Capital)"
+    ],
+    connectivityHighlights: [
+        "Navi Mumbai Metro Lines 1, 2 & 3",
+        "Sion-Panvel 10-Lane Expressway",
+        "Harbour & Trans-Harbour Rail Network",
+        "JNPT Port & Coastal Road Connectivity",
+        "Proposed Kharghar-Turbhe Tunnel Link"
+    ],
+    infraHighlights: [
+        "International Airport (NMIA) 2025 Opening",
+        "NAINA: India's Largest Planned Urban Hub",
+        "Kharghar Corporate Park (BKC 2.0)",
+        "Specialized IT/SEZ zones & Data Centers",
+        "World-class Central Park & Golf Courses"
+    ],
 };
