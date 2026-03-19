@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { BadgeCheck, MapPin, TrendingUp, X } from "lucide-react";
 import { modeLabel } from "./types";
 import type { ListingMode } from "./types";
@@ -86,7 +87,7 @@ export default function HeroHeader({
                 />
             </div>
 
-            <div className="relative container mx-auto px-4 sm:px-6 py-10 sm:py-14">
+            <div className="relative container mx-auto px-4 sm:px-6 py-6 sm:py-10">
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
 
                     {/* LEFT: Main headline block */}

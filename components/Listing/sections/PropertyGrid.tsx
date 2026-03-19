@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Target } from "lucide-react";
 import PropertyCard from "./PropertyCard";
@@ -7,19 +8,24 @@ import { modeLabel } from "./types";
 
 interface PropertyGridProps {
     filtered: ListingProperty[];
+    initialProperties?: ListingProperty[];
     mode: ListingMode;
     resetFilters: () => void;
 }
 
 export default function PropertyGrid({
     filtered,
+    initialProperties,
     mode,
     resetFilters,
 }: PropertyGridProps) {
+    const displayProperties = useMemo(() =>
+        filtered.length > 0 ? filtered : (initialProperties || []),
+        [filtered, initialProperties]);
     return (
         <div className="flex-1 min-w-0">
             <AnimatePresence mode="wait">
-                {filtered.length === 0 ? (
+                {displayProperties.length === 0 ? (
                     <motion.div
                         key="empty"
                         initial={{ opacity: 0, y: 16 }}
@@ -46,7 +52,7 @@ export default function PropertyGrid({
                         role="list"
                         aria-label={`${modeLabel[mode]} property listings`}
                     >
-                        {filtered.map((prop, i) => (
+                        {displayProperties.map((prop, i) => (
                             <div key={prop.id} role="listitem">
                                 <PropertyCard
                                     property={prop}

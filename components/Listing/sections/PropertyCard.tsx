@@ -77,7 +77,7 @@ export default function PropertyCard({ property, index, mode }: PropertyCardProp
 
                 <Image
                     src={property.image}
-                    alt={`Exterior view of ${property.title} in ${property.location}`}
+                    alt={`${property.bhk} ${property.propertyType} for ${mode === 'rent' ? 'Rent' : 'Sale'} in ${property.location} - Navi Mumbai Property Deals`}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-[1100ms] ease-in-out"
                     sizes="(max-width: 640px) 92vw, (max-width: 1024px) 44vw, 30vw"
@@ -105,7 +105,7 @@ export default function PropertyCard({ property, index, mode }: PropertyCardProp
                     className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full
                                bg-white/90 backdrop-blur-sm flex items-center justify-center
                                transition-all duration-300 shadow-md active:scale-90 cursor-pointer"
-                    aria-label={`${isSaved ? "Unsave" : "Save"} ${property.title}`}
+                    aria-label={`${isSaved ? "Unsave" : "Save"} ${property.bhk} in ${property.location}`}
                     title={isSaved ? "Unsave" : "Save"}
                 >
                     <Bookmark
@@ -251,7 +251,7 @@ export default function PropertyCard({ property, index, mode }: PropertyCardProp
                                text-white text-[14px] font-bold overflow-hidden gap-2
                                hover:bg-brand-primary-hover transition-all duration-500
                                flex items-center justify-center active:scale-[0.98] cursor-pointer"
-                    aria-label={`${ctaLabel} — ${property.title}`}
+                    aria-label={`${ctaLabel} - ${property.bhk} ${property.propertyType} for ${mode === 'rent' ? 'Rent' : 'Sale'} in ${property.location}`}
                 >
                     {/* shimmer sweep */}
                     <span

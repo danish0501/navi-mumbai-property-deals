@@ -31,12 +31,18 @@ import {
 } from "./sections/types";
 
 
+import {
+    generatePropertyListSchema,
+    generateFAQSchema,
+} from "./sections/ListingSchema";
+
 //  Types & Props
 interface HubProps {
     mode: ListingMode;
     pageTitle: string;
     pageSubtitle: string;
     filterKeyword?: string;  /* Optional: filter properties by slug/keyword */
+    initialProperties?: ListingProperty[];
 }
 
 //  Helpers
@@ -68,6 +74,7 @@ export default function UniversalListingHub({
     pageTitle,
     pageSubtitle,
     filterKeyword,
+    initialProperties,
 }: HubProps) {
     // Filters State
     const [budget, setBudget] = useState<BudgetFilter>("all");
@@ -179,6 +186,7 @@ export default function UniversalListingHub({
     const handpicked = listingProperties.slice(0, 5);
 
     const breadcrumbs = [
+        { label: "Home", href: "/" },
         { label: mode === "buy" ? "Buy" : mode === "rent" ? "Rent" : "Sell", href: `/${mode}` },
         ...(filterKeyword
             ? [
@@ -187,14 +195,46 @@ export default function UniversalListingHub({
                         .split("-")
                         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
                         .join(" "),
-                    href: "",
+                    href: `/${mode}/${filterKeyword}`,
                 },
             ]
             : []),
     ];
 
+    // FAQ Data based on mode
+    const faqs = mode === "buy"
+        ? [
+            { question: "What are the top residential areas in Navi Mumbai for families?", answer: "Kharghar, Seawoods, and Vashi are top-rated for families due to schools and parks." },
+            { question: "Is property investment in Navi Mumbai a good idea?", answer: "Yes, with the upcoming airport and infrastructure projects, appreciation is high." }
+        ]
+        : mode === "rent"
+            ? [
+                { question: "What is the average rent for a 2BHK in Navi Mumbai?", answer: "Average rent ranges from ₹18,000 to ₹35,000 depending on locality." },
+                { question: "Are there any furnished flats available for rent?", answer: "Yes, we list many fully and semi-furnished apartments across Navi Mumbai." }
+            ]
+            : [
+                { question: "How can I sell my property faster in Navi Mumbai?", answer: "Listing with professional photos and highlighting RERA verification helps." },
+                { question: "Which nodes have the highest property demand currently?", answer: "Kharghar and Panvel are seeing the highest demand due to NMIA." }
+            ];
+
     return (
         <div className="min-h-screen bg-[#fafaf9] relative">
+            {/* Schema Injection */}
+            {filtered.length > 0 && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(generatePropertyListSchema(filtered.slice(0, 10)))
+                    }}
+                />
+            )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(generateFAQSchema(faqs))
+                }}
+            />
+
             {/* Mesh background */}
             <div
                 className="pointer-events-none fixed inset-0 z-0 opacity-[0.018]"
@@ -278,6 +318,7 @@ export default function UniversalListingHub({
 
                         <PropertyGrid
                             filtered={filtered}
+                            initialProperties={initialProperties || listingProperties.slice(0, 10)}
                             mode={mode}
                             resetFilters={resetFilters}
                         />
