@@ -14,7 +14,7 @@ export default function FilterGroup({
     title,
     icon,
     children,
-    defaultOpen = true,
+    defaultOpen = false,
     activeCount = 0
 }: FilterGroupProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -23,7 +23,7 @@ export default function FilterGroup({
         <div className="pb-5 mb-5 border-b border-brand-muted/10 last:border-0 last:pb-0 last:mb-0">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between mb-3 group/btn"
+                className="w-full flex items-center justify-between mb-3 group/btn cursor-pointer"
             >
                 <div className="flex items-center gap-2.5">
                     {icon && <div className="text-brand-primary">{icon}</div>}
@@ -37,7 +37,7 @@ export default function FilterGroup({
                     </p>
                 </div>
                 <ChevronDown
-                    className={`w-4 h-4 text-brand-paragraph transition-transform duration-300  cursor-pointer ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 text-brand-paragraph group-hover/btn:text-brand-primary transition-all duration-300 ${isOpen ? "rotate-180" : ""}`}
                 />
             </button>
             <AnimatePresence initial={false}>

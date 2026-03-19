@@ -8,51 +8,12 @@ import BlogSidebar from "./BlogSidebar";
 import BlogMainContent from "./BlogMainContent";
 import CompanyPromo from "./CompanyPromo";
 import BlogSchema from "./BlogSchema";
-import { useEffect, useRef, useState } from "react";
 
 interface BlogDetailProps {
     post: BlogPost;
 }
 
 const BlogDetail = ({ post }: BlogDetailProps) => {
-
-    const [isPinned, setIsPinned] = useState(false);
-    const [isAtBottom, setIsAtBottom] = useState(false);
-    const mainContentRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (mainContentRef.current) {
-                const rect = mainContentRef.current.getBoundingClientRect();
-                const navbarHeight = 80;
-                const headerHeight = 60;
-                const threshold = navbarHeight + headerHeight;
-
-                // Check if we started the content area
-                if (rect.top <= threshold) {
-                    setIsPinned(true);
-                } else {
-                    setIsPinned(false);
-                }
-
-                const sidebarVisibleHeight = 700; // Estimated height of sidebars
-                if (rect.bottom <= threshold + sidebarVisibleHeight) {
-                    setIsAtBottom(true);
-                } else {
-                    setIsAtBottom(false);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        window.addEventListener("resize", handleScroll);
-        handleScroll();
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
-        };
-    }, []);
 
     // Related posts
     const relatedBlogs = blogPosts
@@ -204,10 +165,10 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
 
             {/* Main Content Layout */}
             <main className="w-full mx-auto p-12 max-[426px]:p-6 max-[321px]:p-4">
-                <div ref={mainContentRef} className="flex flex-col lg:flex-row gap-8 items-start">
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
                     {/* Left: Table of Contents */}
                     <div className="hidden lg:block w-60 shrink-0 self-stretch">
-                        <BlogSidebar content={post.content} isPinned={isPinned && !isAtBottom} isAtBottom={isAtBottom} />
+                        <BlogSidebar content={post.content} />
                     </div>
 
                     {/* Middle: Main Content */}
@@ -217,7 +178,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
 
                     {/* Right: Company Promotion */}
                     <div className="hidden xl:block w-72 shrink-0 self-stretch">
-                        <CompanyPromo isPinned={isPinned && !isAtBottom} isAtBottom={isAtBottom} />
+                        <CompanyPromo />
                     </div>
                 </div>
             </main>
@@ -307,7 +268,7 @@ const BlogDetail = ({ post }: BlogDetailProps) => {
                             viewport={{ once: true }}
                             className="mt-12 hidden max-[426px]:block"
                         >
-                              <Link
+                            <Link
                                 href="/blogs"
                                 className="flex items-center justify-center px-8 py-3 bg-white text-brand-heading text-lg font-medium transition-all rounded-full border-2 border-brand-primary/20 hover:border-brand-primary cursor-pointer shadow-sm hover:shadow-md relative overflow-hidden"
                             >

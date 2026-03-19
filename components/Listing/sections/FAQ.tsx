@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ListingMode } from "../listingData";
 import {
     ChevronDown,
-    MessageCircleQuestion,
     Sparkles,
     ArrowRight,
     Search,
@@ -24,7 +23,7 @@ interface FAQProps {
 }
 
 const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
     const filteredFaqs = faqs.filter(faq =>
@@ -149,14 +148,14 @@ const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
                     </motion.p>
                 </div>
 
-                {/* FAQ Items - Centered Grid */}
+                {/* FAQ Items */}
                 <div className="max-w-4xl mx-auto mb-16">
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="space-y-6"
+                        className="space-y-6 min-h-[400px]"
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredFaqs.length > 0 ? (
@@ -170,7 +169,7 @@ const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
                                             : "bg-[#fcfdfd] border-brand-muted/20 hover:border-brand-primary"
                                             }`}
                                     >
-                                        {/* Accent Background Glow when open */}
+                                        {/* Accent Background Glow */}
                                         {openIndex === index && (
                                             <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
                                                 style={{ backgroundColor: style.accent }} />
@@ -245,7 +244,7 @@ const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
                     </motion.div>
                 </div>
 
-                {/* CTA Footer - Full Container Width */}
+                {/* CTA Footer */}
                 <div className="max-w-6xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -282,15 +281,24 @@ const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
                                     <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
                                         {[
                                             { label: "Free Consult", icon: <Info className="w-4 h-4" /> },
-                                            { label: "Verified Experts", icon: <BadgeCheck className="w-4 h-4" /> },
+                                            { label: "Verified Experts", icon: <BadgeCheck className="w-4 h-4" />, href: "/verified-experts" },
                                             { label: "Instant Support", icon: <Sparkles className="w-4 h-4" /> }
                                         ].map((item, idx) => (
-                                            <div key={idx} className="flex items-center gap-3 group/pill">
-                                                <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-brand-primary border border-white/10 group-hover/pill:bg-brand-primary group-hover/pill:text-white transition-all duration-300">
-                                                    {item.icon}
+                                            item.href ? (
+                                                <a href={item.href} key={idx} className="flex items-center gap-3 group/pill cursor-pointer" title="Verify our expert consultants">
+                                                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-brand-primary border border-white/10 group-hover/pill:bg-brand-primary group-hover/pill:text-white transition-all duration-300">
+                                                        {item.icon}
+                                                    </div>
+                                                    <span className="text-brand-white text-sm font-bold tracking-wide group-hover/pill:text-brand-primary transition-colors">{item.label}</span>
+                                                </a>
+                                            ) : (
+                                                <div key={idx} className="flex items-center gap-3 group/pill">
+                                                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-brand-primary border border-white/10 group-hover/pill:bg-brand-primary group-hover/pill:text-white transition-all duration-300">
+                                                        {item.icon}
+                                                    </div>
+                                                    <span className="text-brand-white text-sm font-bold tracking-wide">{item.label}</span>
                                                 </div>
-                                                <span className="text-brand-white text-sm font-bold tracking-wide">{item.label}</span>
-                                            </div>
+                                            )
                                         ))}
                                     </div>
                                 </div>
@@ -300,6 +308,7 @@ const FAQ: React.FC<FAQProps> = ({ faqs, mode = "buy" }) => {
                                     <motion.button
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
+                                        title="Connect with a Real Estate Professional"
                                         className="w-full sm:w-auto relative px-16 py-4 bg-brand-primary text-white font-bold rounded-2xl transition-all flex items-center justify-center gap-3 group/btn overflow-hidden cursor-pointer"
                                     >
                                         <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />

@@ -1,42 +1,13 @@
 import { motion } from "framer-motion";
 import { Home, Phone, ArrowRight, Award, Users, ShieldCheck } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
-interface CompanyPromoProps {
-    isPinned?: boolean;
-    isAtBottom?: boolean;
-}
+interface CompanyPromoProps { }
 
-const CompanyPromo = ({ isPinned, isAtBottom }: CompanyPromoProps) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [leftPos, setLeftPos] = useState<number | null>(null);
-
-    useEffect(() => {
-        if (!isPinned && containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            setLeftPos(rect.left);
-        }
-
-        const handleResize = () => {
-            if (containerRef.current) {
-                const rect = containerRef.current.getBoundingClientRect();
-                setLeftPos(rect.left);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isPinned]);
+const CompanyPromo = ({ }: CompanyPromoProps) => {
 
     return (
-        <div ref={containerRef} className="w-full h-full relative">
-            <aside
-                className={`
-                    w-72 h-fit transition-all duration-300
-                    ${isPinned ? "fixed top-32 z-30" : isAtBottom ? "absolute bottom-0" : "relative"}
-                `}
-                style={isPinned && leftPos !== null ? { left: `${leftPos}px` } : {}}
-            >
+        <div className="w-full h-fit xl:sticky xl:top-32">
+            <aside className="w-72">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import HeroHeader from "./sections/HeroHeader";
 import MetricsBar from "./sections/MetricsBar";
@@ -35,6 +35,7 @@ import {
 import {
     generatePropertyListSchema,
     generateFAQSchema,
+    generateBreadcrumbSchema,
 } from "./sections/ListingSchema";
 
 //  Types & Props
@@ -117,42 +118,44 @@ export default function UniversalListingHub({
     };
 
     // Filter Logic
-    const filtered = listingProperties.filter((p) => {
-        if (!pricePasses(p, budget)) return false;
-        if (config !== "all" && p.configuration !== config) return false;
-        if (status !== "all" && p.constructionStatus !== status) return false;
-        if (postedBy !== "all" && p.postedBy !== postedBy) return false;
-        if (propertyType !== "all" && p.propertyType !== propertyType) return false;
-        if (furnishing !== "all" && p.furnishing !== furnishing) return false;
-        if (facing !== "all" && p.facing !== facing) return false;
-        if (age !== "all" && p.age !== age) return false;
-        if (amenities.length > 0) {
-            if (!amenities.every((a) => p.amenities.includes(a))) return false;
-        }
-        if (reraOnly && !p.isReraVerified) return false;
+    const filtered = useMemo(() => {
+        return listingProperties.filter((p) => {
+            if (!pricePasses(p, budget)) return false;
+            if (config !== "all" && p.configuration !== config) return false;
+            if (status !== "all" && p.constructionStatus !== status) return false;
+            if (postedBy !== "all" && p.postedBy !== postedBy) return false;
+            if (propertyType !== "all" && p.propertyType !== propertyType) return false;
+            if (furnishing !== "all" && p.furnishing !== furnishing) return false;
+            if (facing !== "all" && p.facing !== facing) return false;
+            if (age !== "all" && p.age !== age) return false;
+            if (amenities.length > 0) {
+                if (!amenities.every((a) => p.amenities.includes(a))) return false;
+            }
+            if (reraOnly && !p.isReraVerified) return false;
 
-        // Area Filter
-        const pArea = parseArea(p.area);
-        if (area.min && pArea < parseFloat(area.min)) return false;
-        if (area.max && pArea > parseFloat(area.max)) return false;
+            // Area Filter
+            const pArea = parseArea(p.area);
+            if (area.min && pArea < parseFloat(area.min)) return false;
+            if (area.max && pArea > parseFloat(area.max)) return false;
 
-        if (filterKeyword) {
-            const kw = filterKeyword.toLowerCase();
-            const match =
-                p.location.toLowerCase().includes(kw) ||
-                p.title.toLowerCase().includes(kw) ||
-                p.configuration.toLowerCase().includes(kw);
-            if (!match) return true;
-        }
-        return true;
-    }).sort((a, b) => {
-        if (sortBy === "price-low") return parsePrice(a.price) - parsePrice(b.price);
-        if (sortBy === "price-high") return parsePrice(b.price) - parsePrice(a.price);
-        if (sortBy === "area-high") return parseArea(b.area) - parseArea(a.area);
-        if (sortBy === "area-low") return parseArea(a.area) - parseArea(b.area);
-        if (sortBy === "newest") return b.id.localeCompare(a.id); // Mock logic for newest
-        return 0;
-    });
+            if (filterKeyword) {
+                const kw = filterKeyword.toLowerCase();
+                const match =
+                    p.location.toLowerCase().includes(kw) ||
+                    p.title.toLowerCase().includes(kw) ||
+                    p.configuration.toLowerCase().includes(kw);
+                if (!match) return true;
+            }
+            return true;
+        }).sort((a, b) => {
+            if (sortBy === "price-low") return parsePrice(a.price) - parsePrice(b.price);
+            if (sortBy === "price-high") return parsePrice(b.price) - parsePrice(a.price);
+            if (sortBy === "area-high") return parseArea(b.area) - parseArea(a.area);
+            if (sortBy === "area-low") return parseArea(a.area) - parseArea(b.area);
+            if (sortBy === "newest") return b.id.localeCompare(a.id); // Mock logic for newest
+            return 0;
+        });
+    }, [budget, config, status, postedBy, propertyType, furnishing, facing, age, amenities, reraOnly, area.min, area.max, filterKeyword, sortBy]);
 
     const resetFilters = () => {
         setBudget("all");
@@ -186,7 +189,7 @@ export default function UniversalListingHub({
     const metricsData = localityMetrics[mode];
     const handpicked = listingProperties.slice(0, 5);
 
-    const breadcrumbs = [
+    const breadcrumbs = useMemo(() => [
         { label: "Home", href: "/" },
         { label: mode === "buy" ? "Buy" : mode === "rent" ? "Rent" : "Sell", href: `/${mode}` },
         ...(filterKeyword
@@ -200,36 +203,44 @@ export default function UniversalListingHub({
                 },
             ]
             : []),
-    ];
+    ], [mode, filterKeyword]);
 
     // FAQ Data based on mode
-    const faqs = mode === "buy"
-        ? [
-            { question: "What are the top residential areas in Navi Mumbai for families?", answer: "Kharghar, Seawoods, and Vashi are top-rated for families due to their excellent social infrastructure, including top-tier schools like Ryan International and DPS, modern healthcare facilities, and numerous public parks. These areas also offer superior connectivity and a cleaner environment compared to other major nodes." },
-            { question: "Is property investment in Navi Mumbai a good idea?", answer: "Navi Mumbai is one of India's fastest-growing real estate markets. With the upcoming Navi Mumbai International Airport (NMIA), the Mumbai Trans-Harbour Link (MTHL), and the expansion of the Metro network, property values are projected to appreciate significantly. Investment in developing nodes like Ulwe and Kharghar is particularly promising." },
-            { question: "What is RERA and how does it protect buyers?", answer: "The Real Estate (Regulation and Development) Act (RERA) ensures transparency and accountability in real estate. It protects buyers by mandating that developers register projects, provide accurate possession timelines, and use escrow accounts for project funds, preventing mismanagement and delays." },
-            { question: "What are the hidden costs when buying a property?", answer: "Beyond the base property price, buyers should account for Stamp Duty (usually 6-7%), Registration Fees (1%), GST (5-12% for under-construction), Society Maintenance deposits, and Legal/Home Loan processing fees." },
-            { question: "Can I get a home loan for resale properties in Navi Mumbai?", answer: "Yes, most major banks and NBFCs provide home loans for resale properties. The process involves a technical and legal valuation of the property. The loan amount usually depends on the property's age and the buyer's credit profile." }
-        ]
-        : mode === "rent"
+    const faqs = useMemo(() => (
+        mode === "buy"
             ? [
-                { question: "What is the average rent for a 2BHK in Navi Mumbai?", answer: "Rents vary by node. A 2BHK in prime areas like Vashi or Palm Beach Road ranges from ₹35,000 - ₹55,000, whereas in developing nodes like Kharghar or Ulwe, it ranges from ₹18,000 - ₹30,000. Gated societies with amenities usually command a 15-20% premium." },
-                { question: "What documents are required for a rental agreement?", answer: "Standard requirements include Aadhaar Card, PAN Card, and a permanent address proof for the tenant. For the owner, property proofs like Tax Receipts or Index II are needed. Registered leave and license agreements are now mandatory in Maharashtra." },
-                { question: "What is the typical security deposit amount?", answer: "The security deposit in Navi Mumbai typically ranges from 3 to 6 months of rent, depending on whether the apartment is unfurnished, semi-furnished, or fully furnished. This is refundable upon completion of the license period." },
-                { question: "Are bachelors allowed to rent in Navi Mumbai societies?", answer: "While most modern societies are open, some older co-operative societies have specific bylaws regarding bachelor tenants. It's always advisable to clarify this with the property owner and society office beforehand." },
-                { question: "Who pays the maintenance and society charges?", answer: "In most rental agreements, the society maintenance is paid by the owner (included in rent), while utilities like electricity, water, and internet are paid on actual consumption by the tenant. Specific terms should be documented in the agreement." }
+                { question: "What are the top residential areas in Navi Mumbai for families?", answer: "Kharghar, Seawoods, and Vashi are top-rated for families due to their excellent social infrastructure, including top-tier schools like Ryan International and DPS, modern healthcare facilities, and numerous public parks. These areas also offer superior connectivity and a cleaner environment compared to other major nodes." },
+                { question: "Is property investment in Navi Mumbai a good idea?", answer: "Navi Mumbai is one of India's fastest-growing real estate markets. With the upcoming Navi Mumbai International Airport (NMIA), the Mumbai Trans-Harbour Link (MTHL), and the expansion of the Metro network, property values are projected to appreciate significantly. Investment in developing nodes like Ulwe and Kharghar is particularly promising." },
+                { question: "What is RERA and how does it protect buyers?", answer: "The Real Estate (Regulation and Development) Act (RERA) ensures transparency and accountability in real estate. It protects buyers by mandating that developers register projects, provide accurate possession timelines, and use escrow accounts for project funds, preventing mismanagement and delays." },
+                { question: "What are the hidden costs when buying a property?", answer: "Beyond the base property price, buyers should account for Stamp Duty (usually 6-7%), Registration Fees (1%), GST (5-12% for under-construction), Society Maintenance deposits, and Legal/Home Loan processing fees." },
+                { question: "Can I get a home loan for resale properties in Navi Mumbai?", answer: "Yes, most major banks and NBFCs provide home loans for resale properties. The process involves a technical and legal valuation of the property. The loan amount usually depends on the property's age and the buyer's credit profile." }
             ]
-            : [
-                { question: "How can I sell my property faster in Navi Mumbai?", answer: "To ensure a quick sale, ensure your property is professionally cleaned, photographed in good lighting, and listed at a competitive market price. Highlighting RERA compliance, OC (Occupancy Certificate) status, and nearby infrastructure projects can also attract serious buyers faster." },
-                { question: "What is Capital Gains Tax on property sale?", answer: "If you sell a property after 2 years, it's considered Long-Term Capital Gain (LTCG) and taxed at 20% with indexation benefits. Selling before 2 years attracts Short-Term Capital Gain (STCG) taxed at your regular income tax slab." },
-                { question: "Which nodes have the highest property demand currently?", answer: "Kharghar and Panvel are currently seeing peak demand due to the airport vicinity. Seawoods is highly sought after for luxury properties, while Ulwe remains popular for high-yield investment potential." },
-                { question: "Do I need a real estate agent to sell my property?", answer: "While you can list directly on portals, an experienced local agent can help with professional valuation, screening serious buyers, managing site visits, and ensuring all legal paperwork and society NOCs are in order." },
-                { question: "What are the mandatory documents to sell a flat?", answer: "Key documents include the Original Sale Deed, Index II, Share Certificate (if society), NOC from Society, Allotment Letter, and latest Property Tax receipts. An Occupancy Certificate (OC) is crucial for buyer confidence." }
-            ];
+            : mode === "rent"
+                ? [
+                    { question: "What is the average rent for a 2BHK in Navi Mumbai?", answer: "Rents vary by node. A 2BHK in prime areas like Vashi or Palm Beach Road ranges from ₹35,000 - ₹55,000, whereas in developing nodes like Kharghar or Ulwe, it ranges from ₹18,000 - ₹30,000. Gated societies with amenities usually command a 15-20% premium." },
+                    { question: "What documents are required for a rental agreement?", answer: "Standard requirements include Aadhaar Card, PAN Card, and a permanent address proof for the tenant. For the owner, property proofs like Tax Receipts or Index II are needed. Registered leave and license agreements are now mandatory in Maharashtra." },
+                    { question: "What is the typical security deposit amount?", answer: "The security deposit in Navi Mumbai typically ranges from 3 to 6 months of rent, depending on whether the apartment is unfurnished, semi-furnished, or fully furnished. This is refundable upon completion of the license period." },
+                    { question: "Are bachelors allowed to rent in Navi Mumbai societies?", answer: "While most modern societies are open, some older co-operative societies have specific bylaws regarding bachelor tenants. It's always advisable to clarify this with the property owner and society office beforehand." },
+                    { question: "Who pays the maintenance and society charges?", answer: "In most rental agreements, the society maintenance is paid by the owner (included in rent), while utilities like electricity, water, and internet are paid on actual consumption by the tenant. Specific terms should be documented in the agreement." }
+                ]
+                : [
+                    { question: "How can I sell my property faster in Navi Mumbai?", answer: "To ensure a quick sale, ensure your property is professionally cleaned, photographed in good lighting, and listed at a competitive market price. Highlighting RERA compliance, OC (Occupancy Certificate) status, and nearby infrastructure projects can also attract serious buyers faster." },
+                    { question: "What is Capital Gains Tax on property sale?", answer: "If you sell a property after 2 years, it's considered Long-Term Capital Gain (LTCG) and taxed at 20% with indexation benefits. Selling before 2 years attracts Short-Term Capital Gain (STCG) taxed at your regular income tax slab." },
+                    { question: "Which nodes have the highest property demand currently?", answer: "Kharghar and Panvel are currently seeing peak demand due to the airport vicinity. Seawoods is highly sought after for luxury properties, while Ulwe remains popular for high-yield investment potential." },
+                    { question: "Do I need a real estate agent to sell my property?", answer: "While you can list directly on portals, an experienced local agent can help with professional valuation, screening serious buyers, managing site visits, and ensuring all legal paperwork and society NOCs are in order." },
+                    { question: "What are the mandatory documents to sell a flat?", answer: "Key documents include the Original Sale Deed, Index II, Share Certificate (if society), NOC from Society, Allotment Letter, and latest Property Tax receipts. An Occupancy Certificate (OC) is crucial for buyer confidence." }
+                ]
+    ), [mode]);
 
     return (
         <div className="min-h-screen bg-[#fafaf9] relative">
             {/* Schema Injection */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs.map(b => ({ name: b.label, item: b.href }))))
+                }}
+            />
             {filtered.length > 0 && (
                 <script
                     type="application/ld+json"

@@ -10,15 +10,11 @@ interface TOCItem {
 
 interface BlogSidebarProps {
     content: string;
-    isPinned?: boolean;
-    isAtBottom?: boolean;
 }
 
-const BlogSidebar = ({ content, isPinned, isAtBottom }: BlogSidebarProps) => {
+const BlogSidebar = ({ content }: BlogSidebarProps) => {
     const [items, setItems] = useState<TOCItem[]>([]);
     const [activeId, setActiveId] = useState<string>("");
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [leftPos, setLeftPos] = useState<number | null>(null);
     const observerRef = useRef<IntersectionObserver | null>(null);
     const entriesRef = useRef<Map<string, IntersectionObserverEntry>>(new Map());
 
@@ -86,23 +82,6 @@ const BlogSidebar = ({ content, isPinned, isAtBottom }: BlogSidebarProps) => {
         };
     }, [content]);
 
-    useEffect(() => {
-        if (!isPinned && containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            setLeftPos(rect.left);
-        }
-
-        const handleResize = () => {
-            if (containerRef.current) {
-                const rect = containerRef.current.getBoundingClientRect();
-                setLeftPos(rect.left);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isPinned]);
-
     // Determine which items should be visible
     const getVisibleItems = () => {
         const activeItem = items.find(i => i.id === activeId);
@@ -132,14 +111,8 @@ const BlogSidebar = ({ content, isPinned, isAtBottom }: BlogSidebarProps) => {
     const visibleItems = getVisibleItems();
 
     return (
-        <div ref={containerRef} className="w-full h-full relative">
-            <aside
-                className={`
-                    w-60 h-fit transition-all duration-300
-                    ${isPinned ? "fixed top-32 z-30" : isAtBottom ? "absolute bottom-0" : "relative"}
-                `}
-                style={isPinned && leftPos !== null ? { left: `${leftPos}px` } : {}}
-            >
+        <div className="w-full h-fit lg:sticky lg:top-32">
+            <aside className="w-60">
                 <div className="space-y-6">
                     <div>
                         <h3 className="text-[14px] font-black uppercase tracking-[0.2em] !text-brand-primary-hover mb-4">
