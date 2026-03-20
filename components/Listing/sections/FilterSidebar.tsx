@@ -129,10 +129,10 @@ export default function FilterSidebar({
                     <div className="flex items-center justify-between mb-7">
                         <div className="flex items-center gap-2.5">
                             <SlidersHorizontal
-                                className="w-5 h-5 text-[#baa360]"
+                                className="w-5 h-5 text-brand-primary"
                                 aria-hidden="true"
                             />
-                            <span className="text-[17px] font-black text-zinc-900 tracking-tight">
+                            <span className="text-[17px] font-bold text-brand-heading tracking-normal">
                                 Filters
                             </span>
                         </div>

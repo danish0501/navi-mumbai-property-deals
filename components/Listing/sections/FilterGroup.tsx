@@ -20,14 +20,18 @@ export default function FilterGroup({
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
-        <div className="pb-5 mb-5 border-b border-brand-muted/10 last:border-0 last:pb-0 last:mb-0">
+        <div 
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+            className="pb-5 mb-5 border-b border-brand-muted/10 last:border-0 last:pb-0 last:mb-0"
+        >
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full flex items-center justify-between mb-3 group/btn cursor-pointer"
             >
                 <div className="flex items-center gap-2.5">
                     {icon && <div className="text-brand-primary">{icon}</div>}
-                    <p className="text-[13px] font-black text-zinc-800 uppercase tracking-wide group-hover/btn:text-brand-primary transition-colors">
+                    <p className="text-[13px] !font-semibold text-brand-heading uppercase tracking-wide group-hover/btn:text-brand-primary transition-colors">
                         {title}
                         {activeCount > 0 && (
                             <span className="ml-2 px-1.5 py-0.5 bg-brand-primary text-white text-[10px] rounded-full">
@@ -37,7 +41,7 @@ export default function FilterGroup({
                     </p>
                 </div>
                 <ChevronDown
-                    className={`w-4 h-4 text-brand-paragraph group-hover/btn:text-brand-primary transition-all duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 text-brand-heading group-hover/btn:text-brand-primary transition-all duration-300 ${isOpen ? "rotate-180" : ""}`}
                 />
             </button>
             <AnimatePresence initial={false}>
