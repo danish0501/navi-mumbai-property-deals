@@ -3,10 +3,23 @@
 
 export type ListingMode = "buy" | "rent" | "sell";
 
+export const titleToSlug = (title: string) => {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+};
+
+export const generatePropertySlug = (property: ListingProperty, mode: ListingMode) => {
+    const slug = titleToSlug(property.title);
+    if (mode === 'rent') {
+        return `${slug}-studio-apartments-for-rent-in-navi-mumbai`;
+    }
+    return `${slug}-flats-for-sale-in-navi-mumbai`;
+};
+
 export interface ListingProperty {
     id: string;
     title: string;
     location: string;
+    address: string;
     price: string;
     rentPrice: string;
     pricePerSqft: string;
@@ -20,6 +33,7 @@ export interface ListingProperty {
     image: string;
     builder: string;
     postedBy: "owner" | "agent" | "builder";
+    listerName: string;
     propertyType: "residential" | "commercial" | "plot" | "industrial";
     furnishing: "furnished" | "semi-furnished" | "unfurnished";
     facing: "east" | "west" | "north" | "south" | "north-east" | "north-west" | "south-east" | "south-west";
@@ -51,6 +65,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-001",
         title: "Luxury 3 BHK Sky Residence",
         location: "Kharghar, Navi Mumbai",
+        address: "Sector 35, Next to Central Park, Kharghar, Navi Mumbai, Maharashtra 410210",
         price: "₹ 2.85 Cr",
         rentPrice: "₹ 32,000 / mo",
         pricePerSqft: "₹ 12,400 psf",
@@ -64,6 +79,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Rustomjee Group",
         postedBy: "builder",
+        listerName: "Rustomjee Group Sales",
         propertyType: "residential",
         furnishing: "furnished",
         facing: "east",
@@ -77,6 +93,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-002",
         title: "Premium Sea-View Apartment",
         location: "Vashi, Navi Mumbai",
+        address: "Palm Beach Road, Sector 14, Vashi, Navi Mumbai, Maharashtra 400703",
         price: "₹ 3.20 Cr",
         rentPrice: "₹ 48,000 / mo",
         pricePerSqft: "₹ 15,200 psf",
@@ -89,6 +106,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Hiranandani Group",
         postedBy: "agent",
+        listerName: "Elite Properties By Rahul",
         propertyType: "residential",
         furnishing: "semi-furnished",
         facing: "west",
@@ -102,6 +120,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-003",
         title: "Modern 2 BHK Smart Flat",
         location: "Kharghar, Navi Mumbai",
+        address: "Sector 11, Utsav Chowk Area, Kharghar, Navi Mumbai, Maharashtra 410210",
         price: "₹ 1.10 Cr",
         rentPrice: "₹ 18,500 / mo",
         pricePerSqft: "₹ 9,560 psf",
@@ -114,6 +133,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Lodha Group",
         postedBy: "builder",
+        listerName: "Lodha direct Sales",
         propertyType: "residential",
         furnishing: "unfurnished",
         facing: "north-east",
@@ -127,6 +147,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-004",
         title: "Spacious Duplex Penthouse",
         location: "Nerul, Navi Mumbai",
+        address: "Sector 24, Seawoods West, Nerul, Navi Mumbai, Maharashtra 400706",
         price: "₹ 4.80 Cr",
         rentPrice: "₹ 70,000 / mo",
         pricePerSqft: "₹ 10,666 psf",
@@ -140,6 +161,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Shapoorji Pallonji",
         postedBy: "owner",
+        listerName: "Mr. Rajeev Sharma",
         propertyType: "residential",
         furnishing: "furnished",
         facing: "east",
@@ -153,6 +175,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-005",
         title: "Smart Home 3 BHK Residence",
         location: "CBD Belapur, Navi Mumbai",
+        address: "Sector 15, Artist Village Road, CBD Belapur, Navi Mumbai, Maharashtra 400614",
         price: "₹ 2.50 Cr",
         rentPrice: "₹ 28,000 / mo",
         pricePerSqft: "₹ 13,513 psf",
@@ -165,6 +188,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "L&T Realty",
         postedBy: "builder",
+        listerName: "L&T Realty Central",
         propertyType: "residential",
         furnishing: "semi-furnished",
         facing: "south",
@@ -178,6 +202,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-006",
         title: "Ultra-Luxury Open Plan Flat",
         location: "Panvel, Navi Mumbai",
+        address: "Palaspe Phata, Mumbai-Pune Expressway Junction, Panvel, Navi Mumbai, Maharashtra 410206",
         price: "₹ 1.80 Cr",
         rentPrice: "₹ 22,000 / mo",
         pricePerSqft: "₹ 9,230 psf",
@@ -190,6 +215,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Godrej Properties",
         postedBy: "agent",
+        listerName: "Nexus Real Estate",
         propertyType: "residential",
         furnishing: "furnished",
         facing: "north",
@@ -203,6 +229,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-007",
         title: "1 BHK Studio with Golf View",
         location: "Kharghar, Navi Mumbai",
+        address: "Sector 34, Opposite Golf Course, Kharghar, Navi Mumbai, Maharashtra 410210",
         price: "₹ 58 L",
         rentPrice: "₹ 9,500 / mo",
         pricePerSqft: "₹ 8,285 psf",
@@ -215,6 +242,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "CIDCO",
         postedBy: "owner",
+        listerName: "Smita Deshmukh",
         propertyType: "residential",
         furnishing: "unfurnished",
         facing: "east",
@@ -228,6 +256,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-008",
         title: "2 BHK Designer Apartment",
         location: "Seawoods, Navi Mumbai",
+        address: "Sector 40, Near Grand Central Mall, Seawoods, Navi Mumbai, Maharashtra 400706",
         price: "₹ 1.65 Cr",
         rentPrice: "₹ 21,000 / mo",
         pricePerSqft: "₹ 11,000 psf",
@@ -240,6 +269,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Dosti Realty",
         postedBy: "agent",
+        listerName: "Prime Space Agency",
         propertyType: "residential",
         furnishing: "semi-furnished",
         facing: "south-east",
@@ -253,6 +283,7 @@ export const listingProperties: ListingProperty[] = [
         id: "lp-009",
         title: "4 BHK Penthouse with Terrace",
         location: "Airoli, Navi Mumbai",
+        address: "Sector 8, Knowledge Park Link Road, Airoli, Navi Mumbai, Maharashtra 400708",
         price: "₹ 3.80 Cr",
         rentPrice: "₹ 55,000 / mo",
         pricePerSqft: "₹ 14,700 psf",
@@ -265,6 +296,7 @@ export const listingProperties: ListingProperty[] = [
         image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         builder: "Tata Housing",
         postedBy: "builder",
+        listerName: "Tata Housing Office",
         propertyType: "residential",
         furnishing: "unfurnished",
         facing: "east",

@@ -2,18 +2,61 @@ import { notFound } from 'next/navigation';
 import { buyMegaMenuData, rentMegaMenuData } from '@/components/common/Navbar/navData';
 import BuySection from '@/components/Home/BuySection';
 import RentSection from '@/components/Home/RentSection';
-
+import PropertyDetails from '@/components/Listing/sections/PropertyDetails';
+import { listingProperties, titleToSlug } from '@/components/Listing/listingData';
+import { Metadata } from 'next';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         slug: string;
+    }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    
+    // Check if it's a dynamic property page based on the navbar clicked
+    // Property URLs are formatted as: /{propertyName}-{categoryName}
+    const property = listingProperties.find(p => {
+        const prefix = titleToSlug(p.title) + '-';
+        return slug.startsWith(prefix) && slug.includes('-in-navi-mumbai');
+    });
+
+    if (property) {
+        return {
+            title: `${property.title} in ${property.location} | Navi Mumbai Property Deals`,
+            description: `View details for ${property.bhk} ${property.propertyType} for sale/rent at ${property.location}. Price: ${property.price}. RERA Verified.`,
+        };
+    }
+
+    // Default metadata for other dynamic pages (or you could query your content)
+    const title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    return {
+        title: `${title} | Navi Mumbai Property Deals`
     };
 }
 
-export default function DynamicPropertyPage({ params }: PageProps) {
-    const { slug } = params;
+export default async function DynamicPropertyPage({ params }: PageProps) {
+    const { slug } = await params;
     const decodedSlug = `/${slug}`;
 
+    // 1. PROPERTY ROUTE HANDLING
+    // The propertyURL structure maps to /{propertyName}-{categoryName-in-navi-mumbai}
+    const matchingProperty = listingProperties.find(p => {
+        const prefix = titleToSlug(p.title) + '-';
+        return slug.startsWith(prefix) && slug.includes('-in-navi-mumbai');
+    });
+
+    if (matchingProperty) {
+        return (
+            <div className="min-h-screen bg-zinc-50 pt-[100px]">
+                <PropertyDetails property={matchingProperty} />
+            </div>
+        );
+    }
+
+
+    // 2. NAV MENU ROUTE HANDLING 
     // Find if the slug exists in any of our menu data
     const allLinks = [
         ...Object.values(buyMegaMenuData).flat(),

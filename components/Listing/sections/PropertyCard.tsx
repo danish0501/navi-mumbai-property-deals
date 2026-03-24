@@ -3,7 +3,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MapPin, Maximize2, BadgeCheck, ArrowRight, Building2, Sparkles, Sofa, Calendar, User, Shield, Layers, ParkingCircle, Bookmark } from "lucide-react";
-import type { ListingProperty, ListingMode } from "../listingData";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { type ListingProperty, type ListingMode, titleToSlug } from "../listingData";
 
 
 const tagColors: Record<string, string> = {
@@ -53,8 +55,22 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ property, index, mode }: PropertyCardProps) {
     const [isSaved, setIsSaved] = useState(false);
+    const pathname = usePathname();
     const titleId = `prop-title-${property.id}`;
     const ctaLabel = getCtaLabel(mode);
+
+    // Build dynamic property UI from the navbar URL section
+    const segments = pathname.split('/').filter(Boolean);
+    const lastSegment = segments[segments.length - 1] || '';
+    
+    // Default fallback suffix if not in a category page
+    let suffix = mode === 'rent' ? '-properties-for-rent-in-navi-mumbai' : '-properties-for-sale-in-navi-mumbai';
+    
+    if (lastSegment && lastSegment.includes('-in-navi-mumbai')) {
+        suffix = `-${lastSegment}`;
+    }
+
+    const propertyUrl = `/${titleToSlug(property.title)}${suffix}`;
 
     return (
         <motion.article
@@ -246,26 +262,28 @@ export default function PropertyCard({ property, index, mode }: PropertyCardProp
                 </div>
 
                 {/* CTA — shimmer button */}
-                <button
-                    className="relative w-full py-3 rounded-[14px] bg-brand-primary
-                               text-white text-[14px] font-bold overflow-hidden gap-2
-                               hover:bg-brand-primary-hover transition-all duration-500
-                               flex items-center justify-center active:scale-[0.98] cursor-pointer"
-                    aria-label={`${ctaLabel} - ${property.bhk} ${property.propertyType} for ${mode === 'rent' ? 'Rent' : 'Sale'} in ${property.location}`}
-                >
-                    {/* shimmer sweep */}
-                    <span
-                        className="absolute inset-0 -translate-x-full
-                                   bg-gradient-to-r from-transparent via-white/20 to-transparent
-                                   group-hover:translate-x-full transition-transform duration-[800ms] ease-in-out
-                                   pointer-events-none"
-                        aria-hidden="true"
-                    />
-                    <span className="relative flex items-center gap-2">
-                        {ctaLabel}
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
-                    </span>
-                </button>
+                <Link href={propertyUrl} className="w-full">
+                    <button
+                        className="relative w-full py-3 rounded-[14px] bg-brand-primary
+                                   text-white text-[14px] font-bold overflow-hidden gap-2
+                                   hover:bg-brand-primary-hover transition-all duration-500
+                                   flex items-center justify-center active:scale-[0.98] cursor-pointer"
+                        aria-label={`${ctaLabel} - ${property.bhk} ${property.propertyType} for ${mode === 'rent' ? 'Rent' : 'Sale'} in ${property.location}`}
+                    >
+                        {/* shimmer sweep */}
+                        <span
+                            className="absolute inset-0 -translate-x-full
+                                       bg-gradient-to-r from-transparent via-white/20 to-transparent
+                                       group-hover:translate-x-full transition-transform duration-[800ms] ease-in-out
+                                       pointer-events-none"
+                            aria-hidden="true"
+                        />
+                        <span className="relative flex items-center gap-2">
+                            {ctaLabel}
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
+                        </span>
+                    </button>
+                </Link>
             </div>
         </motion.article >
     );
