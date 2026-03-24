@@ -50,9 +50,10 @@ export default function PropertyRelated({ property }: Props) {
                         transition={{ delay: 0.1 }}
                     >
                         <h2 className="text-3xl md:text-4xl font-black text-brand-heading tracking-tight leading-[1.1]">
-                            Similar <span className='text-brand-primary italic'>Properties</span>
+                            Explore Related <span className='text-brand-primary italic'>Properties in Navi Mumbai</span>
                         </h2>
-                         <div className="h-1.5 w-26 bg-brand-primary rounded-full mt-2"></div>
+                        <div className="h-1.5 w-26 bg-brand-primary rounded-full mt-2"></div>
+
                     </motion.div>
                 </div>
             

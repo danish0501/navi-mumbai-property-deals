@@ -1,7 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { PhoneCall, Mail, User, Shield, Map as MapIcon, ExternalLink } from 'lucide-react';
-import type { ListingProperty } from '../../components/Listing/listingData';
+import type { ListingProperty } from '../Listing/listingData';
 import { fadeUp } from './variants';
 
 interface Props {
@@ -12,8 +12,10 @@ const PropertySidebar = ({ property }: Props) => {
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${property.title} ${property.address} ${property.location}`)}`;
 
     return (
-        <div className="lg:col-span-4 relative">
-            <motion.div variants={fadeUp} className="sticky top-28 flex flex-col gap-6">
+        <aside className="lg:col-span-4 relative" aria-label="Property availability and contact options">
+
+            <motion.div variants={fadeUp} className="sticky top-72 flex flex-col gap-6">
+
                 {/* Price Card */}
                 <div className="bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-[24px] p-8 shadow-2xl relative overflow-hidden">
                     {/* Decorative element background */}
@@ -76,9 +78,9 @@ const PropertySidebar = ({ property }: Props) => {
                         ></iframe>
 
                         {/* Interactive overlay to allow clicking to full map */}
-                        <a 
-                            href={googleMapsUrl} 
-                            target="_blank" 
+                        <a
+                            href={googleMapsUrl}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="absolute inset-0 z-10 bg-transparent flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10"
                         >
@@ -92,8 +94,9 @@ const PropertySidebar = ({ property }: Props) => {
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </aside>
     );
 };
+
 
 export default PropertySidebar;

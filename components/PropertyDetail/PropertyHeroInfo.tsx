@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MapPin, BadgeCheck, Building2, Maximize2, Compass, Calendar } from 'lucide-react';
-import type { ListingProperty } from '../../components/Listing/listingData';
+import type { ListingProperty } from '../Listing/listingData';
 import { fadeUp } from './variants';
 
 interface Props {
@@ -33,21 +33,25 @@ const PropertyHeroInfo = ({ property }: Props) => {
                 </h1>
                 <p className="flex items-center gap-2 text-lg text-brand-paragraph font-medium mb-2">
                     <MapPin className="w-5 h-5 text-brand-primary" />
-                    {property.location}
+                    Verified {property.bhk} Property at {property.location}
                 </p>
+
             </motion.div>
 
             {/* Hero Image */}
-            <motion.div variants={fadeUp} className="w-full h-[400px] sm:h-[500px] relative rounded-3xl overflow-hidden shadow-xl border border-white group">
+            <motion.div variants={fadeUp} className="w-full h-[400px] sm:h-[500px] relative rounded-3xl overflow-hidden shadow-xl border border-white group bg-zinc-100">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10 pointer-events-none" />
                 <Image
                     src={property.image}
-                    alt={property.title}
+                    alt={`${property.title} - Verified ${property.bhk} Property for Sale in ${property.location}`}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, 850px"
                     className="object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
                     priority
+                    fetchPriority="high"
                 />
             </motion.div>
+
 
             {/* Quick Stats Banner */}
             <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 bg-white border border-zinc-100 rounded-[20px] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">

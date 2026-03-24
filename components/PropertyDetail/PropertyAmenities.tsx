@@ -1,7 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { Dumbbell, Waves, Trees, Car, Shield, Lock, Building2, Wind, CheckCircle2 } from 'lucide-react';
-import type { ListingProperty } from '../../components/Listing/listingData';
+import type { ListingProperty } from '../Listing/listingData';
 import { fadeUp } from './variants';
 
 const getAmenityIcon = (amenity: string) => {

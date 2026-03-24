@@ -1,7 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { Sofa, Car, Shield, User, MapPin, Users, Layout, CalendarRange } from 'lucide-react';
-import type { ListingProperty } from "../../components/Listing/listingData";
+import type { ListingProperty } from "../Listing/listingData";
 import { fadeUp } from './variants';
 import { usePathname } from 'next/navigation';
 
@@ -76,8 +76,8 @@ const PropertyKeyDetails = ({ property }: Props) => {
                         <div className="flex items-center gap-2">
                             <Users className="w-4 h-4 text-brand-primary" />
                             <span className="font-bold text-zinc-800">
-                                {property.suitableFor && property.suitableFor.length > 0 
-                                    ? property.suitableFor.join(', ') 
+                                {property.suitableFor && property.suitableFor.length > 0
+                                    ? property.suitableFor.join(', ')
                                     : 'Family, Bachelor'}
                             </span>
                         </div>
