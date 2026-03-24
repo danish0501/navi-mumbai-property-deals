@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Home, Key, Tag, BookOpen } from 'lucide-react';
+import { Home, Key, Info, BookOpen } from 'lucide-react';
 
 const navItems = [
     {
@@ -21,18 +21,18 @@ const navItems = [
         ariaLabel: 'Find rental apartments, flats and shops in Navi Mumbai'
     },
     {
-        name: 'Sell',
-        href: '/sell',
-        icon: Tag,
-        title: 'Sell Property in Navi Mumbai',
-        ariaLabel: 'List your property in Navi Mumbai for sale or rent to reach potential buyers'
-    },
-    {
         name: 'Blogs',
         href: '/blogs',
         icon: BookOpen,
         title: 'Real Estate Blogs for Navi Mumbai',
         ariaLabel: 'Read the latest real estate news and market trends for Navi Mumbai'
+    },
+    {
+        name: 'About',
+        href: '/about',
+        icon: Info,
+        title: 'About Navi Mumbai Property Deals',
+        ariaLabel: 'Learn more about our real estate services in Navi Mumbai'
     },
 ];
 

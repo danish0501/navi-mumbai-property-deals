@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import BuyMegaMenu from './BuyMegaMenu';
 import RentMegaMenu from './RentMegaMenu';
-import SellMegaMenu from './SellMegaMenu';
-
 interface PredefinedLink {
     name: string;
     href: string;
@@ -27,7 +25,6 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
         if (name === 'blogs') return "Read latest Navi Mumbai real estate news and market insights";
         if (name === 'buy') return "Explore verified residential apartments and villas for sale";
         if (name === 'rent') return "Find luxury flats and houses for rent across Navi Mumbai";
-        if (name === 'sell') return "Sell your property in Navi Mumbai with our expert consultants";
         if (name === 'contact') return "Get expert real estate advice for your next property deal";
         return `Navigate to ${link.name}`;
     };
@@ -43,8 +40,7 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
                 const normalizedName = link.name.toLowerCase().trim();
                 const isBuyLink = normalizedName === 'buy' || normalizedName.includes('buy');
                 const isRentLink = normalizedName === 'rent' || normalizedName.includes('rent');
-                const isSellLink = normalizedName === 'sell' || normalizedName.includes('sell');
-                const hasMegaMenu = isBuyLink || isRentLink || isSellLink;
+                const hasMegaMenu = isBuyLink || isRentLink;
                 const isCurrentlyHovered = hoveredLink === link.name;
                 const menuId = `mega-menu-${normalizedName.replace(/\s+/g, '-')}`;
                 const linkTitle = getLinkTitle(link);
@@ -114,7 +110,6 @@ const NavLinks = ({ navLinks }: { navLinks: PredefinedLink[] }) => {
                             >
                                 {isBuyLink && <BuyMegaMenu />}
                                 {isRentLink && <RentMegaMenu />}
-                                {isSellLink && <SellMegaMenu />}
                             </div>
                         )}
                     </div>

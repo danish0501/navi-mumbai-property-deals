@@ -1,9 +1,8 @@
-import React from 'react';
 import { notFound } from 'next/navigation';
-import { buyMegaMenuData, rentMegaMenuData, sellPropertyCategories } from '@/components/common/Navbar/navData';
+import { buyMegaMenuData, rentMegaMenuData } from '@/components/common/Navbar/navData';
 import BuySection from '@/components/Home/BuySection';
 import RentSection from '@/components/Home/RentSection';
-import SaleSection from '@/components/Home/SaleSection';
+
 
 interface PageProps {
     params: {
@@ -18,15 +17,14 @@ export default function DynamicPropertyPage({ params }: PageProps) {
     // Find if the slug exists in any of our menu data
     const allLinks = [
         ...Object.values(buyMegaMenuData).flat(),
-        ...Object.values(rentMegaMenuData).flat(),
-        ...Object.values(sellPropertyCategories).flat()
+        ...Object.values(rentMegaMenuData).flat()
     ];
 
     const linkData = allLinks.find(link => link.href === decodedSlug);
 
     if (!linkData) {
-        // Specifically allow /buy, /rent, /sell if they are requested
-        if (!['buy', 'rent', 'sell', 'sale'].includes(slug)) {
+        // Specifically allow /buy, /rent, /sale if they are requested
+        if (!['buy', 'rent', 'sale'].includes(slug)) {
             notFound();
         }
     }
@@ -48,8 +46,6 @@ export default function DynamicPropertyPage({ params }: PageProps) {
                     <BuySection />
                 ) : decodedSlug.includes('rent') ? (
                     <RentSection />
-                ) : decodedSlug.includes('sell') ? (
-                    <SaleSection />
                 ) : (
                     <BuySection />
                 )}

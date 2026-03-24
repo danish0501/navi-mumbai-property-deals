@@ -20,7 +20,6 @@ const Navbar = () => {
         { name: 'Blogs', href: '/blogs' },
         { name: 'Buy', href: '/buy' },
         { name: 'Rent', href: '/rent' },
-        { name: 'Sell', href: '/sell' },
         { name: 'Contact', href: '/contact' },
     ];
 

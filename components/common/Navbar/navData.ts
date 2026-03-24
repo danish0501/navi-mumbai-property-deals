@@ -74,26 +74,3 @@ export const rentMegaMenuData = {
 
 export type RentCategory = keyof typeof rentMegaMenuData;
 
-export const sellPropertyCategories = {
-    "Residential": [
-        { title: "Flats", href: "flats-for-sell-in-navi-mumbai", seoTitle: "Sell your Residential Flat in Navi Mumbai Fast" },
-        { title: "Apartments", href: "apartments-for-sell-in-navi-mumbai", seoTitle: "List your Apartment for Sale - High Visibility" },
-        { title: "Villa", href: "villas-for-sell-in-navi-mumbai", seoTitle: "Sell Luxury Villas in Prime Locations" }
-    ],
-    "Commercial": [
-        { title: "Office Spaces", href: "office-spaces-for-sell-in-navi-mumbai", seoTitle: "Sell Commercial Units and Office Spaces" },
-        { title: "Shops", href: "shops-for-sell-in-navi-mumbai", seoTitle: "List Commercial Shops for Sale" }
-    ],
-    "Land/Plots": [
-        { title: "Residential Plots", href: "residential-plots-for-sell-in-navi-mumbai", seoTitle: "Sell Residential Land in Navi Mumbai" },
-        { title: "Industrial Land", href: "industrial-land-for-sell-in-navi-mumbai", seoTitle: "List Industrial Plots for Fast Sale" }
-    ],
-    "Blogs and Articles": [
-        { title: "Blogs for Sellers", href: "/sell/real-estate-blogs-for-sellers", seoTitle: "Updated Real Estate Selling Guides and Market Tips" },
-        { title: "Articles for Sellers", href: "/sell/real-estate-articles-for-sellers", seoTitle: "In-depth Articles on Property Selling in Navi Mumbai" },
-        { title: "Articles for Real Estate", href: "/sell/real-estate-market-articles", seoTitle: "Expert Market Analysis Articles" },
-        { title: "Blogs for Real Estate", href: "/sell/real-estate-industry-blogs", seoTitle: "Industry News and Trends Blog Hub" }
-    ]
-};
-
-export type SellCategory = keyof typeof sellPropertyCategories;
