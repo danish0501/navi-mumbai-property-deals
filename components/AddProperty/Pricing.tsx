@@ -50,10 +50,10 @@ const Pricing: React.FC<PricingProps> = ({ formData, updateFormData }) => {
                                     placeholder="e.g. 1.25 Cr"
                                     value={formData.price}
                                     onChange={(e) => updateFormData("price", e.target.value)}
-                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
+                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
                                 />
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                                    <Wallet className="w-5 h-5 text-brand-paragraph" />
+                                    <Wallet className="w-5 h-5 text-brand-paragraph group-focus-within:text-brand-primary transition-colors" />
                                 </div>
                             </div>
                         </div>
@@ -78,10 +78,10 @@ const Pricing: React.FC<PricingProps> = ({ formData, updateFormData }) => {
                                     placeholder="e.g. 8,500 psf"
                                     value={formData.pricePerSqft}
                                     onChange={(e) => updateFormData("pricePerSqft", e.target.value)}
-                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
+                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
                                 />
                                 <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                                    <TrendingUp className="w-5 h-5 text-brand-paragraph" />
+                                    <TrendingUp className="w-5 h-5 text-brand-paragraph group-focus-within:text-brand-primary transition-colors" />
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const Pricing: React.FC<PricingProps> = ({ formData, updateFormData }) => {
                                     placeholder="e.g. 5,000 / mo"
                                     value={formData.maintenance}
                                     onChange={(e) => updateFormData("maintenance", e.target.value)}
-                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
+                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-10 pr-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
                                 />
                             </div>
                         </div>

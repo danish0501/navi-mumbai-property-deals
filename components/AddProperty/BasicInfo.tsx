@@ -77,7 +77,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, updateFormData }) => {
                             placeholder="e.g. Luxury 3 BHK Sky Residence"
                             value={formData.title}
                             onChange={(e) => updateFormData("title", e.target.value)}
-                            className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
+                            className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
                         />
                         {formData.title?.length > 10 && (
                             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-primary">
@@ -184,9 +184,9 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ formData, updateFormData }) => {
                                     placeholder={`e.g. ${CONFIG_MAPPING.residential.options.find(opt => opt.value === formData.configuration)?.label} Details - 3 Bedrooms, 1 Hall, 1 Kitchen, 3 Bathrooms`}
                                     value={formData.configDetails || ""}
                                     onChange={(e) => updateFormData("configDetails", e.target.value)}
-                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all shadow-sm placeholder:text-[14px] placeholder:text-brand-muted"
+                                    className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all shadow-sm placeholder:text-[14px] placeholder:text-brand-muted"
                                 />
-                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-paragraph">
+                                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-paragraph group-focus-within:text-brand-primary transition-colors">
                                     <Info className="w-5 h-5" />
                                 </div>
                             </div>

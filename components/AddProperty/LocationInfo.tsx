@@ -28,16 +28,16 @@ const LocationInfo: React.FC<LocationInfoProps> = ({ formData, updateFormData })
             <div className="grid grid-cols-1 gap-8">
                 {/* Full Address */}
                 <div className="space-y-2 group">
-                    <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 group-focus-within:text-brand-primary transition-colors">Detailed Address</label>
+                    <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1 group-focus-within:text-brand-primary transition-colors">Detailed Address</label>
                     <div className="relative">
                         <textarea
                             placeholder="e.g. Sector 35, Next to Central Park, Kharghar, Navi Mumbai, Maharashtra 410210"
                             rows={3}
                             value={formData.address}
                             onChange={(e) => updateFormData("address", e.target.value)}
-                            className="w-full bg-zinc-50/50 border border-zinc-100 rounded-2xl px-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all shadow-sm resize-none"
+                            className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted resize-none"
                         />
-                        <div className="absolute right-4 top-4 text-zinc-300">
+                        <div className="absolute right-4 top-4 text-brand-paragraph group-focus-within:text-brand-primary transition-colors">
                            <Navigation className="w-5 h-5" />
                         </div>
                     </div>
@@ -46,28 +46,28 @@ const LocationInfo: React.FC<LocationInfoProps> = ({ formData, updateFormData })
                 {/* Locality & Sector */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2 group">
-                        <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 group-focus-within:text-brand-primary transition-colors">Locality / Area</label>
+                        <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1 group-focus-within:text-brand-primary transition-colors">Locality / Area</label>
                         <div className="relative">
                             <input
                                 type="text"
                                 placeholder="e.g. Kharghar"
                                 value={formData.location}
                                 onChange={(e) => updateFormData("location", e.target.value)}
-                                className="w-full bg-zinc-50/50 border border-zinc-100 rounded-2xl px-5 py-4 text-[14px] font-bold focus:outline-none focus:border-brand-primary focus:bg-white transition-all shadow-sm"
+                                className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-semibold focus:outline-none focus:border-brand-primary focus:bg-white transition-all placeholder:text-[14px] placeholder:text-brand-muted"
                             />
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-300">
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-paragraph group-focus-within:text-brand-primary transition-colors">
                                 <Map className="w-5 h-5" />
                             </div>
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">City</label>
+                        <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1">City</label>
                         <input
                             type="text"
                             value="Navi Mumbai"
                             disabled
-                            className="w-full bg-zinc-100 border border-zinc-200 rounded-2xl px-5 py-4 text-[14px] font-bold text-zinc-400 cursor-not-allowed"
+                            className="w-full bg-zinc-100 border border-brand-muted/50 rounded-2xl px-5 py-4 text-[14px] font-bold text-brand-paragraph cursor-not-allowed"
                         />
                     </div>
                 </div>
