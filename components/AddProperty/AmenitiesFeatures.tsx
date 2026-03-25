@@ -43,7 +43,7 @@ const AmenitiesFeatures: React.FC<AmenitiesFeaturesProps> = ({ formData, updateF
 
             <div className="space-y-12">
                 {/* Amenities */}
-                <div className="space-y-6">
+                <div className="space-y-2">
                     <div className="flex items-center justify-between">
                         <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1">Social Amenities</label>
                         <span className="text-[11px] font-bold text-brand-paragraph bg-zinc-100 px-3 py-1.5 rounded-full">
@@ -101,7 +101,7 @@ const AmenitiesFeatures: React.FC<AmenitiesFeaturesProps> = ({ formData, updateF
                 </div>
 
                 {/* Features */}
-                <div className="space-y-6">
+                <div className="space-y-2">
                     <div className="flex items-center justify-between">
                         <label className="text-[12px] font-black text-zinc-800 uppercase tracking-widest px-1">Property Features</label>
                         <span className="text-[11px] font-bold text-brand-paragraph bg-zinc-100 px-3 py-1.5 rounded-full">

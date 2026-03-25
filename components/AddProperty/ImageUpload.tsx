@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ImagePlus, X, Camera, Sparkles, AlertCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, Reorder } from "framer-motion";
+import { ImagePlus, X, Camera, Sparkles, AlertCircle, GripVertical } from "lucide-react";
 
 interface ImageUploadProps {
     formData: any;
@@ -9,21 +9,32 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ formData, updateFormData }) => {
-    // For demonstration, we'll use placeholder images or handle local selection
-    const [previews, setPreviews] = useState<string[]>([]);
+    const [previews, setPreviews] = useState<string[]>(formData.gallery || []);
+
+    // Sync state with formData if it changes externally
+    useEffect(() => {
+        if (formData.gallery && JSON.stringify(formData.gallery) !== JSON.stringify(previews)) {
+            setPreviews(formData.gallery);
+        }
+    }, [formData.gallery]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // Mock implementation
         const files = Array.from(e.target.files || []);
         const newPreviews = files.map(f => URL.createObjectURL(f));
-        setPreviews([...previews, ...newPreviews]);
-        updateFormData("gallery", [...(formData.gallery || []), ...newPreviews]);
+        const updatedPreviews = [...previews, ...newPreviews];
+        setPreviews(updatedPreviews);
+        updateFormData("gallery", updatedPreviews);
     };
 
     const removeImage = (index: number) => {
         const updated = previews.filter((_, i) => i !== index);
         setPreviews(updated);
         updateFormData("gallery", updated);
+    };
+
+    const handleReorder = (newOrder: string[]) => {
+        setPreviews(newOrder);
+        updateFormData("gallery", newOrder);
     };
 
     return (
@@ -63,41 +74,62 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ formData, updateFormData }) =
                     </div>
                 </div>
 
-                {/* Previews */}
+                {/* Previews with Reorder */}
                 {previews.length > 0 && (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <Reorder.Group 
+                        axis="y" 
+                        values={previews} 
+                        onReorder={handleReorder}
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+                    >
                         <AnimatePresence>
                             {previews.map((src, index) => (
-                                <motion.div
-                                    key={index}
+                                <Reorder.Item
+                                    key={src}
+                                    value={src}
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.8 }}
-                                    className="aspect-square relative rounded-2xl overflow-hidden group shadow-sm"
+                                    className="aspect-square relative rounded-2xl overflow-hidden group shadow-sm bg-zinc-100 cursor-grab active:cursor-grabbing"
                                 >
                                     <img 
                                         src={src} 
                                         alt={`Property photo ${index + 1}`} 
-                                        className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
                                     />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    
+                                    {/* Action Buttons overlay */}
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                        <div className="w-10 h-10 bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center pointer-events-none">
+                                            <GripVertical className="w-5 h-5" />
+                                        </div>
                                         <button 
                                             type="button"
-                                            onClick={() => removeImage(index)}
-                                            className="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                removeImage(index);
+                                            }}
+                                            className="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                                         >
                                             <X className="w-5 h-5" />
                                         </button>
                                     </div>
+
+                                    {/* Cover Badge */}
                                     {index === 0 && (
-                                        <div className="absolute top-2 left-2 px-2 py-1 bg-brand-primary text-white text-[9px] font-black uppercase rounded-lg shadow-sm flex items-center gap-1">
+                                        <div className="absolute top-2 left-2 px-2 py-1 bg-brand-primary text-white text-[9px] font-black uppercase rounded-lg shadow-sm flex items-center gap-1 z-20">
                                             <Sparkles className="w-3 h-3" /> Cover
                                         </div>
                                     )}
-                                </motion.div>
+
+                                    {/* Position Indicator */}
+                                    <div className="absolute bottom-2 right-2 w-6 h-6 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                        {index + 1}
+                                    </div>
+                                </Reorder.Item>
                             ))}
                         </AnimatePresence>
-                    </div>
+                    </Reorder.Group>
                 )}
 
                 {/* Tip */}
@@ -106,6 +138,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ formData, updateFormData }) =
                     <p className="text-[13px] text-amber-800 font-medium leading-relaxed">
                         <span className="font-black uppercase tracking-widest text-[11px] block mb-1">Expert Advice:</span>
                         Include photos of Main Hall, Kitchen, Bedrooms, and Balcony View. Buyers feel more confident seeing these first.
+                        <br />
+                        <span className="text-zinc-400 text-[10px] font-bold mt-2 block italic"> TIP: Drag and drop to reorder. The first photo will be your property's Cover Image.</span>
                     </p>
                 </div>
             </div>
