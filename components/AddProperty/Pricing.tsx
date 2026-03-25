@@ -133,6 +133,7 @@ const Pricing: React.FC<PricingProps> = ({ formData, updateFormData }) => {
                 <div className="space-y-2 group">
                     <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 group-focus-within:text-brand-primary transition-colors">Certification</label>
                     <button
+                        type="button"
                         onClick={() => updateFormData("isReraVerified", !formData.isReraVerified)}
                         className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl border transition-all
                             ${formData.isReraVerified 

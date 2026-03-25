@@ -109,10 +109,10 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                                         onChange(option.value);
                                         setIsOpen(false);
                                     }}
-                                    className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[13px] font-bold transition-all relative group/item ${
+                                    className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[13px] font-bold transition-all relative group/item cursor-pointer ${
                                         value === option.value
-                                            ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20"
-                                            : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
+                                            ? "bg-brand-primary text-white"
+                                            : "text-brand-paragraph hover:bg-brand-muted/10 hover:text-brand-heading"
                                     }`}
                                 >
                                     <span className="relative z-10">{option.label}</span>
@@ -138,8 +138,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
     return (
         <div className="space-y-2 relative group" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <label className={`text-[11px] font-black uppercase tracking-widest px-1 transition-all duration-300 ${
-                isOpen ? "text-brand-primary translate-x-1" : "text-zinc-400"
+            <label className={`text-[12px] font-black uppercase tracking-widest px-1 transition-all duration-300 ${
+                isOpen ? "text-brand-primary translate-x-1" : "text-brand-paragraph"
             }`}>
                 {label}
             </label>
@@ -148,26 +148,26 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                 <button
                     ref={buttonRef}
                     type="button"
-                    className={`w-full bg-zinc-50/50 border rounded-2xl px-5 py-4 text-[14px] font-bold flex items-center justify-between transition-all duration-300 shadow-sm relative overflow-hidden ${
+                    className={`w-full bg-zinc-50/50 border rounded-2xl px-5 py-4 text-[14px] font-bold flex items-center justify-between transition-all duration-300 relative overflow-hidden cursor-pointer ${
                         isOpen 
-                        ? "border-brand-primary bg-white ring-[6px] ring-brand-primary/5 shadow-[0_10px_40px_-10px_rgba(186,163,96,0.15)]" 
-                        : "border-zinc-100 hover:border-brand-primary/40 hover:bg-white hover:shadow-md"
+                        ? "border-brand-primary bg-white ring-[6px] ring-brand-primary/5" 
+                        : "border-brand-muted/50 hover:border-brand-primary/40 hover:bg-white"
                     }`}
                 >
                     <div className="flex items-center gap-3 relative z-10">
                         {icon && (
                             <div className={`p-2 rounded-xl transition-colors duration-300 ${
-                                isOpen ? "bg-brand-primary/10 text-brand-primary" : "bg-zinc-100 text-zinc-400 group-hover:bg-brand-primary/5 group-hover:text-brand-primary/60"
+                                isOpen ? "bg-brand-primary/10 text-brand-primary" : "bg-zinc-100 text-brand-paragraph group-hover:bg-brand-primary group-hover:text-brand-primary/60"
                             }`}>
                                 {React.cloneElement(icon as React.ReactElement<any>, { className: "w-4 h-4" })}
                             </div>
                         )}
-                        <span className={selectedOption ? "text-zinc-900" : "text-zinc-400"}>
+                        <span className={selectedOption ? "text-brand-paragraph" : "text-brand-paragraph"}>
                             {selectedOption ? selectedOption.label : placeholder}
                         </span>
                     </div>
-                    <div className={`p-1.5 rounded-lg transition-all duration-300 ${isOpen ? "bg-brand-primary/10 rotate-180" : "bg-transparent"}`}>
-                        <ChevronDown className={`w-4 h-4 transition-colors duration-300 ${isOpen ? "text-brand-primary" : "text-zinc-300 group-hover:text-brand-primary/60"}`} />
+                    <div className={`p-1.5 rounded-full transition-all duration-300 ${isOpen ? "bg-brand-primary/10 rotate-180" : "bg-transparent"}`}>
+                        <ChevronDown className={`w-5 h-5 transition-colors duration-300 ${isOpen ? "text-brand-primary" : "text-brand-paragraph group-hover:text-brand-primary/60"}`} />
                     </div>
                 </button>
 

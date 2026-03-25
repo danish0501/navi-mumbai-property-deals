@@ -53,6 +53,7 @@ const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ formData, updateFormData })
                     </div>
                 </div>
                 <motion.button
+                    type="button"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={addPlace}
@@ -106,6 +107,7 @@ const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ formData, updateFormData })
                             </div>
 
                             <motion.button
+                                type="button"
                                 whileHover={{ scale: 1.1, backgroundColor: "#fee2e2" }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => removePlace(index)}

@@ -5,7 +5,6 @@ export const buyMegaMenuData = {
         { title: "Apartments", href: "/buy/apartments-for-sale-in-navi-mumbai", seoTitle: "Luxury Apartments for Sale in Navi Mumbai - Best Localities" },
         { title: "Studio Apartment", href: "/buy/studio-apartments-for-sale-in-navi-mumbai", seoTitle: "Compact Studio Apartments in Navi Mumbai for Sale" },
         { title: "Independent House", href: "/buy/independent-houses-for-sale-in-navi-mumbai", seoTitle: "Detached Independent Houses for Sale in Navi Mumbai" },
-        { title: "Plots in Navi Mumbai", href: "/buy/plots-for-sale-in-navi-mumbai", seoTitle: "Verified Residential Plots for Sale in Navi Mumbai" },
         { title: "Villa", href: "/buy/villas-for-sale-in-navi-mumbai", seoTitle: "Exclusive Luxury Villas for Sale in Navi Mumbai" }
     ],
     "Land/Plot": [
@@ -16,13 +15,12 @@ export const buyMegaMenuData = {
         { title: "MMRDA Authority Plots", href: "/buy/mmrda-authority-plots-in-navi-mumbai", seoTitle: "MMRDA Approved Residential Land" }
     ],
     "Commercial": [
-        { title: "Ready to move office", href: "/buy/commercial-office-space-for-sale-in-navi-mumbai", seoTitle: "Modern Ready-to-Move Office Spaces for Sale" },
-        { title: "Bare shell office spaces", href: "/buy/bare-shell-office-for-sale-navi-mumbai", seoTitle: "Customizable Office Spaces for Sale in Business Hubs" },
+        { title: "Office", href: "/buy/commercial-office-space-for-sale-in-navi-mumbai", seoTitle: "Modern Ready-to-Move Office Spaces for Sale" },
         { title: "Shops", href: "/buy/shops-for-sale-in-navi-mumbai", seoTitle: "Commercial Retail Shops for Sale in High Footfall Areas" },
         { title: "Factory", href: "/buy/factories-for-sale-in-navi-mumbai-industrial", seoTitle: "Industrial Factory Units for Sale in Navi Mumbai" },
         { title: "Warehouses", href: "/buy/warehouses-for-sale-in-navi-mumbai", seoTitle: "Large Industrial Warehouses for Sale near Nhava Sheva" },
         { title: "Showrooms", href: "/buy/commercial-showrooms-for-sale-navi-mumbai", seoTitle: "Prime Location Commercial Showrooms for Sale" },
-        { title: "Industrial Lands/Plots", href: "/buy/industrial-plots-for-sale-navi-mumbai", seoTitle: "Verified Industrial Land and Plots for Sale" }
+        { title: "Industrial Plot", href: "/buy/industrial-plots-for-sale-navi-mumbai", seoTitle: "Verified Industrial Land and Plots for Sale" }
     ],
     "Popular Areas": [
         { title: "Vashi", href: "/buy/properties-for-sale-in-vashi-navi-mumbai", seoTitle: "Residential and Commercial Properties for Sale in Vashi" },
@@ -54,15 +52,19 @@ export const rentMegaMenuData = {
         { title: "Co-living Spaces", href: "/rent/co-living-spaces-for-rent-in-navi-mumbai", seoTitle: "Modern Co-living and Shared Accommodation Hubs" }
     ],
     "Commercial": [
-        { title: "Ready to move office", href: "/rent/move-office-for-rent-in-navi-mumbai", seoTitle: "Furnished Office Spaces for Rent in Business Districts" },
+        { title: "Office", href: "/rent/move-office-for-rent-in-navi-mumbai", seoTitle: "Furnished Office Spaces for Rent in Business Districts" },
         { title: "Shops", href: "/rent/shops-for-rent-in-navi-mumbai", seoTitle: "Commercial Shops for Rent in Prime Localities" },
         { title: "Warehouses", href: "/rent/warehouses-for-rent-in-navi-mumbai", seoTitle: "Industrial Storage Warehouses for Lease" },
-        { title: "Showrooms", href: "/rent/showrooms-for-rent-in-navi-mumbai", seoTitle: "High Visibility Showrooms for Rent" }
+        { title: "Showrooms", href: "/rent/showrooms-for-rent-in-navi-mumbai", seoTitle: "High Visibility Showrooms for Rent" },
+        { title: "Factory", href: "/rent/factories-for-rent-in-navi-mumbai-industrial", seoTitle: "Industrial Factory Units for Rent in Navi Mumbai" },
+        { title: "Industrial Plot", href: "/rent/industrial-plots-for-rent-navi-mumbai", seoTitle: "Verified Industrial Land and Plots for Rent" }
     ],
     "Popular Areas": [
         { title: "Vashi", href: "/rent/vashi-area-rent-in-navi-mumbai", seoTitle: "Top Rental Properties in Vashi Central" },
         { title: "Kharghar", href: "/rent/kharghar-area-for-rent-in-navi-mumbai", seoTitle: "Education Hub Rentals - Flats and Hostels" },
-        { title: "CBD Belapur", href: "/rent/belapur-area-for-rent-in-navi-mumbai", seoTitle: "Corporate Rentals in CBD Belapur" }
+        { title: "Belapur", href: "/rent/belapur-area-for-rent-in-navi-mumbai", seoTitle: "Corporate Rentals in CBD Belapur" },
+        { title: "Nerul", href: "/rent/properties-for-rent-in-nerul-navi-mumbai", seoTitle: "Rent Flats and Independent Houses in Nerul" },
+        { title: "Panvel", href: "/rent/properties-for-rent-in-panvel-navi-mumbai", seoTitle: "Upcoming Real Estate Hub in Panvel - Houses and Plots" }
     ],
     "Blogs and Articles": [
         { title: "Blogs for Renters", href: "/rent/real-estate-blogs-for-renters", seoTitle: "Updated Real Estate Renting Guides and Market Tips" },
