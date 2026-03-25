@@ -146,12 +146,12 @@ const AddProperty = () => {
                 <form onSubmit={handleSubmit} className="space-y-12">
                     <BasicInfo formData={formData} updateFormData={updateFormData} />
                     <PropertyDescription formData={formData} updateFormData={updateFormData} />
+                    <RentalSuitability formData={formData} updateFormData={updateFormData} />
                     <Pricing formData={formData} updateFormData={updateFormData} />
                     <LocationInfo formData={formData} updateFormData={updateFormData} />
                     <PropertyDetails formData={formData} updateFormData={updateFormData} />
                     <AmenitiesFeatures formData={formData} updateFormData={updateFormData} />
                     <ImageUpload formData={formData} updateFormData={updateFormData} />
-                    <RentalSuitability formData={formData} updateFormData={updateFormData} />
                     <NearbyPlaces formData={formData} updateFormData={updateFormData} />
 
                     {/* Bottom Actions */}

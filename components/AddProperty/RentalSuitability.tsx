@@ -11,7 +11,7 @@ interface RentalSuitabilityProps {
 const SUITABILITY_OPTIONS = ["Family", "Bachelor", "Company Lease", "Working Professional"];
 
 const RentalSuitability: React.FC<RentalSuitabilityProps> = ({ formData, updateFormData }) => {
-    
+
     const toggleSuitability = (item: string) => {
         const currentList = formData.suitableFor || [];
         if (currentList.includes(item)) {
@@ -44,7 +44,7 @@ const RentalSuitability: React.FC<RentalSuitabilityProps> = ({ formData, updateF
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Suitable For */}
                             <div className="space-y-6">
-                                <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Suitable For</label>
+                                <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1">Suitable For</label>
                                 <div className="flex flex-wrap gap-3">
                                     {SUITABILITY_OPTIONS.map((item) => {
                                         const isSelected = (formData.suitableFor || []).includes(item);
@@ -55,12 +55,12 @@ const RentalSuitability: React.FC<RentalSuitabilityProps> = ({ formData, updateF
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
                                                 onClick={() => toggleSuitability(item)}
-                                                className={`px-5 py-3 rounded-2xl text-[12px] font-bold border transition-all flex items-center gap-2
-                                                    ${isSelected 
-                                                        ? "bg-sky-500 text-white border-sky-500 shadow-md shadow-sky-500/20" 
-                                                        : "bg-white border-zinc-100 text-zinc-600 hover:border-sky-500/30"}`}
+                                                className={`px-5 py-2 rounded-2xl text-[14px] font-semibold border transition-all flex items-center gap-2 cursor-pointer group
+                                                    ${isSelected
+                                                        ? "bg-brand-primary text-white border-brand-primary shadow-lg shadow-brand-primary/20"
+                                                        : "bg-white border-brand-muted/50 text-brand-paragraph hover:border-brand-primary hover:text-brand-primary"}`}
                                             >
-                                                {isSelected ? <CheckCircle className="w-4 h-4" /> : <Info className="w-4 h-4 text-zinc-300" />}
+                                                {isSelected ? <CheckCircle className="w-4 h-4 text-white" /> : <Info className="w-4 h-4 text-brand-paragraph group-hover:text-brand-primary transition-colors" />}
                                                 {item}
                                             </motion.button>
                                         );
@@ -70,24 +70,29 @@ const RentalSuitability: React.FC<RentalSuitabilityProps> = ({ formData, updateF
 
                             {/* Available From */}
                             <div className="space-y-6">
-                                <label className="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Availability</label>
-                                <div className="relative group">
-                                    <div className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300">
-                                        <Calendar className="w-5 h-5" />
+                                <label className="text-[12px] font-black text-brand-paragraph uppercase tracking-widest px-1">Available From</label>
+                                <div className="space-y-4">
+                                    <div className="relative group">
+                                        <div className="absolute left-6 top-1/2 -translate-y-1/2 text-brand-primary group-hover:scale-110 transition-transform">
+                                            <Calendar className="w-5 h-5" />
+                                        </div>
+
+                                        <input
+                                            type="date"
+                                            value={formData.availableFrom || ""}
+                                            onChange={(e) => updateFormData("availableFrom", e.target.value)}
+                                            className="w-full bg-zinc-50/50 border border-brand-muted/50 rounded-2xl pl-14 pr-5 py-3 text-[15px] font-semibold text-brand-paragraph focus:outline-none focus:border-brand-primary focus:bg-white transition-all appearance-none cursor-pointer hover:border-brand-primary/50 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+                                        />
                                     </div>
-                                    <input
-                                        type="text"
-                                        placeholder="e.g. Immediately or 1st April"
-                                        value={formData.availableFrom}
-                                        onChange={(e) => updateFormData("availableFrom", e.target.value)}
-                                        className="w-full bg-zinc-50/50 border border-zinc-100 rounded-2xl pl-14 pr-5 py-4 text-[14px] font-bold focus:outline-none focus:border-sky-500 focus:bg-white transition-all shadow-sm"
-                                    />
+                                    <p className="text-[12px] font-bold text-brand-muted px-2 italic uppercase tracking-wider flex items-center gap-2">
+                                        <Info className="w-3.5 h-3.5" />
+                                        Note: Specific dates attract more serious tenants
+                                    </p>
                                 </div>
-                                <p className="text-[10px] font-bold text-zinc-400 px-2 italic uppercase tracking-wider">Note: Be specific for faster closure</p>
                             </div>
                         </div>
                     </div>
-                    <div className="h-8" /> {/* Spacer */}
+                    <div className="h-2" /> {/* Spacer */}
                 </motion.div>
             )}
         </AnimatePresence>
