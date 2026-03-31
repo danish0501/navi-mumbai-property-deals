@@ -10,6 +10,13 @@ interface PageProps {
     }>;
 }
 
+export async function generateStaticParams() {
+    const allLinks = Object.values(buyMegaMenuData).flat();
+    return allLinks.map(link => ({
+        slug: link.href.replace(/^\/buy\//, ''),
+    }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const allLinks = Object.values(buyMegaMenuData).flat();

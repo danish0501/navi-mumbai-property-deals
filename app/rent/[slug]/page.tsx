@@ -8,6 +8,13 @@ interface PageProps {
     }>;
 }
 
+export async function generateStaticParams() {
+    const allLinks = Object.values(rentMegaMenuData).flat();
+    return allLinks.map(link => ({
+        slug: link.href.replace(/^\/rent\//, ''),
+    }));
+}
+
 export default async function RentPropertyPage({ params }: PageProps) {
     const { slug } = await params;
     const allLinks = Object.values(rentMegaMenuData).flat();

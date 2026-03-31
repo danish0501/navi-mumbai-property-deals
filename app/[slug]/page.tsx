@@ -13,6 +13,19 @@ interface PageProps {
     }>;
 }
 
+export async function generateStaticParams() {
+    const propertySlugs = listingProperties.flatMap(p => [
+        titleToSlug(p.title) + '-flats-for-sale-in-navi-mumbai',
+        titleToSlug(p.title) + '-studio-apartments-for-rent-in-navi-mumbai'
+    ]);
+
+    const staticSlugs = ['buy', 'rent', 'sale'];
+
+    return [...propertySlugs, ...staticSlugs].map(slug => ({
+        slug,
+    }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const baseUrl = 'https://navimumbaipropertydeals.com';
