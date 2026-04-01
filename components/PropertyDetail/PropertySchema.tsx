@@ -125,6 +125,7 @@ export default function PropertySchema({ property, slug }: Props) {
     <script 
       type="application/ld+json" 
       dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }} 
+      suppressHydrationWarning
     />
   );
 }

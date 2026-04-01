@@ -14,14 +14,31 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-    const propertySlugs = listingProperties.flatMap(p => [
-        titleToSlug(p.title) + '-flats-for-sale-in-navi-mumbai',
-        titleToSlug(p.title) + '-studio-apartments-for-rent-in-navi-mumbai'
-    ]);
+    const allLinks = [...Object.values(buyMegaMenuData).flat(), ...Object.values(rentMegaMenuData).flat()];
+    const dynamicSuffixes = allLinks
+        .map(link => link.href.split('/').pop() || '')
+        .filter(segment => segment.includes('-in-navi-mumbai'));
+
+    const propertySlugs = listingProperties.flatMap(p => {
+        const base = titleToSlug(p.title);
+        const slugs = [
+            base + '-flats-for-sale-in-navi-mumbai',
+            base + '-studio-apartments-for-rent-in-navi-mumbai',
+            base + '-properties-for-sale-in-navi-mumbai',
+            base + '-properties-for-rent-in-navi-mumbai'
+        ];
+        
+        dynamicSuffixes.forEach(suffix => {
+            slugs.push(`${base}-${suffix}`);
+        });
+        
+        return slugs;
+    });
 
     const staticSlugs = ['buy', 'rent', 'sale'];
+    const uniqueSlugs = Array.from(new Set([...propertySlugs, ...staticSlugs]));
 
-    return [...propertySlugs, ...staticSlugs].map(slug => ({
+    return uniqueSlugs.map(slug => ({
         slug,
     }));
 }
